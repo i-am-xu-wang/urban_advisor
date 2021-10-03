@@ -5,7 +5,11 @@ As this is a capstone project for the CS 5934 class, the main stakeholders for t
 
 # Team Members
 Project Manager/Requirements Analysis Lead - Mark Paes
+
 Front-End Lead - Steven Barnett
+
 Back-End  Lead - Srija Gurijala
+
 User Experience Lead - Xu Wang
+
 Data Lead - Chris Luersen
