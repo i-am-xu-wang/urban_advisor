@@ -10,12 +10,12 @@
 <body>
 <header>
     <div id="left-header">
-        <a href="index.html">
+        <a href="{% url "index" %}">
             <img id="header-logo" alt="Website Logo" src="{% static "images/logo.png" %}"/>
         </a>
     </div>
     <div id="mid-header">
-        <h1 id="header-text"><a href="index.html">Powerful Financial</a></h1>
+        <h1 id="header-text"><a href="{% url "index" %}">Powerful Financial</a></h1>
         <h3 id="header-subhead">Your smart financial calculator</h3>
     </div>
 </header>
