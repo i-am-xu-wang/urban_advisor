@@ -5,7 +5,8 @@
 {% block content %}
 <h2>Welcome to Powerful Financial</h2>
     <h4>Please answer the following questions for us to better evaluate your needs.</h4>
-    <form id="quiz" action="report.html" method="get">
+    <form id="quiz" action="{% url "report" %}" method="post">
+    {% csrf_token %}
         <!-- Moving options -->
         <div>
             <label for="moving-from">Moving From:</label>
