@@ -1,0 +1,34 @@
+{% extends "capstone/base.html" %}
+{% block page-title %}Report Page{% endblock %}
+{% load static %}
+{% block content %}
+    <h1>Here is your customized financial report:</h1>
+    <h2>Cost of Living Report (Monthly)</h2>
+    <ul id="cost-living">
+        <li>
+            <div>Restaurant:</div>
+            <p>Estimated Expense: $500</p></li>
+        <li>
+            <div>Grocery:</div>
+            <p>Estimated Expense: $500</p></li>
+        <li>
+            <div>Transportation:</div>
+            <p>Estimated Public Transportation Expense: $200</p>
+            <p>Estimated Taxi and Ride Share Expense: $200 </p>
+            <p>Estimated Gas Expense: $200</p>
+        </li>
+        <li>
+            <div>Entertainment:</div>
+            <p>Estimated Fitness Center Expense: $100</p>
+            <p>Estimated Cinema and Nightlife expense: $100</p>
+            <p>Estimated Vacation Expense (amortized by month): $200</p>
+        </li>
+        <li>
+            <div>Rent or Mortgage:</div>
+            <p>Estimated Monthly Payment: $2000</p>
+        </li>
+        <li>
+            <div>Total Household Estimated Spending: $5000</div>
+        </li>
+    </ul>
+{% endblock %}

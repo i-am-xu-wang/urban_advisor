@@ -1,26 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>The home Page of Powerful Financial Website </title>
-    <link rel="stylesheet" href="../capstone/static/css/global.css"/>
-</head>
+{% extends "capstone/base.html" %}
+{% block page-title %}Questionnaire Page{% endblock %}
+{% load static %}
 
-<body>
-<header>
-    <div id="left-header">
-        <a href="index.html">
-            <img id="header-logo" alt="Website Logo" src="../capstone/static/images/logo.png"/>
-        </a>
-    </div>
-    <div id="mid-header">
-        <h1 id="header-text"><a href="index.html">Powerful Financial</a></h1>
-        <h3 id="header-subhead">Your smart financial calculator</h3>
-    </div>
-</header>
-
-<main>
-    <h2>Welcome to Powerful Financial</h2>
+{% block content %}
+<h2>Welcome to Powerful Financial</h2>
     <h4>Please answer the following questions for us to better evaluate your needs.</h4>
     <form id="quiz" action="report.html" method="get">
         <!-- Moving options -->
@@ -245,21 +228,4 @@
         </div>
         <input type="submit" id="submit-button" name="submit-button" value="Submit">
     </form>
-</main>
-
-<footer>
-    <div id="mid-footer">
-        <ul>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Contact Us</a></li>
-            <li><a href="https://code.vt.edu/cost-of-living-app/cost-of-living">Gitlab Link</a></li>
-        </ul>
-    </div>
-    <div id="right-footer">
-        <div class="flexItem">
-            &copy; 2021 Powerful Financial
-        </div>
-    </div>
-</footer>
-</body>
-</html>
+{% endblock %}
