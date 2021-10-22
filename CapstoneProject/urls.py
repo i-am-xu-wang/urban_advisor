@@ -20,6 +20,7 @@ from capstone import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.index_page, name="default"),
     path('index/', views.index_page, name="index"),
     path('report/', views.report_page, name="report"),
 ]
