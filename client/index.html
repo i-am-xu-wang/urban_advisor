@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The home Page of Powerful Financial Website </title>
+    <link rel="stylesheet" href="src/css/global.css"/>
+</head>
+
+<body>
+<header>
+    <div id="left-header">
+        <a href="index.html">
+            <img id="header-logo" alt="Website Logo" src="src/images/logo.png"/>
+        </a>
+    </div>
+    <div id="mid-header">
+        <h1 id="header-text"><a href="index.html">Powerful Financial</a></h1>
+        <h3 id="header-subhead">Your smart financial calculator</h3>
+    </div>
+</header>
+
+<main>
+    <h2>Welcome to Powerful Financial</h2>
+    <h4>Please answer the following questions for us to better evaluate your needs.</h4>
+    <form id="quiz" action="report.html" method="get">
+        <!-- Moving options -->
+        <div>
+            <label for="moving-from">Moving From:</label>
+            <select id="moving-from" name="moving-from">
+                <option value="Washington DC">Washington DC</option>
+                <option value="Philadelphia">Philadelphia</option>
+                <option value="Boston">Boston</option>
+                <option value="Seattle">Seattle</option>
+                <option value="Silicon Valley">Silicon Valley</option>
+                <option value="Roanoke">Roanoke</option>
+            </select>
+            <label for="moving-to">Moving To:</label>
+            <select id="moving-to" name="moving-to">
+                <option value="Washington DC">Washington DC</option>
+                <option value="Philadelphia">Philadelphia</option>
+                <option value="Boston">Boston</option>
+                <option value="Seattle">Seattle</option>
+                <option value="Silicon Valley">Silicon Valley</option>
+                <option value="Roanoke">Roanoke</option>
+            </select>
+        </div>
+        <!-- Checkbox options -->
+        <div>
+            What are you looking for?
+            <label for="cost-of-living-checkbox">Cost of Living</label>
+            <input type="checkbox" id="cost-of-living-checkbox" name="cost-of-living-checkbox"/>
+            <label for="property-price-checkbox">Property Price</label>
+            <input type="checkbox" id="property-price-checkbox" name="property-price-checkbox"/>
+            <label for="crime-rate-checkbox">Crime Rate</label>
+            <input type="checkbox" id="crime-rate-checkbox" name="crime-rate-checkbox"/>
+            <label for="healthcare-checkbox">Healthcare</label>
+            <input type="checkbox" id="healthcare-checkbox" name="healthcare-checkbox"/>
+            <label for="childcare-checkbox">Childcare</label>
+            <input type="checkbox" id="childcare-checkbox" name="childcare-checkbox"/>
+        </div>
+        <!-- Lifestyle options -->
+        <h4>Lifestyle Options</h4>
+        <!-- Salary box -->
+        <div>
+            <label for="salary">Anticipated annual salary (USD):</label>
+            <input type="text" id="salary" name="salary" placeholder="50,000"/>
+        </div>
+        <!-- Members of household options -->
+        <div>
+            <label for="household-options">Members of household:</label>
+            <select id="household-options" name="household-options">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6+</option>
+            </select>
+        </div>
+        <!-- Eating out options -->
+        <div>
+            <label for="eating-out-options">How often do you eat meals at restaurants/get food delivered?</label>
+            <select id="eating-out-options" name="eating-out-options">
+                <option value="0">0 times per week</option>
+                <option value="1">1 time per week</option>
+                <option value="2">2 times per week</option>
+                <option value="3">3 times per week</option>
+                <option value="4">4 times per week</option>
+                <option value="5">5 times per week</option>
+                <option value="6">6 times per week</option>
+                <option value="7">7+ times per week</option>
+            </select>
+        </div>
+        <!-- Inexpensive restaurant options -->
+        <div>
+            <label for="inexpensive-restaurant-options">How often do you choose expensive restaurants?</label>
+            <select id="inexpensive-restaurant-options" name="inexpensive-restaurant-options">
+                <option value="0">0% of the time</option>
+                <option value="10">10% of the time</option>
+                <option value="20">20% of the time</option>
+                <option value="30">30% of the time</option>
+                <option value="40">40% of the time</option>
+                <option value="50">50% of the time</option>
+                <option value="60">60% of the time</option>
+                <option value="70">70% of the time</option>
+                <option value="80">80% of the time</option>
+                <option value="90">90% of the time</option>
+                <option value="100">100% of the time</option>
+            </select>
+        </div>
+        <!-- Coffee options -->
+        <div>
+            <label for="coffee-options">How often do you order coffee at a cafe?</label>
+            <select id="coffee-options" name="coffee-options">
+                <option value="0">0 times per week</option>
+                <option value="1">1 time per week</option>
+                <option value="2">2 times per week</option>
+                <option value="3">3 times per week</option>
+                <option value="4">4 times per week</option>
+                <option value="5">5 times per week</option>
+                <option value="6">6 times per week</option>
+                <option value="7">7+ times per week</option>
+            </select>
+        </div>
+        <!-- Going out options -->
+        <div>
+            <label for="going-out-options">How often do you order enjoy city entertainment
+                (movie/nightlife/etc)?</label>
+            <select id="going-out-options" name="going-out-options">
+                <option value="0">0 times per week</option>
+                <option value="1">1 time per week</option>
+                <option value="2">2 times per week</option>
+                <option value="3">3 times per week</option>
+                <option value="4">4 times per week</option>
+                <option value="5">5 times per week</option>
+                <option value="6">6 times per week</option>
+                <option value="7">7+ times per week</option>
+            </select>
+        </div>
+        <!-- Smoking options -->
+        <div>
+            <label for="smoking-options">How many packs of cigarettes does your household consume?</label>
+            <select id="smoking-options" name="smoking-options">
+                <option value="0">We don't smoke</option>
+                <option value="1">1 pack per week</option>
+                <option value="2">2 packs per week</option>
+                <option value="3">3 packs per week</option>
+                <option value="4">4 packs per week</option>
+                <option value="5">5 packs per week</option>
+                <option value="6">6 packs per week</option>
+                <option value="7">7+ packs per week</option>
+            </select>
+        </div>
+        <!-- Drinking options -->
+        <div>
+            <label for="drinking-options">How much alcohol does your household consume?</label>
+            <select id="drinking-options" name="drinking-options">
+                <option value="None">We don't drink</option>
+                <option value="Low">Low</option>
+                <option value="Moderate">Moderate</option>
+                <option value="High">High</option>
+            </select>
+        </div>
+        <!-- Drinking options -->
+        <div>
+            <label for="driving-options">How frequently do you drive?</label>
+            <select id="driving-options" name="driving-options">
+                <option value="None">I don't drive</option>
+                <option value="Low">Low</option>
+                <option value="Moderate">Moderate</option>
+                <option value="High">High</option>
+            </select>
+        </div>
+        <!-- Rideshare options -->
+        <div>
+            <label for="rideshare-options">How frequently do you use a taxi or rideshare app?</label>
+            <select id="rideshare-options" name="rideshare-options">
+                <option value="None">I don't rideshare</option>
+                <option value="Low">Low</option>
+                <option value="Moderate">Moderate</option>
+                <option value="High">High</option>
+            </select>
+        </div>
+        <!-- Public transportation options -->
+        <div>
+            Does your household use public transportation?
+            <label for="public-monthly">Monthly Pass</label>
+            <input type="radio" id="public-monthly" name="public-transit-options" value="Monthly">
+            <label for="public-on-demand">On Demand Tickets</label>
+            <input type="radio" id="public-on-demand" name="public-transit-options" value="On Demand Tickets">
+            <label for="public-no">No</label>
+            <input type="radio" id="public-no" name="public-transit-options" value="No">
+        </div>
+
+        <!-- I would LIKE to display the following two options dynamically
+        depending on which radio button the user selects above -->
+        <div>
+            <label for="public-transit-members">How many members of your household use a monthly public transportation
+                ticket?</label>
+            <select id="public-transit-members" name="public-transit-members">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6+</option>
+            </select>
+        </div>
+        <div>
+            <label for="public-transit-trips">How many times per week does your household take public
+                transportation?</label>
+            <select id="public-transit-trips" name="public-transit-trips">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5+</option>
+            </select>
+        </div>
+
+        <!-- Gym options -->
+        <div>
+            <label for="gym-options">How many members of your household have a gym membership?</label>
+            <select id="gym-options" name="gym-options">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3+</option>
+            </select>
+        </div>
+        <!-- Vacation spending -->
+        <div>
+            <label for="vacation-spending">How much money do you spend on vacations per year?</label>
+            <input type="text" id="vacation-spending" name="vacation-spending" placeholder="2,000"/>
+        </div>
+        <!-- Clothing options -->
+        <div>
+            <label for="clothing-options">How often do you buy new clothing/shoes?</label>
+            <select id="clothing-options" name="clothing-options">
+                <option value="None">I don't buy new clothes/shoes</option>
+                <option value="Low">Low</option>
+                <option value="Moderate">Moderate</option>
+                <option value="High">High</option>
+            </select>
+        </div>
+        <input type="submit" id="submit-button" name="submit-button" value="Submit">
+    </form>
+</main>
+
+<footer>
+    <div id="mid-footer">
+        <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="https://code.vt.edu/cost-of-living-app/cost-of-living">Gitlab Link</a></li>
+        </ul>
+    </div>
+    <div id="right-footer">
+        <div class="flexItem">
+            &copy; 2021 Powerful Financial
+        </div>
+    </div>
+</footer>
+</body>
+</html>
