@@ -9,11 +9,9 @@ def index_page(request):
                   "capstone/questionnaire.html",
                   )
 
-
 # def report_page(request, result):
 #     return render(request,
-#                   "capstone/report.html",
-#                   {"result": result}
+#                   "capstone/report.html"
 #                   )
 
 
