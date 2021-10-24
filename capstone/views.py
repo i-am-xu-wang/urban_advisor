@@ -16,6 +16,7 @@ def index_page(request):
 
 
 def register_form(request):
+    end_city = request.POST['moving_to']
     household_member = request.POST['household-options']
     eating_options = request.POST['eating-out-options']
     inexpensive_restaurant_options = request.POST['inexpensive-restaurant-options']
@@ -32,7 +33,7 @@ def register_form(request):
     vacation_spending = request.POST['vacation-spending']
     clothing_options = request.POST['clothing-options']
 
-    result = models.cost_of_living_calculation(household_member, eating_options, inexpensive_restaurant_options,
+    result = models.cost_of_living_calculation(end_city,household_member, eating_options, inexpensive_restaurant_options,
                                                coffee_option,
                                                going_out_options, smoking_option, drinking_options, driving_options,
                                                rideshare_options, public_transit_options, public_transit_members,
