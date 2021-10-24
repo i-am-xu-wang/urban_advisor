@@ -53,3 +53,33 @@
 //     return cookieValue;
 // }
 
+$(document).ready(function () {
+    const transitOptions = document.getElementById('transit-options')
+    const monthlyOptions = document.getElementById('when-public-monthly');
+    const onDemandOptions = document.getElementById('when-public-on-demand');
+    monthlyOptions.remove()
+    onDemandOptions.remove()
+
+    $('#public-monthly').click(function () {
+        if (onDemandOptions) {
+            onDemandOptions.remove()
+        }
+        transitOptions.append(monthlyOptions)
+        monthlyOptions.style.margin = "10px 0 10px 0"
+    })
+    $('#public-on-demand').click(function () {
+        if (monthlyOptions) {
+            monthlyOptions.remove()
+        }
+        transitOptions.append(onDemandOptions)
+        onDemandOptions.style.margin = "10px 0 10px 0"
+    })
+    $('#public-no').click(function () {
+        if (onDemandOptions) {
+            onDemandOptions.remove()
+        }
+        if (monthlyOptions) {
+            monthlyOptions.remove()
+        }
+    })
+})

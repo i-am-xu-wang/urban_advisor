@@ -166,7 +166,7 @@
             </select>
         </div>
         <!-- Public transportation options -->
-        <div>
+        <div id="transit-options">
             Does your household use public transportation?
             <input type="radio" id="public-monthly" name="public-transit-options" value="Monthly">
             <label for="public-monthly">Monthly Pass</label>
@@ -178,7 +178,7 @@
 
         <!-- I would LIKE to display the following two options dynamically
         depending on which radio button the user selects above -->
-        <div>
+        <div id="when-public-monthly">
             <label for="public-transit-members">How many members of your household use a monthly public transportation
                 ticket?</label>
             <select id="public-transit-members" name="public-transit-members">
@@ -190,7 +190,7 @@
                 <option value="6">6+</option>
             </select>
         </div>
-        <div>
+        <div id="when-public-on-demand">
             <label for="public-transit-trips">How many times per week does your household take public
                 transportation?</label>
             <select id="public-transit-trips" name="public-transit-trips">
