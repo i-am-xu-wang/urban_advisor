@@ -1,4 +1,4 @@
-insert into main.cities (Expenses, 'Roanoke/Blacksburg', 'Washington DC', Philadelphia, Boston, Seattle, 'San Francisco')
+insert into main.cities (Expenses, "Roanoke/Blacksburg", "Washington DC", Philadelphia, Boston, Seattle, "San Francisco")
 values  ('Meal, Inexpensive Restaurant', 15, 15, 15, 20, 18, 20),
         ('Meal for 2 People, Mid-range Restaurant, Three-course', 65, 80, 55, 87.5, 85, 85),
         ('Fast Food Combo Meal', 8, 8, 8, 9.59, 10, 10),
