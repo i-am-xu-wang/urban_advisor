@@ -20,8 +20,11 @@ class Result:
 
 def cost_of_living_calculation(household_member, eating_options, inexpensive_restaurant_options, coffee_option,
                                going_out_options, smoking_option, drinking_options, driving_options, rideshare_options,
-                               public_transit_members, public_transit_trips, gym_options, vacation_spending,
-                               clothing_options):
+                               public_transit_options, public_transit_members, public_transit_trips, gym_options,
+                               vacation_spending, clothing_options):
+    print(household_member, eating_options, inexpensive_restaurant_options, coffee_option, going_out_options,
+          smoking_option, drinking_options, driving_options, rideshare_options, public_transit_options,
+          public_transit_members, public_transit_trips, gym_options, vacation_spending, clothing_options)
     # todo:perform logic calculation for the result
     result = Result(500, 200, 300, 400, 500, 400, 200, 1000, 121, 232)
     return result

@@ -25,6 +25,7 @@ def register_form(request):
     drinking_options = request.POST['drinking-options']
     driving_options = request.POST['driving-options']
     rideshare_options = request.POST['rideshare-options']
+    public_transit_options = request.POST['public-transit-options']
     public_transit_members = request.POST['public-transit-members']
     public_transit_trips = request.POST['public-transit-trips']
     gym_options = request.POST['gym-options']
@@ -34,8 +35,8 @@ def register_form(request):
     result = models.cost_of_living_calculation(household_member, eating_options, inexpensive_restaurant_options,
                                                coffee_option,
                                                going_out_options, smoking_option, drinking_options, driving_options,
-                                               rideshare_options, public_transit_members, public_transit_trips,
-                                               gym_options, vacation_spending, clothing_options)
+                                               rideshare_options, public_transit_options, public_transit_members,
+                                               public_transit_trips, gym_options, vacation_spending, clothing_options)
     return render(request,
                   "capstone/report.html",
                   {"result": result}
