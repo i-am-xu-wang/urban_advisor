@@ -16,6 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from capstone import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.index_page, name="default"),
+    path('index/', views.index_page, name="index"),
+    path('report/', views.register_form, name="report"),
+    # path('report/', views.report_page, name="report"),
 ]

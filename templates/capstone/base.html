@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The home Page of Powerful Financial Website | {% block page-title %} {% endblock %} </title>
+    <link rel="stylesheet" type="text/css" href="{% static "css/global.css" %}?{% now "U" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/report.css" %}?{% now "U" %}">
+    <script src="{% static "js/jquery-3.6.0.min.js" %}"></script>
+    <script src="{% static "js/jquery.serializejson.js" %}"></script>
+    <script src="{% static "js/script.js" %}"></script>
+</head>
+
+<body>
+<header>
+    <div id="left-header">
+        <a href="{% url "index" %}">
+            <img id="header-logo" alt="Website Logo" src="{% static "images/logo.png" %}"/>
+        </a>
+    </div>
+    <div id="mid-header">
+        <h1 id="header-text"><a href="{% url "index" %}">Powerful Financial</a></h1>
+        <h3 id="header-subhead">Your smart financial calculator</h3>
+    </div>
+</header>
+
+<main>
+   {% block content %}{% endblock %}
+</main>
+
+<footer>
+    <div id="mid-footer">
+        <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="https://code.vt.edu/cost-of-living-app/cost-of-living">Gitlab Link</a></li>
+        </ul>
+    </div>
+    <div id="right-footer">
+        <div class="flexItem">
+            &copy; 2021 Powerful Financial
+        </div>
+    </div>
+</footer>
+</body>
+</html>
