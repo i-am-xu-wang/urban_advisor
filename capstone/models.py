@@ -4,8 +4,9 @@ from django.db import models
 # Create your models here.
 
 class Result:
-    def __init__(self, restaurant, grocery, public_transportation, ride_share, gas, fitness, cinema, vacation,
-                 clothing, total):
+    def __init__(self, city , restaurant, grocery, public_transportation, ride_share, gas, fitness, cinema, vacation,
+                 clothing,mortgage, total):
+        self.city = city
         self.restaurant = restaurant
         self.grocery = grocery
         self.public_transportation = public_transportation
@@ -15,6 +16,7 @@ class Result:
         self.cinema = cinema
         self.vacation = vacation
         self.clothing = clothing
+        self.mortgage = mortgage
         self.total = total
 
 
@@ -22,9 +24,17 @@ def cost_of_living_calculation(end_city,household_member, eating_options, inexpe
                                going_out_options, smoking_option, drinking_options, driving_options, rideshare_options,
                                public_transit_options, public_transit_members, public_transit_trips, gym_options,
                                vacation_spending, clothing_options):
-    print(end_city,household_member, eating_options, inexpensive_restaurant_options, coffee_option, going_out_options,
+
+    food = 18 * int(household_member)
+    grocery = 415.8 * int(household_member)
+    entertainment = 14 * int(household_member)
+    gym = 54.48 * int(gym_options)
+    mortgage = 300
+    total = food + grocery + entertainment + gym + mortgage + int(vacation_spending)
+    print(grocery,entertainment, gym,end_city,household_member, eating_options, inexpensive_restaurant_options, coffee_option, going_out_options,
           smoking_option, drinking_options, driving_options, rideshare_options, public_transit_options,
           public_transit_members, public_transit_trips, gym_options, vacation_spending, clothing_options)
     # todo:perform logic calculation for the result
-    result = Result('seattle', 500, 200, 300, 400, 500, 400, 200, 1000, 121, 232)
+
+    result = Result('seattle', food, grocery, 300, 400, 500, gym, entertainment, vacation_spending , clothing_options, mortgage, total)
     return result

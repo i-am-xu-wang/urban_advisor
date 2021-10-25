@@ -16,7 +16,7 @@ def index_page(request):
 
 
 def register_form(request):
-    end_city = request.POST['moving_to']
+    end_city = request.POST['moving-to']
     household_member = request.POST['household-options']
     eating_options = request.POST['eating-out-options']
     inexpensive_restaurant_options = request.POST['inexpensive-restaurant-options']
