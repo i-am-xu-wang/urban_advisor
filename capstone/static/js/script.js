@@ -54,32 +54,33 @@
 // }
 
 $(document).ready(function () {
-    const transitOptions = document.getElementById('transit-options')
     const monthlyOptions = document.getElementById('when-public-monthly');
     const onDemandOptions = document.getElementById('when-public-on-demand');
-    monthlyOptions.remove()
-    onDemandOptions.remove()
+
+    monthlyOptions.style.display = 'none'
+    onDemandOptions.style.display = 'none'
 
     $('#public-monthly').click(function () {
+        console.log('monthly display')
         if (onDemandOptions) {
-            onDemandOptions.remove()
+            onDemandOptions.style.display = 'none'
         }
-        transitOptions.append(monthlyOptions)
-        monthlyOptions.style.margin = "10px 0 10px 0"
+        monthlyOptions.style.display = 'block'
     })
     $('#public-on-demand').click(function () {
+        console.log('on demand display')
         if (monthlyOptions) {
-            monthlyOptions.remove()
+            monthlyOptions.style.display = 'none'
         }
-        transitOptions.append(onDemandOptions)
-        onDemandOptions.style.margin = "10px 0 10px 0"
+        onDemandOptions.style.display = 'block'
     })
     $('#public-no').click(function () {
+        console.log('none display')
         if (onDemandOptions) {
-            onDemandOptions.remove()
+            onDemandOptions.style.display = 'none'
         }
         if (monthlyOptions) {
-            monthlyOptions.remove()
+            monthlyOptions.style.display = 'none'
         }
     })
 })
