@@ -4,8 +4,8 @@ from django.db import models
 # Create your models here.
 
 class Result:
-    def __init__(self, city , restaurant, grocery, public_transportation, ride_share, gas, fitness, cinema, vacation,
-                 clothing,mortgage, total):
+    def __init__(self, city, restaurant, grocery, public_transportation, ride_share, gas, fitness, cinema, vacation,
+                 clothing, mortgage, total):
         self.city = city
         self.restaurant = restaurant
         self.grocery = grocery
@@ -20,21 +20,34 @@ class Result:
         self.total = total
 
 
-def cost_of_living_calculation(end_city,household_member, eating_options, inexpensive_restaurant_options, coffee_option,
+def cost_of_living_calculation(end_city, household_member, eating_options, inexpensive_restaurant_options,
+                               coffee_option,
                                going_out_options, smoking_option, drinking_options, driving_options, rideshare_options,
                                public_transit_options, public_transit_members, public_transit_trips, gym_options,
                                vacation_spending, clothing_options):
-
     food = 18 * int(household_member)
     grocery = 415.8 * int(household_member)
     entertainment = 14 * int(household_member)
     gym = 54.48 * int(gym_options)
     mortgage = 300
-    total = food + grocery + entertainment + gym + mortgage + int(vacation_spending)
-    print(grocery,entertainment, gym,end_city,household_member, eating_options, inexpensive_restaurant_options, coffee_option, going_out_options,
+    total = food + grocery + entertainment + gym + mortgage
+    # + int(vacation_spending)
+    print(grocery, entertainment, gym, end_city, household_member, eating_options, inexpensive_restaurant_options,
+          coffee_option, going_out_options,
           smoking_option, drinking_options, driving_options, rideshare_options, public_transit_options,
           public_transit_members, public_transit_trips, gym_options, vacation_spending, clothing_options)
     # todo:perform logic calculation for the result
 
-    result = Result('seattle', food, grocery, 300, 400, 500, gym, entertainment, vacation_spending , clothing_options, mortgage, total)
+    result = Result('seattle', food, grocery, 300, 400, 500, gym, entertainment, vacation_spending, clothing_options,
+                    mortgage, total)
     return result
+
+
+class Cities(models.Model):
+    expenses = models.CharField(max_length=250)
+    roanoke = models.AutoField
+    dc = models.AutoField
+    philly = models.AutoField
+    boston = models.AutoField
+    seattle = models.AutoField
+    sf = models.AutoField
