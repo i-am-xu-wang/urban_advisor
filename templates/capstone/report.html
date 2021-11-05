@@ -7,32 +7,32 @@
     <ul id="cost-living">
         <li>
             <div>Restaurant:</div>
-            <p>Estimated Expense: ${{result.restaurant}}</p></li>
+            <p>Estimated Expense: ${{living_expense.restaurant}}</p></li>
         <li>
             <div>Grocery:</div>
-            <p>Estimated Expense:  ${{result.grocery}}</p></li>
+            <p>Estimated Expense:  ${{living_expense.grocery}}</p></li>
         <li>
             <div>Transportation:</div>
-            <p>Estimated Public Transportation Expense:  ${{result.public_transportation}}</p>
-            <p>Estimated Taxi and Ride Share Expense:  ${{result.ride_share}} </p>
-            <p>Estimated Gas Expense: ${{result.gas}}</p>
+            <p>Estimated Public Transportation Expense:  ${{living_expense.public_transportation}}</p>
+            <p>Estimated Taxi and Ride Share Expense:  ${{living_expense.ride_share}} </p>
+            <p>Estimated Gas Expense: ${{living_expense.gas}}</p>
         </li>
         <li>
             <div>Entertainment:</div>
-            <p>Estimated Fitness Center Expense: ${{result.fitness}}</p>
-            <p>Estimated Cinema and Nightlife expense: ${{result.cinema}}</p>
-            <p>Estimated Vacation Expense (amortized by month): ${{result.vacation}}</p>
+            <p>Estimated Fitness Center Expense: ${{living_expense.fitness}}</p>
+            <p>Estimated Cinema and Nightlife expense: ${{living_expense.cinema}}</p>
+            <p>Estimated Vacation Expense (amortized by month): ${{living_expense.vacation}}</p>
         </li>
         <li>
             <div>Shopping Spending:</div>
-            <p>Estimated Shopping Spending: ${{result.clothing}}</p>
+            <p>Estimated Shopping Spending: ${{living_expense.clothing}}</p>
         </li>
         <li>
             <div>Rent or Mortgage:</div>
-            <p>Estimated Monthly Payment: ${{result.mortgage}}</p>
+            <p>Estimated Monthly Payment: ${{living_expense.mortgage}}</p>
         </li>
         <li>
-            <div>Total Household Estimated Spending: ${{ result.total }}</div>
+            <div>Total Household Estimated Spending: ${{ living_expense.total }}</div>
         </li>
     </ul>
 {% endblock %}
