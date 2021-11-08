@@ -12,7 +12,7 @@ def index_page(request):
 def register_form(request):
     # TODO: change 'end city' to city list selected from checkboxes. pass city_list to output page
     # TODO: pass checkbox_selections and additional property questions to calculator
-    end_city = request.POST["moving-to"]
+    cities = request.POST.getlist('city-checkbox')
     household_member = request.POST["household-options"]
     eating_options = request.POST["eating-out-options"]
     inexpensive_restaurant_options = request.POST["inexpensive-restaurant-options"]
@@ -30,7 +30,7 @@ def register_form(request):
     clothing_options = request.POST["clothing-options"]
 
     living_expense = calculator.cost_of_living_calculation(
-        end_city,
+        cities,
         household_member,
         eating_options,
         inexpensive_restaurant_options,
@@ -50,3 +50,13 @@ def register_form(request):
 
     # TODO: pass to backend "city_list": city_list, "checkbox_selections": checkbox_selections
     return render(request, "capstone/report.html", {"living_expense": living_expense})
+
+def register_property_form(request):
+    proximity = request.POST["city-proximity-options"]
+    rent_or_buy = request.POST["rent-or-buy-options"]
+    if rent_or_buy == "Rent":
+        rental_bedrooms = request.POST["rental-bedroom-options"]
+    else:
+        buy_square_footage = request.POST["buy-square-footage"]
+
+    return render(request, "capstone/report.html")

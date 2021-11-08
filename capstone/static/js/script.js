@@ -1,58 +1,3 @@
-// const csrftoken = getCookie('csrftoken');
-//
-// $(document).ready(function () {
-//     //submit questionnaire when clicking submit button
-//     var household_members = $('#household-options').find(":selected").text().toString();
-//     // var obj = $('#quiz').serializeJSON();
-//     console.log(household_members)
-//     $('#submit-button').click(function () {
-//         console.log("Submit button clicked!");
-//         // Using the core $.ajax() method
-//         $.ajax({
-//             // The URL for the request
-//             url: "/",
-//             // The data to send (will be converted to a query string)
-//             data: {
-//                 member: household_members
-//             },
-//             type: "POST",
-//             // The type of data we expect back
-//             dataType: "json",
-//             headers: {'X-CSRFToken': csrftoken, 'x-requested-with': XMLHttpRequest}
-//         })
-//             .done(function (json) {
-//                 alert("Receive Ajax request");
-//                 //console.log(JSON.stringify(obj));
-//             })
-//             .fail(function (xhr, status, errorThrown) {
-//                 alert("Sorry, there was a problem!");
-//                 console.log("Error: " + errorThrown);
-//                 console.log("Status: " + status);
-//                 console.dir(xhr);
-//             })
-//             // Code to run regardless of success or failure;
-//             .always(function (xhr, status) {
-//                 alert("The request is complete!");
-//             });
-//     });
-// })
-//
-// function getCookie(name) {
-//     let cookieValue = null;
-//     if (document.cookie && document.cookie !== '') {
-//         const cookies = document.cookie.split(';');
-//         for (let i = 0; i < cookies.length; i++) {
-//             const cookie = cookies[i].trim();
-//             // Does this cookie string begin with the name we want?
-//             if (cookie.substring(0, name.length + 1) === (name + '=')) {
-//                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-//                 break;
-//             }
-//         }
-//     }
-//     return cookieValue;
-// }
-
 $(document).ready(function () {
     const monthlyOptions = document.getElementById('when-public-monthly');
     const onDemandOptions = document.getElementById('when-public-on-demand');
@@ -124,4 +69,49 @@ $(document).ready(function () {
         }
         buyQuestions.style.display = 'block'
     })
+
+    submitForms = function() {
+        console.log("submit clicked")
+        $(".error-num").removeClass("error-num");
+        $(".error-select").removeClass("error-select");
+
+        // cost of living quiz validation
+        if ($('input[name="salary"]').val() === "") {
+            $('#salary').addClass('error-num');
+            return alert("Please enter anticipated annual salary");
+        } else if ($('input[name="vacation-spending"]').val() === "") {
+            $('#vacation-spending').addClass('error-num');
+            return alert("Please enter vacation spending")
+        } else {
+            // property price quiz validation
+            const property_price_checkbox = document.getElementById('property-price-checkbox');
+            if ($(property_price_checkbox).is(":checked")) {
+                if ($('input[name="city-proximity-options"]:checked').val() === undefined) {
+                    $('#city-proximity-options').addClass('error-select');
+                    return alert("Please select an option for city proximity");
+                } else if ($('input[name="rent-or-buy-options"]:checked').val() === undefined) {
+                    $('#rent-or-buy-options').addClass('error-select');
+                    return alert("Please select an option for rent or buy");
+                } else {
+                    if ($('input[name="rent-or-buy-options"]:checked').val() === "Rent") {
+                        if ($('input[name="rental-bedroom-options"]:checked').val() === undefined) {
+                            $('#rent-questions').addClass('error-select');
+                            return alert("Please select an option for rental bedrooms");
+                        }
+                    } else {
+                        if ($('input[name="buy-square-footage"]').val() === "") {
+                            $('#buy-square-footage').addClass('error-num');
+                            return alert("Please enter desired square footage")
+                        }
+                    }
+                }
+                console.log("passed the checks!")
+                document.getElementById('property-price-quiz').submit();
+                console.log("submitted property price quiz")
+            }
+            document.getElementById('cost-of-living-quiz').submit();
+            console.log("submitted cost of living quiz")
+        }
+        console.log("done executing submitForms")
+    }
 })
