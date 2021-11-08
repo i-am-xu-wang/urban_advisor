@@ -57,8 +57,23 @@ $(document).ready(function () {
     const monthlyOptions = document.getElementById('when-public-monthly');
     const onDemandOptions = document.getElementById('when-public-on-demand');
 
-    monthlyOptions.style.display = 'none'
-    onDemandOptions.style.display = 'none'
+    const propertyPriceOptions = document.getElementById('property-price-options');
+    const rentQuestions = document.getElementById('rent-questions')
+    const buyQuestions = document.getElementById('buy-questions')
+
+    monthlyOptions.style.display = 'none';
+    onDemandOptions.style.display = 'none';
+
+    propertyPriceOptions.style.display = 'none';
+    rentQuestions.style.display = 'none';
+    buyQuestions.style.display = 'none';
+
+    $('#cities-checkboxes :checkbox').change(function () {
+        var $cs = $(this).closest('#cities-checkboxes').find(':checkbox:checked');
+        if ($cs.length > 3) {
+            this.checked = false;
+        }
+    });
 
     $('#public-monthly').click(function () {
         console.log('monthly display')
@@ -82,5 +97,31 @@ $(document).ready(function () {
         if (monthlyOptions) {
             monthlyOptions.style.display = 'none'
         }
+    })
+
+    $('#property-price-checkbox').click(function () {
+        console.log("clicked it!")
+        if ($(this).is(":checked")) {
+            console.log("it's checked now!")
+            propertyPriceOptions.style.display = 'block'
+        } else{
+            console.log("it's not checked...")
+            propertyPriceOptions.style.display = 'none'
+        }
+    })
+
+    $('#rent').click(function () {
+        console.log("selected rent!")
+        if (buyQuestions) {
+            buyQuestions.style.display = 'none'
+        }
+        rentQuestions.style.display = 'block'
+    })
+    $('#buy').click(function () {
+        console.log("selected buy!")
+        if (rentQuestions) {
+            rentQuestions.style.display = 'none'
+        }
+        buyQuestions.style.display = 'block'
     })
 })
