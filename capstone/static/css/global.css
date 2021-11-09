@@ -41,8 +41,17 @@ main {
 margin-left: 30px;
 }
 
-#quiz > div {
+#cost-of-living-quiz > div,
+#property-price-quiz > div > div {
     margin: 10px 0 10px 0;
+}
+
+.error-num {
+    border: 2px solid red;
+}
+
+.error-select {
+    color: red;
 }
 
 footer {
