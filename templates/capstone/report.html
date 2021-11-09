@@ -3,36 +3,263 @@
 {% load static %}
 {% block content %}
     <h1>Here is your customized financial report:</h1>
-    <h2>Cost of Living Report (Monthly)</h2>
-    <ul id="cost-living">
-        <li>
-            <div>Restaurant:</div>
-            <p>Estimated Expense: ${{living_expense.restaurant}}</p></li>
-        <li>
-            <div>Grocery:</div>
-            <p>Estimated Expense:  ${{living_expense.grocery}}</p></li>
-        <li>
-            <div>Transportation:</div>
-            <p>Estimated Public Transportation Expense:  ${{living_expense.public_transportation}}</p>
-            <p>Estimated Taxi and Ride Share Expense:  ${{living_expense.ride_share}} </p>
-            <p>Estimated Gas Expense: ${{living_expense.gas}}</p>
-        </li>
-        <li>
-            <div>Entertainment:</div>
-            <p>Estimated Fitness Center Expense: ${{living_expense.fitness}}</p>
-            <p>Estimated Cinema and Nightlife expense: ${{living_expense.cinema}}</p>
-            <p>Estimated Vacation Expense (amortized by month): ${{living_expense.vacation}}</p>
-        </li>
-        <li>
-            <div>Shopping Spending:</div>
-            <p>Estimated Shopping Spending: ${{living_expense.clothing}}</p>
-        </li>
-        <li>
-            <div>Rent or Mortgage:</div>
-            <p>Estimated Monthly Payment: ${{living_expense.mortgage}}</p>
-        </li>
-        <li>
-            <div>Total Household Estimated Spending: ${{ living_expense.total }}</div>
-        </li>
-    </ul>
+        <h2>Cost of Living Report (Monthly)</h2>
+        <table id="cost-living">
+            <tr>
+                <th></th>
+                {% for city_result in cities_living_expense %}
+                    <th>{{ city_result.city }}   </th>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>
+                    <div>Restaurant:</div>
+                    <p>Estimated Expense:</p>
+                </td>
+                {% for city_result in cities_living_expense %}
+                    <td>
+                        ${{ city_result.restaurant }}
+                    </td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>
+                    <div>Grocery:</div>
+                    <p>Estimated Expense:</p>
+                </td>
+
+                {% for city_result in cities_living_expense %}
+                    <td>
+                        ${{ city_result.grocery }}
+                    </td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>
+                    <div>Transportation:</div>
+                    <p>Estimated Public Transportation Expense:</p>
+                </td>
+                {% for city_result in cities_living_expense %}
+                    <td>
+                        ${{ city_result.public_transportation }}
+                    </td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>
+                    <p>Estimated Taxi and Ride Share Expense: </p>
+                </td>
+                {% for city_result in cities_living_expense %}
+                    <td>
+                        ${{ city_result.ride_share }}
+                    </td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>
+                    <p>Estimated Gas Expense: </p>
+                </td>
+                {% for city_result in cities_living_expense %}
+                    <td>
+                        ${{ city_result.gas }}
+                    </td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>
+                    <div>Entertainment:</div>
+                    <p>Estimated Fitness Center Expense:</p>
+                </td>
+                {% for city_result in cities_living_expense %}
+                    <td>
+                        ${{ city_result.fitness }}
+                    </td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>
+                    <p>Estimated Cinema and Nightlife expense:</p>
+                </td>
+                {% for city_result in cities_living_expense %}
+                    <td>
+                        ${{ city_result.cinema }}
+                    </td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>
+                    <p>Estimated Vacation Expense (amortized by month):</p>
+                </td>
+                {% for city_result in cities_living_expense %}
+                    <td>
+                        ${{ city_result.vacation }}
+                    </td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>
+                    <div>Shopping Spending:</div>
+                    <p>Estimated Shopping Spending: </p>
+                </td>
+                {% for city_result in cities_living_expense %}
+                    <td>
+                        ${{ city_result.clothing }}
+                    </td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>
+                    <div>Total Household Estimated Spending:</div>
+                </td>
+                {% for city_result in cities_living_expense %}
+                    <td>
+                        ${{ city_result.total }}
+                    </td>
+                {% endfor %}
+            </tr>
+        </table>
+    {% if user_info.property_option %}
+            <h2>Cost of Property Report (Monthly)</h2>
+            <table id="cost-of-property">
+                <tr>
+                    <th></th>
+                    {% for city_result in cities_living_expense %}
+                        <th>{{ city_result.city }}   </th>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>You have choose the <strong>{{ city1_property.rent_or_buy }}</strong> &#160 option</td>
+                </tr>
+                <tr>
+                    <td>Estimated Cost for {{ city1_property.property_size }}:</td>
+                    {% for city_property in cities_property_expense %}
+                        <td>
+                            ${{ city_property.monthly_payment }}
+                        </td>
+                    {% endfor %}
+                </tr>
+            </table>
+    {% endif %}
+    {% if user_info.healthcare %}
+            <h2>Health Care Report</h2>
+            <table id="health-care">
+                <tr>
+                    <th></th>
+                    {% for city_result in cities_living_expense %}
+                        <th>{{ city_result.city }}   </th>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td><strong>Healthcare Quality(%):</strong></td>
+                </tr>
+                <tr>
+                    <td>Skill and competency of medical staff:</td>
+                    {% for city_health in cities_health_care %}
+                        <td>
+                            ${{ city_health.skill }}
+                        </td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Speed in completing examination and reports</td>
+                    {% for city_health in cities_health_care %}
+                        <td>
+                            ${{ city_health.speed }}
+                        </td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Equipment for modern diagnosis and treatment</td>
+                    {% for city_health in cities_health_care %}
+                        <td>
+                            ${{ city_health.equipment }}
+                        </td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Accuracy and completeness in filling out reports</td>
+                    {% for city_health in cities_health_care %}
+                        <td>
+                            ${{ city_health.accuracy }}
+                        </td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Friendliness and courtesy of the staff</td>
+                    {% for city_health in cities_health_care %}
+                        <td>
+                            ${{ city_health.friendliness }}
+                        </td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Satisfaction with responsiveness (waitings) in medical institutions</td>
+                    {% for city_health in cities_health_care %}
+                        <td>
+                            ${{ city_health.satisfaction_responsiveness }}
+                        </td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Satisfaction with cost to you</td>
+                    {% for city_health in cities_health_care %}
+                        <td>
+                            ${{ city_health.satisfaction_cost }}
+                        </td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Convenience of location for you</td>
+                    {% for city_health in cities_health_care %}
+                        <td>
+                            ${{ city_health.location }}
+                        </td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td><strong>Health Care Expense (Per Visit):</strong></td>
+                </tr>
+                <tr>
+                    <td>Doctor's Visit</td>
+                    {% for city_health in cities_health_care %}
+                        <td>
+                            ${{ city_health.doctor_visit }}
+                        </td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Dentist Visit</td>
+                    {% for city_health in cities_health_care %}
+                        <td>
+                            ${{ city_health.dentist_visit }}
+                        </td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Optometrist Visit</td>
+                    {% for city_health in cities_health_care %}
+                        <td>
+                            ${{ city_health.optometrist_visit }}
+                        </td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>RX Drug</td>
+                    {% for city_health in cities_health_care %}
+                        <td>
+                            ${{ city_health.RX_drug }}
+                        </td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Veterinary Visit</td>
+                    {% for city_health in cities_health_care %}
+                        <td>
+                            ${{ city_health.veterinary_visit }}
+                        </td>
+                    {% endfor %}
+                </tr>
+            </table>
+    {% endif %}
+
 {% endblock %}

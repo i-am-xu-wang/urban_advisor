@@ -3,8 +3,6 @@ from . import models, calculator
 
 
 # Create your views here.
-
-
 def index_page(request):
     return render(request, "capstone/questionnaire.html", )
 
@@ -12,7 +10,9 @@ def index_page(request):
 def register_form(request):
     # TODO: change 'end city' to city list selected from checkboxes. pass city_list to output page
     # TODO: pass checkbox_selections and additional property questions to calculator
-    end_city = request.POST["moving-to"]
+    feature_options = request.POST.getlist('feature-option')
+    salary = request.POST.getlist('salary')
+    cities = request.POST.getlist('cities-checkbox')
     household_member = request.POST["household-options"]
     eating_options = request.POST["eating-out-options"]
     inexpensive_restaurant_options = request.POST["inexpensive-restaurant-options"]
@@ -28,9 +28,9 @@ def register_form(request):
     gym_options = request.POST["gym-options"]
     vacation_spending = request.POST["vacation-spending"]
     clothing_options = request.POST["clothing-options"]
-
+    user_info = calculator.register_user(salary, feature_options)
     living_expense = calculator.cost_of_living_calculation(
-        end_city,
+        cities,
         household_member,
         eating_options,
         inexpensive_restaurant_options,
@@ -47,6 +47,33 @@ def register_form(request):
         vacation_spending,
         clothing_options,
     )
+    proximity = request.POST.get('city-proximity-options')
+    print(proximity)
+    rent_or_buy = request.POST.get('rent-or-buy-options')
+    if rent_or_buy == "Rent":
+        property_size = request.POST.get('rental-bedroom-options')
+    else:
+        property_size = request.POST.get('buy-square-footage')
 
-    # TODO: pass to backend "city_list": city_list, "checkbox_selections": checkbox_selections
-    return render(request, "capstone/report.html", {"living_expense": living_expense})
+    print(property_size)
+    property_expense = calculator.cost_of_property_calculation(proximity, rent_or_buy, property_size)
+    cities_health_care = calculator.cost_of_health_calculation()
+    return render(request, "capstone/report.html", {"cities_living_expense": living_expense, "user_info": user_info,
+                                                    "cities_property_expense": property_expense,
+                                                    "city1_property": property_expense[0],
+                                                    "cities_health_care": cities_health_care})
+
+
+def register_property_form(request):
+    proximity = request.POST.get('city-proximity-options')
+    print(proximity)
+    rent_or_buy = request.POST.get('rent-or-buy-options')
+    if rent_or_buy == "Rent":
+        property_size = request.POST["rental-bedroom-options"]
+    else:
+        property_size = request.POST["buy-square-footage"]
+    property_expense = calculator.cost_of_property_calculation(proximity, rent_or_buy, property_size)
+
+    return render(request, "capstone/report.html",
+                  {"cities_property_expense": property_expense, "city1_property": property_expense[0]}
+                  )

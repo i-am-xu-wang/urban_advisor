@@ -23,5 +23,5 @@ urlpatterns = [
     path("", views.index_page, name="default"),
     path("index/", views.index_page, name="index"),
     path("report/", views.register_form, name="report"),
-    # path('report/', views.report_page, name="report"),
+    path("report-property/", views.register_property_form, name="property-report")
 ]
