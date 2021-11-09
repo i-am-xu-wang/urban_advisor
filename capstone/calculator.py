@@ -37,6 +37,24 @@ class CostPropertyResult:
         self.property_size = property_size
 
 
+class HealthCareResult:
+    def __init__(self, skill, speed, equipment, accuracy, friendliness, satisfaction_responsiveness, satisfaction_cost,
+                 location, doctor_visit, dentist_visit, optometrist_visit, RX_drug, veterinary_visit):
+        self.skill = skill
+        self.speed = speed
+        self.equipment = equipment
+        self.accuracy = accuracy
+        self.friendliness = friendliness
+        self.satisfaction_responsiveness = satisfaction_responsiveness
+        self.satisfaction_cost = satisfaction_cost
+        self.location = location
+        self.doctor_visit = doctor_visit
+        self.dentist_visit = dentist_visit
+        self.optometrist_visit = optometrist_visit
+        self.RX_drug = RX_drug
+        self.veterinary_visit = veterinary_visit
+
+
 def register_user(salary, feature_options):
     print(feature_options)
     property_option = False
@@ -56,6 +74,8 @@ def register_user(salary, feature_options):
     return user
 
 
+# pass a list of cities and user selections. Calculated each cities' result based selection, return a list of
+# results of each city. The function need to add cities into selected_cities for other functions to access it
 def cost_of_living_calculation(cities, household_member, eating_options, inexpensive_restaurant_options,
                                coffee_option, going_out_options, smoking_option, drinking_options, driving_options,
                                rideshare_options, public_transit_options, public_transit_members, public_transit_trips,
@@ -72,7 +92,7 @@ def cost_of_living_calculation(cities, household_member, eating_options, inexpen
           smoking_option, drinking_options, driving_options, rideshare_options, public_transit_options,
           public_transit_members, public_transit_trips, gym_options, vacation_spending, clothing_options)
     # todo:perform logic calculation for the result
-    # just some dummy data
+    # this just some dummy data
     cost_of_living_result1 = CostLivingResult(cities[0], food, grocery, 300, 400, 500, gym, entertainment,
                                               vacation_spending, clothing_options,
                                               mortgage, total)
@@ -89,10 +109,20 @@ def cost_of_living_calculation(cities, household_member, eating_options, inexpen
 
 def cost_of_property_calculation(proximity, rent_or_buy, property_size):
     # todo: perform property calculation logic here
-
+    print(property_size)
     # dummy data
     cost_property_result1 = CostPropertyResult(selected_cities[0], "Rent", 500, property_size)
     cost_property_result2 = CostPropertyResult(selected_cities[1], "Rent", 500, property_size)
     cost_property_result3 = CostPropertyResult(selected_cities[2], "Rent", 500, property_size)
     cities_property_expense = [cost_property_result1, cost_property_result2, cost_property_result3]
     return cities_property_expense
+
+
+# this function purely fetch data from DB, not using data pass from frontend.
+def cost_of_health_calculation():
+    # dummy data
+    health_care_city1 = HealthCareResult(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)
+    health_care_city2 = HealthCareResult(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)
+    health_care_city3 = HealthCareResult(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)
+    cities_health_care = [health_care_city1, health_care_city2, health_care_city3]
+    return cities_health_care
