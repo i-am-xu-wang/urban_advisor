@@ -56,7 +56,7 @@ class HealthCareResult:
 
 
 def register_user(salary, feature_options):
-    print(feature_options)
+    print("register user feature options: " + feature_options[0])
     property_option = False
     crime_rate = False
     healthcare = False
@@ -87,7 +87,7 @@ def cost_of_living_calculation(cities, household_member, eating_options, inexpen
     gym = 54.48 * int(gym_options)
     mortgage = 300
     total = food + grocery + entertainment + gym + mortgage + int(vacation_spending)
-    print(grocery, entertainment, gym, cities, household_member, eating_options, inexpensive_restaurant_options,
+    print("cost of living calculation values " + str(grocery), entertainment, str(gym), cities, household_member, eating_options, inexpensive_restaurant_options,
           coffee_option, going_out_options,
           smoking_option, drinking_options, driving_options, rideshare_options, public_transit_options,
           public_transit_members, public_transit_trips, gym_options, vacation_spending, clothing_options)
@@ -109,7 +109,7 @@ def cost_of_living_calculation(cities, household_member, eating_options, inexpen
 
 def cost_of_property_calculation(proximity, rent_or_buy, property_size):
     # todo: perform property calculation logic here
-    print(property_size)
+    print("cost of property calculation property size: " + property_size)
     # dummy data
     cost_property_result1 = CostPropertyResult(selected_cities[0], "Rent", 500, property_size)
     cost_property_result2 = CostPropertyResult(selected_cities[1], "Rent", 500, property_size)
