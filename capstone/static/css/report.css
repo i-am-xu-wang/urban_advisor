@@ -2,8 +2,44 @@
 ul#cost-living {
     list-style-type: none;
 }
-
-div {
-    font-weight: bold;
+h2.report{
+    margin-top: 40px;
 }
+
+div.title {
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 17px;
+    height: 25px;
+}
+
+#cost-living th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: cornflowerblue;
+    color: white;
+    width: 300px;
+}
+
+#cost-property th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: lightseagreen;
+    color: white;
+    width: 300px;
+}
+
+tr {
+    height: 40px;
+}
+
+th:first-child {
+    width: 500px;
+}
+td:not(:first-child){
+    text-align: center;
+}
+
 

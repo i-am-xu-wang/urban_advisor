@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <title>The home Page of Powerful Financial | {% block page-title %} {% endblock %} </title>
     <link rel="stylesheet" type="text/css" href="{% static "css/global.css" %}?{% now "U" %}">
-    <link rel="stylesheet" type="text/css" href="{% static "css/report.css" %}?{% now "U" %}">
     <script src="{% static "js/jquery-3.6.0.min.js" %}"></script>
     <script src="{% static "js/jquery.serializejson.js" %}"></script>
     <script src="{% static "js/script.js" %}"></script>
@@ -25,7 +24,7 @@
 </header>
 
 <main>
-   {% block content %}{% endblock %}
+    {% block content %}{% endblock %}
 </main>
 
 <footer>
