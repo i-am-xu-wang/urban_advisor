@@ -226,8 +226,8 @@
                 <option value="5">5+ time per week</option>
             </select>
         </div>
-    </form>
-    <form id="property-price-quiz" action="{% url "property-report" %}" method="post">
+        {#    </form>#}
+        {#    <form id="property-price-quiz" action="{% url "property-report" %}" method="post">#}
         {% csrf_token %}
         <div id="property-price-options">
             <h4>Property Price Options</h4>
@@ -267,6 +267,6 @@
             </div>
             <!--Add more questions here-->
         </div>
+     <input type="submit" id="submit-button" name="submit-button" value="Submit">
     </form>
-    <input onClick="submitForms()" type="submit" id="submit-button" name="submit-button" value="Submit">
 {% endblock %}

@@ -48,14 +48,14 @@ def register_form(request):
         clothing_options,
     )
     proximity = request.POST.get('city-proximity-options')
-    print("register form proximity: " + proximity)
+    # print("register form proximity: " + proximity)
     rent_or_buy = request.POST.get('rent-or-buy-options')
     if rent_or_buy == "Rent":
         property_size = request.POST.get('rental-bedroom-options')
     else:
         property_size = request.POST.get('buy-square-footage')
 
-    print("register form property size: " + property_size)
+    # print("register form property size: " + property_size)
     property_expense = calculator.cost_of_property_calculation(proximity, rent_or_buy, property_size)
     cities_health_care = calculator.cost_of_health_calculation()
     return render(request, "capstone/report.html", {"cities_living_expense": living_expense, "user_info": user_info,
@@ -64,16 +64,16 @@ def register_form(request):
                                                     "cities_health_care": cities_health_care})
 
 
-def register_property_form(request):
-    proximity = request.POST.get('city-proximity-options')
-    print("register property form proximity: " + proximity)
-    rent_or_buy = request.POST.get('rent-or-buy-options')
-    if rent_or_buy == "Rent":
-        property_size = request.POST["rental-bedroom-options"]
-    else:
-        property_size = request.POST["buy-square-footage"]
-    property_expense = calculator.cost_of_property_calculation(proximity, rent_or_buy, property_size)
-
-    return render(request, "capstone/report.html",
-                  {"cities_property_expense": property_expense, "city1_property": property_expense[0]}
-                  )
+# def register_property_form(request):
+#     proximity = request.POST.get('city-proximity-options')
+#     print("register property form proximity: " + proximity)
+#     rent_or_buy = request.POST.get('rent-or-buy-options')
+#     if rent_or_buy == "Rent":
+#         property_size = request.POST["rental-bedroom-options"]
+#     else:
+#         property_size = request.POST["buy-square-footage"]
+#     property_expense = calculator.cost_of_property_calculation(proximity, rent_or_buy, property_size)
+#
+#     return render(request, "capstone/report.html",
+#                   {"cities_property_expense": property_expense, "city1_property": property_expense[0]}
+#                   )
