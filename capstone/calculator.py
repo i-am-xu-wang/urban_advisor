@@ -107,13 +107,13 @@ def cost_of_living_calculation(cities, household_member, eating_options, inexpen
     return cities_living_expense
 
 
-def cost_of_property_calculation(proximity, rent_or_buy, property_size):
+def cost_of_property_calculation(proximity, rent_or_buy, property_size, down_payment_percent):
     # todo: perform property calculation logic here
     print("cost of property calculation property size: " + property_size)
     # dummy data
-    cost_property_result1 = CostPropertyResult(selected_cities[0], "Rent", 500, property_size)
-    cost_property_result2 = CostPropertyResult(selected_cities[1], "Rent", 500, property_size)
-    cost_property_result3 = CostPropertyResult(selected_cities[2], "Rent", 500, property_size)
+    cost_property_result1 = CostPropertyResult(selected_cities[0], "Rent", 5000, property_size)
+    cost_property_result2 = CostPropertyResult(selected_cities[1], "Rent", 5000, property_size)
+    cost_property_result3 = CostPropertyResult(selected_cities[2], "Rent", 5000, property_size)
     cities_property_expense = [cost_property_result1, cost_property_result2, cost_property_result3]
     return cities_property_expense
 

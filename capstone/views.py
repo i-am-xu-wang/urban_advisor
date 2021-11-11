@@ -52,17 +52,20 @@ def register_form(request):
     rent_or_buy = request.POST.get('rent-or-buy-options')
     if rent_or_buy == "Rent":
         property_size = request.POST.get('rental-bedroom-options')
+        down_payment_percent = 0
     else:
         property_size = request.POST.get('buy-square-footage')
+        down_payment_percent = request.POST.get('down-payment')
+        print(down_payment_percent)
 
     # print("register form property size: " + property_size)
-    property_expense = calculator.cost_of_property_calculation(proximity, rent_or_buy, property_size)
+    property_expense = calculator.cost_of_property_calculation(proximity, rent_or_buy, property_size,
+                                                               down_payment_percent)
     cities_health_care = calculator.cost_of_health_calculation()
     return render(request, "capstone/report.html", {"cities_living_expense": living_expense, "user_info": user_info,
                                                     "cities_property_expense": property_expense,
                                                     "city1_property": property_expense[0],
                                                     "cities_health_care": cities_health_care})
-
 
 # def register_property_form(request):
 #     proximity = request.POST.get('city-proximity-options')

@@ -1,6 +1,7 @@
 {% extends "capstone/base.html" %}
 {% block page-title %}Report Page{% endblock %}
 {% load static %}
+ {% load humanize %}
 {% block content %}
     <link rel="stylesheet" type="text/css" href="{% static "css/report.css" %}?{% now "U" %}">
     <h1>Here is your customized financial report:</h1>
@@ -12,42 +13,42 @@
                 <th>{{ city_result.city }}   </th>
             {% endfor %}
         </tr>
-        <tr>
-            <td>
-                <div class = "title">Restaurant:</div>
+        <tr class = "category">
+            <td class = "category-cell">
+                <div class="title">Restaurant:</div>
             </td>
         </tr>
         <tr>
             <td>Estimated Expense:</td>
             {% for city_result in cities_living_expense %}
                 <td>
-                    ${{ city_result.restaurant }}
+                    ${{ city_result.restaurant |intcomma }}
                 </td>
             {% endfor %}
         </tr>
         <tr>
             <td>
-                <div class = "title">Grocery:</div>
+                <div class="title">Grocery:</div>
             </td>
         </tr>
         <tr>
             <td>Estimated Expense:</td>
             {% for city_result in cities_living_expense %}
                 <td>
-                    ${{ city_result.grocery }}
+                    ${{ city_result.grocery |intcomma }}
                 </td>
             {% endfor %}
         </tr>
         <tr>
             <td>
-                <div class = "title">Transportation:</div>
+                <div class="title">Transportation:</div>
             </td>
         </tr>
         <tr>
             <td>Estimated Public Transportation Expense:</td>
             {% for city_result in cities_living_expense %}
                 <td>
-                    ${{ city_result.public_transportation }}
+                    ${{ city_result.public_transportation |intcomma }}
                 </td>
             {% endfor %}
         </tr>
@@ -57,7 +58,7 @@
             </td>
             {% for city_result in cities_living_expense %}
                 <td>
-                    ${{ city_result.ride_share }}
+                    ${{ city_result.ride_share |intcomma }}
                 </td>
             {% endfor %}
         </tr>
@@ -67,13 +68,13 @@
             </td>
             {% for city_result in cities_living_expense %}
                 <td>
-                    ${{ city_result.gas }}
+                    ${{ city_result.gas |intcomma}}
                 </td>
             {% endfor %}
         </tr>
         <tr>
             <td>
-                <div class = "title">Entertainment:</div>
+                <div class="title">Entertainment:</div>
             </td>
         </tr>
         <tr>
@@ -82,7 +83,7 @@
             </td>
             {% for city_result in cities_living_expense %}
                 <td>
-                    ${{ city_result.fitness }}
+                    ${{ city_result.fitness |intcomma }}
                 </td>
             {% endfor %}
         </tr>
@@ -92,7 +93,7 @@
             </td>
             {% for city_result in cities_living_expense %}
                 <td>
-                    ${{ city_result.cinema }}
+                    ${{ city_result.cinema |intcomma }}
                 </td>
             {% endfor %}
         </tr>
@@ -102,51 +103,68 @@
             </td>
             {% for city_result in cities_living_expense %}
                 <td>
-                    ${{ city_result.vacation }}
+                    ${{ city_result.vacation |intcomma}}
                 </td>
             {% endfor %}
         </tr>
         <tr>
             <td>
-                <div class = "title">Shopping Spending:</div>
+                <div class="title">Shopping Spending:</div>
             </td>
         </tr>
-    <tr>
-    <td>Estimated Shopping Spending:</td>
+        <tr>
+            <td>Estimated Shopping Spending:</td>
             {% for city_result in cities_living_expense %}
                 <td>
-                    ${{ city_result.clothing }}
+                    ${{ city_result.clothing |intcomma }}
                 </td>
             {% endfor %}
         </tr>
         <tr>
             <td>
-                <div class = "title">Total Household Estimated Spending:</div>
+                <div class="title">Total Household Estimated Spending:</div>
             </td>
             {% for city_result in cities_living_expense %}
                 <td>
-                    ${{ city_result.total }}
+                    ${{ city_result.total |intcomma }}
                 </td>
             {% endfor %}
         </tr>
     </table>
     {% if user_info.property_option %}
-        <h2 class = "report">Cost of Property Report (Monthly)</h2>
+        <h2 class="report">Cost of Property Report</h2>
         <table id="cost-property" class="table">
             <tr>
-                <th></th>
+                <th class = "first-col"></th>
                 {% for city_result in cities_living_expense %}
                     <th>{{ city_result.city }}   </th>
                 {% endfor %}
             </tr>
             <tr>
-                <td>You have choose the <strong>{{ city1_property.rent_or_buy }}</strong> &#8202 option</td>
+                {% if city1_property.rent_or_buy == "Rent" %}
+                    <td>You have chosen the <strong>Rent</strong> &#8202 option</td>
+                {% else %}
+                    <td> You have choose the <strong>Buy</strong> &#8202 option:</td>
+                {% endif %}
             </tr>
             <tr>
-                <td><div class = "title">Estimated Cost for {{ city1_property.property_size }}:</div></td>
+                <td>
+                    {% if city1_property.rent_or_buy == "Rent" %}
+
+                            For {{ city1_property.property_size }} Apartment:
+
+                    {% else %}
+
+                            For {{ city1_property.property_size }} &#8202 sqft:
+
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>Estimated Monthly Payment:</td>
                 {% for city_property in cities_property_expense %}
                     <td>
-                        ${{ city_property.monthly_payment }}
+                        ${{ city_property.monthly_payment |intcomma}}
                     </td>
                 {% endfor %}
             </tr>
@@ -156,13 +174,15 @@
         <h2>Health Care Report</h2>
         <table id="health-care" class="table">
             <tr>
-                <th></th>
+                <th class = "first-col"></th>
                 {% for city_result in cities_living_expense %}
                     <th>{{ city_result.city }}   </th>
                 {% endfor %}
             </tr>
             <tr>
-                <td><div class = "title">Healthcare Quality(%):</div></td>
+                <td>
+                    <div class="title">Healthcare Quality(%):</div>
+                </td>
             </tr>
             <tr>
                 <td>Skill and competency of medical staff:</td>
@@ -205,7 +225,7 @@
                 {% endfor %}
             </tr>
             <tr>
-                <td>Satisfaction with responsiveness (waitings) in medical institutions</td>
+                <td>Satisfaction with responsiveness (waiting time) in medical institutions</td>
                 {% for city_health in cities_health_care %}
                     <td>
                         ${{ city_health.satisfaction_responsiveness }}
@@ -229,7 +249,9 @@
                 {% endfor %}
             </tr>
             <tr>
-                <td><div class = "title">Health Care Expense (Per Visit):</div></td>
+                <td>
+                    <div class="title">Health Care Expense (Per Visit):</div>
+                </td>
             </tr>
             <tr>
                 <td>Doctor's Visit</td>
