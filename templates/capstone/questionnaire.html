@@ -263,12 +263,12 @@
             <!-- Buy questions -->
             <div id="buy-questions">
                 <label for="buy-square-footage">How many square feet are you looking to buy?</label>
-                <input type="number" id="buy-square-footage" name="buy-square-footage" placeholder="2,000" required>
+                <input type="number" id="buy-square-footage" name="buy-square-footage" placeholder="2,000">
                 <label for="buy-square-footage">How much you prepare for down payment?</label>
-                <input type="number" id="buy-square-footage" name="down-payment" placeholder="10" required> %
+                <input type="number" id="buy-square-footage" name="down-payment" placeholder="10" > %
             </div>
             <!--Add more questions here-->
         </div>
-     <input type="submit" id="submit-button" name="submit-button" value="Submit">
+     <input type="submit" onClick="submitForms()" id="submit-button" name="submit-button" value="Submit">
     </form>
 {% endblock %}
