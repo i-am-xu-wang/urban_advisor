@@ -130,8 +130,6 @@ def cost_of_property_calculation(cities,proximity, rent_or_buy, property_size, d
     print('proximity',proximity)
     print('rent_or_buy',rent_or_buy)
     print('property_size',property_size)
-    #print('down_payment_percent',down_payment_percent)
-    # dummy data
     cities_property_expense = []
     for i, v in enumerate(cities):
         if v == 'Boston':
@@ -159,6 +157,20 @@ def cost_of_property_calculation(cities,proximity, rent_or_buy, property_size, d
                 cities_property_expense.append(CostPropertyResult(cities[i], rent_or_buy,(int(getattr(Expense.objects.get(id=33),v))+int(getattr(Expense.objects.get(id=35),v))/2), property_size))
             elif proximity == 'Suburb' and property_size == 'Three Bedrooms':
                 cities_property_expense.append(CostPropertyResult(cities[i], rent_or_buy,getattr(Expense.objects.get(id=35), v), property_size))
+        else:
+            r = getattr(Expense.objects.get(id=18),v)/12
+            n = 30 * 12
+            if proximity == 'Suburb':
+                down = (int(property_size)*int(getattr(Expense.objects.get(id=37),v)))*int(down_payment_percent)/100
+                p = (int(property_size)*int(getattr(Expense.objects.get(id=37),v))) - down
+                m = p*((r*((1+r)**n))/((1+r)**n-1))
+                cities_property_expense.append(CostPropertyResult(cities[i], rent_or_buy, m, property_size))
+            elif proximity == 'City Center':
+                down = (int(property_size) * int(getattr(Expense.objects.get(id=37), v))) * int(down_payment_percent)/100
+                p = int(property_size) * int(getattr(Expense.objects.get(id=36), v)) - down
+                m = p*((r*((1+r)**n))/((1+r)**n-1))
+                cities_property_expense.append(CostPropertyResult(cities[i], rent_or_buy, m, property_size))
+
     return cities_property_expense
 
 
