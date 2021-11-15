@@ -76,6 +76,20 @@ $(document).ready(function () {
         $(".error-select").removeClass("error-select");
 
         // cost of living quiz validation
+        cities_checkboxes=document.getElementsByClassName("cities-checkbox");
+        var cities_checked = false;
+
+        for (i = 0; i < cities_checkboxes.length; i++) {
+            if (cities_checkboxes[i].checked === true) {
+                cities_checked = true;
+            }
+        }
+
+        if (!cities_checked) {
+            $('#cities-checkboxes').addClass('error-select')
+            return alert("Please select at least one city to evaluate")
+        }
+
         if ($('input[name="salary"]').val() === "") {
             $('#salary').addClass('error-num');
             return alert("Please enter anticipated annual salary");

@@ -57,7 +57,7 @@ class HealthCareResult:
 
 
 def register_user(salary, feature_options):
-    print("register user feature options: " + feature_options[0])
+    #print("register user feature options: " + feature_options[0])
     property_option = False
     crime_rate = False
     healthcare = False
