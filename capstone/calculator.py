@@ -120,7 +120,7 @@ def cost_of_living_calculation(cities, household_member, eating_options, inexpen
     cost_of_living_result = []
     for i in range(len(cities)):
         cost_of_living_result.append(CostLivingResult(cities[i], food[i], grocery[i], public_transport[i], 400, 500, gym[i], entertainment[i],
-                                                  vacation_spending, clothing_options,cigarettes[i],drinks[i],total[i]))
+                                                  vacation_spending, clothing[i],cigarettes[i],drinks[i],total[i]))
     return cost_of_living_result
 
 
