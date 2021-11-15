@@ -178,6 +178,10 @@
             </tr>
             <tr>
                 <td>Estimated Monthly Payment:</td>
+                    {% if city1_property.rent_or_buy == "Buy" %}
+                        <div>(For 30 Years Fixed Rate)</div>
+                    {% endif %}
+                </td>
                 {% for city_property in cities_property_expense %}
                     <td>
                         ${{ city_property.monthly_payment |floatformat:2|intcomma}}

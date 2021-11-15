@@ -81,6 +81,7 @@ def cost_of_living_calculation(cities, household_member, eating_options, inexpen
                                coffee_option, going_out_options, smoking_option, drinking_options, driving_options,
                                rideshare_options, public_transit_options, public_transit_members, public_transit_trips,
                                gym_options, vacation_spending, clothing_options):
+    print(public_transit_options)
     food = []
     grocery = []
     entertainment = []
@@ -92,19 +93,27 @@ def cost_of_living_calculation(cities, household_member, eating_options, inexpen
     taxi = []
     gas = []
     total = []
+    avg_mpg = 25
+    mil = 0
     for i, v in enumerate(cities):
         if v == 'Boston':
             v = 'boston'
+            mil = 13109/52
         elif v == 'Washington D.C.':
             v = 'dc'
+            mil = 	14509/52
         elif v == 'Philadelphia':
             v = 'philly'
+            mil = 11445/52
         elif v == 'Seattle':
             v = 'seattle'
+            mil = 12000/52
         elif v == 'Silicon Valley':
             v = 'sf'
+            mil = 12524/52
         elif v == 'Roanoke':
             v = 'roanoke'
+            mil = 14509/52
         food.append((int(eating_options)*int(household_member)*getattr(Expense.objects.get(id=1), v)) + (int(inexpensive_restaurant_options)*int(household_member)*getattr(Expense.objects.get(id=2), v))/2 + (int(coffee_option)*int(household_member)*getattr(Expense.objects.get(id=6), v)))
         grocery.append(getattr(Expense.objects.get(id=10),v))
         entertainment.append(int(going_out_options)*int(household_member)*getattr(Expense.objects.get(id=16),v))
@@ -113,9 +122,9 @@ def cost_of_living_calculation(cities, household_member, eating_options, inexpen
         drinks.append(int(drinking_options)*getattr(Expense.objects.get(id=5), v))
         public_transport.append(int(public_transit_members)*getattr(Expense.objects.get(id=57), v) + int(public_transit_trips)*2*getattr(Expense.objects.get(id=56), v))
         clothing.append(int(clothing_options)*getattr(Expense.objects.get(id=57), v))
-        taxi.append(500)
-        gas.append(400)
-        total.append(int(food[i])+int(grocery[i])+int(entertainment[i])+int(gym[i])+int(vacation_spending)+int(cigarettes[i])+int(drinks[i])+public_transport[i]+clothing[i]+gas[i]+taxi[i])
+        taxi.append(20*2*int(rideshare_options))
+        gas.append(int(driving_options)*2*mil/avg_mpg*int(getattr(Expense.objects.get(id=61), v)))
+        total.append(int(food[i])+int(grocery[i])+int(entertainment[i])+int(gym[i])+int(vacation_spending)+int(cigarettes[i])+int(drinks[i])+int(public_transport[i])+clothing[i]+gas[i]+taxi[i])
 
     cost_of_living_result = []
     for i in range(len(cities)):
@@ -159,7 +168,7 @@ def cost_of_property_calculation(cities,proximity, rent_or_buy, property_size, d
                 cities_property_expense.append(CostPropertyResult(cities[i], rent_or_buy,getattr(Expense.objects.get(id=35), v), property_size))
         else:
             r = getattr(Expense.objects.get(id=18),v)/1200
-            n = 30 * 12
+            n = 20 * 12
             if proximity == 'Suburb':
                 down = (int(property_size)*int(getattr(Expense.objects.get(id=37),v)))*int(down_payment_percent)/100
                 p = (int(property_size)*int(getattr(Expense.objects.get(id=37),v))) - down
