@@ -167,10 +167,7 @@ def cost_of_property_calculation(cities,proximity, rent_or_buy, property_size, d
             if proximity == 'Suburb':
                 down = (int(property_size)*int(getattr(Expense.objects.get(id=37),v)))*int(down_payment_percent)/100
                 p = (int(property_size)*int(getattr(Expense.objects.get(id=37),v))) - down
-                l = 1+r
-                k = l**n
-                m = p*r*k/(k-1)
-                #m = p*((r*((1+r)**n))/((1+r)**n-1))
+                m = p * ((r * ((1 + r) ** n)) / ((1 + r) ** n - 1))
                 cities_property_expense.append(CostPropertyResult(cities[i], rent_or_buy, m, property_size))
             elif proximity == 'City Center':
                 down = (int(property_size) * int(getattr(Expense.objects.get(id=37), v))) * int(down_payment_percent)/100
