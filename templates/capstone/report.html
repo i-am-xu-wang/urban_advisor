@@ -22,7 +22,7 @@
             <td>Estimated Expense:</td>
             {% for city_result in cities_living_expense %}
                 <td>
-                    ${{ city_result.restaurant |intcomma }}
+                    ${{ city_result.restaurant |floatformat:2|intcomma }}
                 </td>
             {% endfor %}
         </tr>
@@ -35,7 +35,7 @@
             <td>Estimated Grocery Expense:</td>
             {% for city_result in cities_living_expense %}
                 <td>
-                    ${{ city_result.grocery |intcomma }}
+                    ${{ city_result.grocery |floatformat:2|intcomma }}
                 </td>
             {% endfor %}
         </tr>
@@ -43,7 +43,7 @@
             <td>Estimated Smoking Expense:</td>
             {% for city_result in cities_living_expense %}
                 <td>
-                    ${{ city_result.smoking |intcomma }}
+                    ${{ city_result.smoking |floatformat:2|intcomma }}
                 </td>
             {% endfor %}
         </tr>
@@ -51,7 +51,7 @@
             <td>Estimated Alcohol Expense:</td>
             {% for city_result in cities_living_expense %}
                 <td>
-                    ${{ city_result.alcohol |intcomma }}
+                    ${{ city_result.alcohol |floatformat:2|intcomma }}
                 </td>
             {% endfor %}
         </tr>
@@ -64,7 +64,7 @@
             <td>Estimated Public Transportation Expense:</td>
             {% for city_result in cities_living_expense %}
                 <td>
-                    ${{ city_result.public_transportation |intcomma }}
+                    ${{ city_result.public_transportation |floatformat:2|intcomma }}
                 </td>
             {% endfor %}
         </tr>
@@ -74,7 +74,7 @@
             </td>
             {% for city_result in cities_living_expense %}
                 <td>
-                    ${{ city_result.ride_share |intcomma }}
+                    ${{ city_result.ride_share |floatformat:2|intcomma }}
                 </td>
             {% endfor %}
         </tr>
@@ -84,7 +84,7 @@
             </td>
             {% for city_result in cities_living_expense %}
                 <td>
-                    ${{ city_result.gas |intcomma}}
+                    ${{ city_result.gas |floatformat:2|intcomma}}
                 </td>
             {% endfor %}
         </tr>
@@ -99,7 +99,7 @@
             </td>
             {% for city_result in cities_living_expense %}
                 <td>
-                    ${{ city_result.fitness |intcomma }}
+                    ${{ city_result.fitness |floatformat:2|intcomma }}
                 </td>
             {% endfor %}
         </tr>
@@ -109,7 +109,7 @@
             </td>
             {% for city_result in cities_living_expense %}
                 <td>
-                    ${{ city_result.cinema |intcomma }}
+                    ${{ city_result.cinema |floatformat:2|intcomma }}
                 </td>
             {% endfor %}
         </tr>
@@ -119,7 +119,7 @@
             </td>
             {% for city_result in cities_living_expense %}
                 <td>
-                    ${{ city_result.vacation |intcomma}}
+                    ${{ city_result.vacation |floatformat:2|intcomma}}
                 </td>
             {% endfor %}
         </tr>
@@ -132,7 +132,7 @@
             <td>Estimated Shopping Spending:</td>
             {% for city_result in cities_living_expense %}
                 <td>
-                    ${{ city_result.clothing |intcomma }}
+                    ${{ city_result.clothing |floatformat:2|intcomma }}
                 </td>
             {% endfor %}
         </tr>
@@ -142,7 +142,7 @@
             </td>
             {% for city_result in cities_living_expense %}
                 <td>
-                    ${{ city_result.total |intcomma }}
+                    ${{ city_result.total |floatformat:2|intcomma }}
                 </td>
             {% endfor %}
         </tr>
@@ -180,7 +180,7 @@
                 <td>Estimated Monthly Payment:</td>
                 {% for city_property in cities_property_expense %}
                     <td>
-                        ${{ city_property.monthly_payment |intcomma}}
+                        ${{ city_property.monthly_payment |floatformat:2|intcomma}}
                     </td>
                 {% endfor %}
             </tr>
@@ -204,7 +204,7 @@
                 <td>Skill and competency of medical staff:</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        ${{ city_health.skill }}
+                        {{ city_health.skill |floatformat:2 }}%
                     </td>
                 {% endfor %}
             </tr>
@@ -212,7 +212,7 @@
                 <td>Speed in completing examination and reports</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        ${{ city_health.speed }}
+                        {{ city_health.speed |floatformat:2 }}%
                     </td>
                 {% endfor %}
             </tr>
@@ -220,7 +220,7 @@
                 <td>Equipment for modern diagnosis and treatment</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        ${{ city_health.equipment }}
+                        {{ city_health.equipment |floatformat:2 }}%
                     </td>
                 {% endfor %}
             </tr>
@@ -228,7 +228,7 @@
                 <td>Accuracy and completeness in filling out reports</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        ${{ city_health.accuracy }}
+                        {{ city_health.accuracy |floatformat:2 }}%
                     </td>
                 {% endfor %}
             </tr>
@@ -236,7 +236,7 @@
                 <td>Friendliness and courtesy of the staff</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        ${{ city_health.friendliness }}
+                        {{ city_health.friendliness |floatformat:2 }}%
                     </td>
                 {% endfor %}
             </tr>
@@ -244,7 +244,7 @@
                 <td>Satisfaction with responsiveness (waiting time) in medical institutions</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        ${{ city_health.satisfaction_responsiveness }}
+                        {{ city_health.satisfaction_responsiveness |floatformat:2 }}%
                     </td>
                 {% endfor %}
             </tr>
@@ -252,7 +252,7 @@
                 <td>Satisfaction with cost to you</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        ${{ city_health.satisfaction_cost }}
+                        {{ city_health.satisfaction_cost |floatformat:2 }}%
                     </td>
                 {% endfor %}
             </tr>
@@ -260,7 +260,7 @@
                 <td>Convenience of location for you</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        ${{ city_health.location }}
+                        {{ city_health.location |floatformat:2 }}%
                     </td>
                 {% endfor %}
             </tr>
@@ -273,7 +273,7 @@
                 <td>Doctor's Visit</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        ${{ city_health.doctor_visit }}
+                        ${{ city_health.doctor_visit |floatformat:2 }}
                     </td>
                 {% endfor %}
             </tr>
@@ -281,7 +281,7 @@
                 <td>Dentist Visit</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        ${{ city_health.dentist_visit }}
+                        ${{ city_health.dentist_visit |floatformat:2 }}
                     </td>
                 {% endfor %}
             </tr>
@@ -289,7 +289,7 @@
                 <td>Optometrist Visit</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        ${{ city_health.optometrist_visit }}
+                        ${{ city_health.optometrist_visit |floatformat:2 }}
                     </td>
                 {% endfor %}
             </tr>
@@ -297,7 +297,7 @@
                 <td>RX Drug</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        ${{ city_health.RX_drug }}
+                        ${{ city_health.RX_drug |floatformat:2 }}
                     </td>
                 {% endfor %}
             </tr>
@@ -305,7 +305,7 @@
                 <td>Veterinary Visit</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        ${{ city_health.veterinary_visit }}
+                        ${{ city_health.veterinary_visit |floatformat:2 }}
                     </td>
                 {% endfor %}
             </tr>
