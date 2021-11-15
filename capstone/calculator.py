@@ -124,7 +124,7 @@ def cost_of_living_calculation(cities, household_member, eating_options, inexpen
         clothing.append(int(clothing_options)*getattr(Expense.objects.get(id=57), v))
         taxi.append(20*2*int(rideshare_options))
         gas.append(int(driving_options)*2*mil/avg_mpg*int(getattr(Expense.objects.get(id=61), v)))
-        total.append(int(food[i])+int(grocery[i])+int(entertainment[i])+int(gym[i])+int(vacation_spending)+int(cigarettes[i])+int(drinks[i])+int(public_transport[i])+clothing[i]+gas[i]+taxi[i])
+        total.append(int(food[i])+int(grocery[i])+int(entertainment[i])+int(gym[i])+int(vacation_spending)/12.0+int(cigarettes[i])+int(drinks[i])+int(public_transport[i])+clothing[i]+gas[i]+taxi[i])
 
     cost_of_living_result = []
     for i in range(len(cities)):
