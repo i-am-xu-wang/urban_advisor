@@ -23,8 +23,15 @@ def register_form(request):
     driving_options = request.POST["driving-options"]
     rideshare_options = request.POST["rideshare-options"]
     public_transit_options = request.POST["public-transit-options"]
-    public_transit_members = request.POST["public-transit-members"]
-    public_transit_trips = request.POST["public-transit-trips"]
+    if public_transit_options == "No":
+        public_transit_members = 0
+        public_transit_trips = 0
+    elif public_transit_options == "Monthly":
+        public_transit_members = request.POST["public-transit-members"]
+        public_transit_trips = 0
+    else:
+        public_transit_members = 0
+        public_transit_trips = request.POST["public-transit-trips"]
     gym_options = request.POST["gym-options"]
     vacation_spending = request.POST["vacation-spending"]
     clothing_options = request.POST["clothing-options"]
