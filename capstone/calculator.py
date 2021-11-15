@@ -81,10 +81,6 @@ def cost_of_living_calculation(cities, household_member, eating_options, inexpen
                                coffee_option, going_out_options, smoking_option, drinking_options, driving_options,
                                rideshare_options, public_transit_options, public_transit_members, public_transit_trips,
                                gym_options, vacation_spending, clothing_options):
-
-    print('public_transit_trips', public_transit_trips)
-    print('public_transit_options',public_transit_options)
-    print('public_transit_members',public_transit_members)
     food = []
     grocery = []
     entertainment = []
@@ -99,7 +95,6 @@ def cost_of_living_calculation(cities, household_member, eating_options, inexpen
         if v == 'Boston':
             v = 'boston'
         elif v == 'Washington D.C.':
-            print(v)
             v = 'dc'
         elif v == 'Philadelphia':
             v = 'philly'
@@ -159,10 +154,25 @@ def cost_of_property_calculation(cities,proximity, rent_or_buy, property_size, d
 
 
 # this function purely fetch data from DB, not using data pass from frontend.
-def cost_of_health_calculation():
+def cost_of_health_calculation(cities):
     # dummy data
-    health_care_city1 = HealthCareResult(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)
-    health_care_city2 = HealthCareResult(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)
-    health_care_city3 = HealthCareResult(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)
-    cities_health_care = [health_care_city1, health_care_city2, health_care_city3]
-    return cities_health_care
+    health_care_city = []
+    for i, v in enumerate(cities):
+        if v == 'Boston':
+            v = 'boston'
+        elif v == 'Washington D.C.':
+            v = 'dc'
+        elif v == 'Philadelphia':
+            v = 'philly'
+        elif v == 'Seattle':
+            v = 'seattle'
+        elif v == 'Silicon Valley':
+            v = 'sf'
+        elif v == 'Roanoke':
+            v = 'roanoke'
+
+        health_care_city.append(HealthCareResult((getattr(Expense.objects.get(id=19),v)), (getattr(Expense.objects.get(id=20),v)), (getattr(Expense.objects.get(id=21),v)), (getattr(Expense.objects.get(id=22),v)), (getattr(Expense.objects.get(id=23),v)), (getattr(Expense.objects.get(id=24),v)), (getattr(Expense.objects.get(id=25),v)), (getattr(Expense.objects.get(id=26),v)), (getattr(Expense.objects.get(id=27),v)), (getattr(Expense.objects.get(id=28),v)), (getattr(Expense.objects.get(id=29),v)), (getattr(Expense.objects.get(id=30),v)), (getattr(Expense.objects.get(id=31),v))))
+    #health_care_city2 = HealthCareResult(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)
+    #health_care_city3 = HealthCareResult(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)
+    #cities_health_care = [health_care_city1, health_care_city2, health_care_city3]
+    return health_care_city
