@@ -1,6 +1,7 @@
 # major calculations perform here
 
 selected_cities = ["Seattle", "Boston", "Roanoke"]
+from capstone.models import Expense
 
 
 class UserInfo:
@@ -14,7 +15,7 @@ class UserInfo:
 
 class CostLivingResult:
     def __init__(self, city, restaurant, grocery, public_transportation, ride_share, gas, fitness, cinema, vacation,
-                 clothing, mortgage, total):
+                 clothing,smoking,total):
         self.city = city
         self.restaurant = restaurant
         self.grocery = grocery
@@ -25,7 +26,7 @@ class CostLivingResult:
         self.cinema = cinema
         self.vacation = vacation
         self.clothing = clothing
-        self.mortgage = mortgage
+        self.smoking = smoking
         self.total = total
 
 
@@ -79,42 +80,81 @@ def register_user(salary, feature_options):
 def cost_of_living_calculation(cities, household_member, eating_options, inexpensive_restaurant_options,
                                coffee_option, going_out_options, smoking_option, drinking_options, driving_options,
                                rideshare_options, public_transit_options, public_transit_members, public_transit_trips,
-                               gym_options,
-                               vacation_spending, clothing_options):
-    food = 18 * int(household_member)
-    grocery = 415.8 * int(household_member)
-    entertainment = 14 * int(household_member)
-    gym = 54.48 * int(gym_options)
-    mortgage = 300
-    total = food + grocery + entertainment + gym + mortgage + int(vacation_spending)
-    print("cost of living calculation values " + str(grocery), entertainment, str(gym), cities, household_member, eating_options, inexpensive_restaurant_options,
-          coffee_option, going_out_options,
-          smoking_option, drinking_options, driving_options, rideshare_options, public_transit_options,
-          public_transit_members, public_transit_trips, gym_options, vacation_spending, clothing_options)
-    # todo:perform logic calculation for the result
-    # this just some dummy data
-    cost_of_living_result1 = CostLivingResult(cities[0], food, grocery, 300, 400, 500, gym, entertainment,
-                                              vacation_spending, clothing_options,
-                                              mortgage, total)
-    cost_of_living_result2 = CostLivingResult(cities[1], food, grocery, 300, 400, 500, gym, entertainment,
-                                              vacation_spending, clothing_options,
-                                              mortgage, total)
-    cost_of_living_result3 = CostLivingResult(cities[2], food, grocery, 300, 400, 500, gym, entertainment,
-                                              vacation_spending, clothing_options,
-                                              mortgage, total)
-    cities_living_expense = [cost_of_living_result1, cost_of_living_result2, cost_of_living_result3]
-    # return cost_of_living_result
-    return cities_living_expense
+                               gym_options, vacation_spending, clothing_options):
+
+    print('public_transit_trips', public_transit_trips)
+    print('public_transit_options',public_transit_options)
+    print('public_transit_members',public_transit_members)
+    food = []
+    grocery = []
+    entertainment = []
+    gym = []
+    cigarettes = []
+    drinks = []
+    clothing = []
+    public_transport = []
+    total = []
+    # print(Expense.objects.get(id))
+    for i, v in enumerate(cities):
+        if v == 'Boston':
+            v = 'boston'
+        elif v == 'Washington D.C.':
+            print(v)
+            v = 'dc'
+        elif v == 'Philadelphia':
+            v = 'philly'
+        elif v == 'Seattle':
+            v = 'seattle'
+        elif v == 'Silicon Valley':
+            v = 'sf'
+        elif v == 'Roanoke':
+            v = 'roanoke'
+
+        #getattr(obj, v)
+        food.append((int(eating_options)*int(household_member)*getattr(Expense.objects.get(id=1), v)) + (int(inexpensive_restaurant_options)*int(household_member)*getattr(Expense.objects.get(id=2), v))/2 + (int(coffee_option)*int(household_member)*getattr(Expense.objects.get(id=6), v)))
+        grocery.append(getattr(Expense.objects.get(id=10),v))
+        entertainment.append(int(going_out_options)*int(household_member)*getattr(Expense.objects.get(id=16),v))
+        gym.append(int(gym_options)*int(household_member)*getattr(Expense.objects.get(id=14), v))
+        cigarettes.append(int(smoking_option)*getattr(Expense.objects.get(id=14), v))
+        drinks.append(int(drinking_options)*getattr(Expense.objects.get(id=5), v))
+        public_transport.append(int(public_transit_members)*getattr(Expense.objects.get(id=57), v) + int(public_transit_trips)*2*getattr(Expense.objects.get(id=56), v))
+        clothing.append(int(clothing_options)*getattr(Expense.objects.get(id=57), v))
+        total.append(int(food[i])+int(grocery[i])+int(entertainment[i])+int(gym[i])+int(vacation_spending)+int(cigarettes[i])+int(drinks[i])+public_transport[i]+clothing[i])
+
+    cost_of_living_result = []
+    for i in range(len(cities)):
+        cost_of_living_result.append(CostLivingResult(cities[i], food[i], grocery[i], public_transport[i], 400, 500, gym[i], entertainment[i],
+                                                  vacation_spending, clothing_options,cigarettes,total[i]))
+    return cost_of_living_result
 
 
-def cost_of_property_calculation(proximity, rent_or_buy, property_size, down_payment_percent):
+def cost_of_property_calculation(cities,proximity, rent_or_buy, property_size, down_payment_percent):
     # todo: perform property calculation logic here
     print("cost of property calculation property size: " + property_size)
+    print('proximity',proximity)
+    print('rent_or_buy',rent_or_buy)
+    print('property_size',property_size)
+    #print('down_payment_percent',down_payment_percent)
     # dummy data
-    cost_property_result1 = CostPropertyResult(selected_cities[0], "Rent", 5000, property_size)
-    cost_property_result2 = CostPropertyResult(selected_cities[1], "Rent", 5000, property_size)
-    cost_property_result3 = CostPropertyResult(selected_cities[2], "Rent", 5000, property_size)
-    cities_property_expense = [cost_property_result1, cost_property_result2, cost_property_result3]
+    cities_property_expense = []
+    for i, v in enumerate(cities):
+        if v == 'Boston':
+            v = 'boston'
+        elif v == 'Washington D.C.':
+            v = 'dc'
+        elif v == 'Philadelphia':
+            v = 'philly'
+        elif v == 'Seattle':
+            v = 'seattle'
+        elif v == 'Silicon Valley':
+            v = 'sf'
+        elif v == 'Roanoke':
+            v = 'roanoke'
+        cities_property_expense.append(CostPropertyResult(cities[i], rent_or_buy, 5000, property_size))
+    #cost_property_result1 = CostPropertyResult(selected_cities[0], ", 5000, property_size)
+    #cost_property_result2 = CostPropertyResult(selected_cities[1], "Rent", 5000, property_size)
+    #cost_property_result3 = CostPropertyResult(selected_cities[2], "Rent", 5000, property_size)
+    #cities_property_expense = [cost_property_result1, cost_property_result2, cost_property_result3]
     return cities_property_expense
 
 
