@@ -1,6 +1,5 @@
 # major calculations perform here
 
-selected_cities = ["Seattle", "Boston", "Roanoke"]
 from capstone.models import Expense
 
 
@@ -93,7 +92,6 @@ def cost_of_living_calculation(cities, household_member, eating_options, inexpen
     taxi = []
     gas = []
     total = []
-    # print(Expense.objects.get(id))
     for i, v in enumerate(cities):
         if v == 'Boston':
             v = 'boston'
@@ -107,8 +105,6 @@ def cost_of_living_calculation(cities, household_member, eating_options, inexpen
             v = 'sf'
         elif v == 'Roanoke':
             v = 'roanoke'
-
-        #getattr(obj, v)
         food.append((int(eating_options)*int(household_member)*getattr(Expense.objects.get(id=1), v)) + (int(inexpensive_restaurant_options)*int(household_member)*getattr(Expense.objects.get(id=2), v))/2 + (int(coffee_option)*int(household_member)*getattr(Expense.objects.get(id=6), v)))
         grocery.append(getattr(Expense.objects.get(id=10),v))
         entertainment.append(int(going_out_options)*int(household_member)*getattr(Expense.objects.get(id=16),v))
@@ -124,7 +120,7 @@ def cost_of_living_calculation(cities, household_member, eating_options, inexpen
     cost_of_living_result = []
     for i in range(len(cities)):
         cost_of_living_result.append(CostLivingResult(cities[i], food[i], grocery[i], public_transport[i], taxi[i], gas[i], gym[i], entertainment[i],
-                                                  vacation_spending, clothing[i],cigarettes[i],drinks[i],total[i]))
+                                                  int(vacation_spending)/12.0, clothing[i],cigarettes[i],drinks[i],total[i]))
     return cost_of_living_result
 
 
@@ -180,7 +176,6 @@ def cost_of_property_calculation(cities,proximity, rent_or_buy, property_size, d
 
 # this function purely fetch data from DB, not using data pass from frontend.
 def cost_of_health_calculation(cities):
-    # dummy data
     health_care_city = []
     for i, v in enumerate(cities):
         if v == 'Boston':
@@ -195,9 +190,5 @@ def cost_of_health_calculation(cities):
             v = 'sf'
         elif v == 'Roanoke':
             v = 'roanoke'
-
         health_care_city.append(HealthCareResult((getattr(Expense.objects.get(id=19),v)), (getattr(Expense.objects.get(id=20),v)), (getattr(Expense.objects.get(id=21),v)), (getattr(Expense.objects.get(id=22),v)), (getattr(Expense.objects.get(id=23),v)), (getattr(Expense.objects.get(id=24),v)), (getattr(Expense.objects.get(id=25),v)), (getattr(Expense.objects.get(id=26),v)), (getattr(Expense.objects.get(id=27),v)), (getattr(Expense.objects.get(id=28),v)), (getattr(Expense.objects.get(id=29),v)), (getattr(Expense.objects.get(id=30),v)), (getattr(Expense.objects.get(id=31),v))))
-    #health_care_city2 = HealthCareResult(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)
-    #health_care_city3 = HealthCareResult(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)
-    #cities_health_care = [health_care_city1, health_care_city2, health_care_city3]
     return health_care_city
