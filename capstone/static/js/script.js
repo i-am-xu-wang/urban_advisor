@@ -106,7 +106,7 @@ $(document).ready(function () {
                     }
                 }
                 console.log("passed the checks!")
-                document.getElementById('property-price-quiz').submit();
+                //document.getElementById('property-price-quiz').submit();
                 console.log("submitted property price quiz")
             }
             document.getElementById('cost-of-living-quiz').submit();

@@ -59,7 +59,7 @@ def register_form(request):
         print(down_payment_percent)
 
     # print("register form property size: " + property_size)
-    property_expense = calculator.cost_of_property_calculation(proximity, rent_or_buy, property_size,
+    property_expense = calculator.cost_of_property_calculation(cities, proximity, rent_or_buy, property_size,
                                                                down_payment_percent)
     cities_health_care = calculator.cost_of_health_calculation()
     return render(request, "capstone/report.html", {"cities_living_expense": living_expense, "user_info": user_info,
