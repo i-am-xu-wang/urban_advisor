@@ -15,7 +15,7 @@ class UserInfo:
 
 class CostLivingResult:
     def __init__(self, city, restaurant, grocery, public_transportation, ride_share, gas, fitness, cinema, vacation,
-                 clothing,smoking,total):
+                 clothing,smoking,alcohol,total):
         self.city = city
         self.restaurant = restaurant
         self.grocery = grocery
@@ -27,6 +27,7 @@ class CostLivingResult:
         self.vacation = vacation
         self.clothing = clothing
         self.smoking = smoking
+        self.alcohol = alcohol
         self.total = total
 
 
@@ -119,7 +120,7 @@ def cost_of_living_calculation(cities, household_member, eating_options, inexpen
     cost_of_living_result = []
     for i in range(len(cities)):
         cost_of_living_result.append(CostLivingResult(cities[i], food[i], grocery[i], public_transport[i], 400, 500, gym[i], entertainment[i],
-                                                  vacation_spending, clothing_options,cigarettes,total[i]))
+                                                  vacation_spending, clothing_options,cigarettes[i],drinks[i],total[i]))
     return cost_of_living_result
 
 
