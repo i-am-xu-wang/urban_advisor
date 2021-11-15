@@ -90,6 +90,8 @@ def cost_of_living_calculation(cities, household_member, eating_options, inexpen
     drinks = []
     clothing = []
     public_transport = []
+    taxi = []
+    gas = []
     total = []
     # print(Expense.objects.get(id))
     for i, v in enumerate(cities):
@@ -115,11 +117,13 @@ def cost_of_living_calculation(cities, household_member, eating_options, inexpen
         drinks.append(int(drinking_options)*getattr(Expense.objects.get(id=5), v))
         public_transport.append(int(public_transit_members)*getattr(Expense.objects.get(id=57), v) + int(public_transit_trips)*2*getattr(Expense.objects.get(id=56), v))
         clothing.append(int(clothing_options)*getattr(Expense.objects.get(id=57), v))
-        total.append(int(food[i])+int(grocery[i])+int(entertainment[i])+int(gym[i])+int(vacation_spending)+int(cigarettes[i])+int(drinks[i])+public_transport[i]+clothing[i])
+        taxi.append(500)
+        gas.append(400)
+        total.append(int(food[i])+int(grocery[i])+int(entertainment[i])+int(gym[i])+int(vacation_spending)+int(cigarettes[i])+int(drinks[i])+public_transport[i]+clothing[i]+gas[i]+taxi[i])
 
     cost_of_living_result = []
     for i in range(len(cities)):
-        cost_of_living_result.append(CostLivingResult(cities[i], food[i], grocery[i], public_transport[i], 400, 500, gym[i], entertainment[i],
+        cost_of_living_result.append(CostLivingResult(cities[i], food[i], grocery[i], public_transport[i], taxi[i], gas[i], gym[i], entertainment[i],
                                                   vacation_spending, clothing[i],cigarettes[i],drinks[i],total[i]))
     return cost_of_living_result
 
@@ -158,12 +162,15 @@ def cost_of_property_calculation(cities,proximity, rent_or_buy, property_size, d
             elif proximity == 'Suburb' and property_size == 'Three Bedrooms':
                 cities_property_expense.append(CostPropertyResult(cities[i], rent_or_buy,getattr(Expense.objects.get(id=35), v), property_size))
         else:
-            r = getattr(Expense.objects.get(id=18),v)/12
+            r = getattr(Expense.objects.get(id=18),v)/1200
             n = 30 * 12
             if proximity == 'Suburb':
                 down = (int(property_size)*int(getattr(Expense.objects.get(id=37),v)))*int(down_payment_percent)/100
                 p = (int(property_size)*int(getattr(Expense.objects.get(id=37),v))) - down
-                m = p*((r*((1+r)**n))/((1+r)**n-1))
+                l = 1+r
+                k = l**n
+                m = p*r*k/(k-1)
+                #m = p*((r*((1+r)**n))/((1+r)**n-1))
                 cities_property_expense.append(CostPropertyResult(cities[i], rent_or_buy, m, property_size))
             elif proximity == 'City Center':
                 down = (int(property_size) * int(getattr(Expense.objects.get(id=37), v))) * int(down_payment_percent)/100
