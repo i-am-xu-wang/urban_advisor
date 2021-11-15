@@ -146,11 +146,19 @@ def cost_of_property_calculation(cities,proximity, rent_or_buy, property_size, d
             v = 'sf'
         elif v == 'Roanoke':
             v = 'roanoke'
-        cities_property_expense.append(CostPropertyResult(cities[i], rent_or_buy, 5000, property_size))
-    #cost_property_result1 = CostPropertyResult(selected_cities[0], ", 5000, property_size)
-    #cost_property_result2 = CostPropertyResult(selected_cities[1], "Rent", 5000, property_size)
-    #cost_property_result3 = CostPropertyResult(selected_cities[2], "Rent", 5000, property_size)
-    #cities_property_expense = [cost_property_result1, cost_property_result2, cost_property_result3]
+        if rent_or_buy == "Rent":
+            if proximity == 'City Center' and property_size == 'One Bedroom':
+                cities_property_expense.append(CostPropertyResult(cities[i], rent_or_buy,getattr(Expense.objects.get(id=32), v), property_size))
+            elif proximity == 'City Center' and property_size == 'Two Bedrooms':
+                cities_property_expense.append(CostPropertyResult(cities[i], rent_or_buy,(int(getattr(Expense.objects.get(id=32),v))+int(getattr(Expense.objects.get(id=34),v))/2), property_size))
+            elif proximity == 'City Center' and property_size == 'Three Bedrooms':
+                cities_property_expense.append(CostPropertyResult(cities[i], rent_or_buy,getattr(Expense.objects.get(id=34), v), property_size))
+            elif proximity == 'Suburb' and property_size == 'One Bedroom':
+                cities_property_expense.append(CostPropertyResult(cities[i], rent_or_buy,getattr(Expense.objects.get(id=33), v), property_size))
+            elif proximity == 'Suburb' and property_size == 'Two Bedrooms':
+                cities_property_expense.append(CostPropertyResult(cities[i], rent_or_buy,(int(getattr(Expense.objects.get(id=33),v))+int(getattr(Expense.objects.get(id=35),v))/2), property_size))
+            elif proximity == 'Suburb' and property_size == 'Three Bedrooms':
+                cities_property_expense.append(CostPropertyResult(cities[i], rent_or_buy,getattr(Expense.objects.get(id=35), v), property_size))
     return cities_property_expense
 
 
