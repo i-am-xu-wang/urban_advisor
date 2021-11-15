@@ -157,7 +157,7 @@
                 {% endfor %}
             </tr>
             <tr>
-                {% if city1_property.rent_or_buy == "Rent" %}
+                {% if cities_property_expense.0.rent_or_buy == "Rent" %}
                     <td>You have chosen the <strong>Rent</strong> &#8202 option</td>
                 {% else %}
                     <td> You have choose the <strong>Buy</strong> &#8202 option:</td>
@@ -165,21 +165,21 @@
             </tr>
             <tr>
                 <td>
-                    {% if city1_property.rent_or_buy == "Rent" %}
+                    {% if cities_property_expense.0.rent_or_buy == "Rent" %}
 
-                            For {{ city1_property.property_size }} Apartment:
+                            For {{ cities_property_expense.0.property_size }} Apartment:
 
                     {% else %}
 
-                            For {{ city1_property.property_size }} &#8202 sqft:
+                            For {{ cities_property_expense.0.property_size }} &#8202 sqft:
 
                     {% endif %}
                 </td>
             </tr>
             <tr>
-                <td>Estimated Monthly Payment:</td>
-                    {% if city1_property.rent_or_buy == "Buy" %}
-                        <div>(For 30 Years Fixed Rate)</div>
+                <td>Estimated Monthly Payment:
+                    {% if cities_property_expense.0.rent_or_buy == "Buy" %}
+                        <div>(For 20 Years Fixed Rate)</div>
                     {% endif %}
                 </td>
                 {% for city_property in cities_property_expense %}
