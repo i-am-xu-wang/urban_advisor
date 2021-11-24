@@ -5,11 +5,11 @@ from django.db import models
 
 class Expense(models.Model):
     expenses = models.CharField(max_length=250)
-    roanoke = models.FloatField()
+    Roanoke = models.FloatField()
     dc = models.FloatField()
-    philly = models.FloatField()
-    boston = models.FloatField()
-    seattle = models.FloatField()
+    Philadelphia = models.FloatField()
+    Boston = models.FloatField()
+    Seattle = models.FloatField()
     sf = models.FloatField()
 
     def __str__(self):
