@@ -2,6 +2,19 @@ body {
     font-family: "Roboto", sans-serif;
 }
 
+.page {
+    background-color: #3b5998 !important;
+}
+
+.page-content {
+    background-color: white;
+    width: 800px;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1em;
+}
+
 header {
     margin-left: 20px;
     display: flex;
@@ -21,7 +34,6 @@ header {
 
 #mid-header {
     text-align: center;
-    width: 80%;
 }
 
 #header-text a {
@@ -84,7 +96,6 @@ footer {
 
 #mid-footer ul li {
     display: table-cell;
-    border-right: solid grey 2px;
     padding: 7px;
     align-self: center;
 }
