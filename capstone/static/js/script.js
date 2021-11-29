@@ -62,6 +62,7 @@ $(document).ready(function () {
         }
         rentQuestions.style.display = 'block'
     })
+
     $('#buy').click(function () {
         console.log("selected buy!")
         if (rentQuestions) {
@@ -71,9 +72,11 @@ $(document).ready(function () {
     })
 
     submitForms = function() {
+        let valid = true;
         console.log("submit clicked")
         $(".alert-danger").removeClass("alert-danger");
         $(".alert").removeClass("alert");
+        $(".alert-dismissible").remove();
 
         // cost of living quiz validation
         cities_checkboxes=document.getElementsByClassName("cities-checkbox");
@@ -87,35 +90,61 @@ $(document).ready(function () {
 
         if (!cities_checked) {
             $('#cities-checkboxes').addClass('alert alert-danger')
-            return alert("Please select at least one city to evaluate")
-        }
-
-        if ($('input[name="salary"]').val() === "") {
+            valid = false;
+            message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
+                '    <strong>Error!</strong> Please select at least one city to evaluate\n' +
+                '</div>')
+            $('#submit-button').after(message)
+        } else if ($('input[name="salary"]').val() === "") {
             $('#salary').addClass('alert alert-danger');
-            return alert("Please enter anticipated annual salary");
+            valid = false;
+            message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
+                '    <strong>Error!</strong> Please enter anticipated annual salary\n' +
+                '</div>')
+            $('#submit-button').after(message)
         } else if ($('input[name="vacation-spending"]').val() === "") {
             $('#vacation-spending').addClass('alert alert-danger');
-            return alert("Please enter vacation spending")
+            valid = false;
+            message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
+                '    <strong>Error!</strong> Please enter vacation spending\n' +
+                '</div>')
+            $('#submit-button').after(message)
         } else {
             // property price quiz validation
             const property_price_checkbox = document.getElementById('property-price-checkbox');
             if ($(property_price_checkbox).is(":checked")) {
                 if ($('input[name="city-proximity-options"]:checked').val() === undefined) {
                     $('#city-proximity-options').addClass('alert alert-danger');
-                    return alert("Please select an option for city proximity");
+                    valid = false;
+                    message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
+                        '    <strong>Error!</strong> Please select an option for city proximity\n' +
+                        '</div>')
+                    $('#submit-button').after(message)
                 } else if ($('input[name="rent-or-buy-options"]:checked').val() === undefined) {
                     $('#rent-or-buy-options').addClass('alert alert-danger');
-                    return alert("Please select an option for rent or buy");
+                    valid = false;
+                    message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
+                        '    <strong>Error!</strong> Please select an option for rent or buy\n' +
+                        '</div>')
+                    $('#submit-button').after(message)
                 } else {
                     if ($('input[name="rent-or-buy-options"]:checked').val() === "Rent") {
                         if ($('input[name="rental-bedroom-options"]:checked').val() === undefined) {
                             $('#rent-questions').addClass('alert alert-danger');
-                            return alert("Please select an option for rental bedrooms");
+                            valid = false;
+                            message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
+                                '    <strong>Error!</strong> Please select an option for rental bedrooms\n' +
+                                '</div>')
+                            $('#submit-button').after(message)
                         }
                     } else {
                         if ($('input[name="buy-square-footage"]').val() === "") {
                             $('#buy-square-footage').addClass('alert alert-danger');
-                            return alert("Please enter desired square footage")
+                            valid = false;
+                            message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
+                                '    <strong>Error!</strong> Please enter desired square footage\n' +
+                                '</div>')
+                            $('#submit-button').after(message)
                         }
                     }
                 }
@@ -123,8 +152,10 @@ $(document).ready(function () {
                 //document.getElementById('property-price-quiz').submit();
                 console.log("submitted property price quiz")
             }
-            document.getElementById('cost-of-living-quiz').submit();
-            console.log("submitted cost of living quiz")
+            if (valid) {
+                document.getElementById('cost-of-living-quiz').submit();
+                console.log("submitted cost of living quiz")
+            }
         }
         console.log("done executing submitForms")
     }

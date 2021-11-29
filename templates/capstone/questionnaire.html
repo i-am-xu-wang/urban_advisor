@@ -60,6 +60,10 @@
                         <label for="crime-rate-checkbox">Crime Rate</label>
                     </div>
                     <div class="col-sm-6 col-md-4 col-lg-3">
+                        <input type="checkbox" id="food-checkbox" name="feature-option" value="food"/>
+                        <label for="food-checkbox">Food Options</label>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-3">
                         <input type="checkbox" id="healthcare-checkbox" name="feature-option" value="healthcare"/>
                         <label for="healthcare-checkbox">Healthcare</label>
                     </div>
@@ -261,15 +265,14 @@
                 <option value="5">5+ time per week</option>
             </select>
         </div>
-        {#    </form>#}
-        {#    <form id="property-price-quiz" action="{% url "property-report" %}" method="post">#}
-        {% csrf_token %}
+
+
         <div id="property-price-options">
             <h4>Property Price Options</h4>
             <!-- City proximity options -->
             <div id="city-proximity-options">
                 Where are you looking to live?*
-                <input type="radio" id="city-center" name="city-proximity-options" value="City Center" required>
+                <input type="radio" id="city-center" name="city-proximity-options" value="City Center" >
                 <label for="city-center">Inside City Center</label>
                 <input type="radio" id="suburb" name="city-proximity-options" value="Suburb">
                 <label for="suburb">Outside of City Center</label>
@@ -278,7 +281,7 @@
             <!-- Rent or buy options -->
             <div id="rent-or-buy-options">
                 Do you plan to rent or buy?*
-                <input type="radio" id="rent" name="rent-or-buy-options" value="Rent" required>
+                <input type="radio" id="rent" name="rent-or-buy-options" value="Rent" >
                 <label for="rent">Rent</label>
                 <input type="radio" id="buy" name="rent-or-buy-options" value="Buy">
                 <label for="buy">Buy</label>
@@ -290,7 +293,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-6 col-md-4">
-                            <input type="radio" id="one-bedroom" name="rental-bedroom-options" value="One Bedroom" required>
+                            <input type="radio" id="one-bedroom" name="rental-bedroom-options" value="One Bedroom" >
                             <label for="one-bedroom">1 bedroom</label>
                         </div>
                         <div class="col-sm-6 col-md-4">
@@ -314,6 +317,6 @@
             </div>
             <!--Add more questions here-->
         </div>
-     <input type="submit" onClick="submitForms()" id="submit-button" name="submit-button" value="Submit">
+     <input type="button" onClick="submitForms()" id="submit-button" name="submit-button" value="Submit">
     </form>
 {% endblock %}

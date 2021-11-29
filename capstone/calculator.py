@@ -4,13 +4,12 @@ from capstone.models import Expense
 
 
 class UserInfo:
-    def __init__(self, cities, salary, property_option, crime_rate, healthcare, childcare):
+    def __init__(self, salary, property_option, crime_rate, healthcare, childcare):
         self.salary = salary
         self.property_option = property_option
         self.crime_rate = crime_rate
         self.healthcare = healthcare
         self.childcare = childcare
-        self.cities = cities
 
 class CostLivingResult:
     def __init__(self, city, restaurant, grocery, public_transportation, ride_share, gas, fitness, cinema, vacation,
