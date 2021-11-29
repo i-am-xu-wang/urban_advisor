@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    const driveDistance = document.getElementById('when-driving')
+
     const monthlyOptions = document.getElementById('when-public-monthly');
     const onDemandOptions = document.getElementById('when-public-on-demand');
 
@@ -6,7 +8,7 @@ $(document).ready(function () {
     const rentQuestions = document.getElementById('rent-questions')
     const buyQuestions = document.getElementById('buy-questions')
 
-    const driveDistance = document.getElementById('when-driving')
+    const childcareOptions = document.getElementById('childcare-options')
 
     driveDistance.style.display = 'none';
 
@@ -16,6 +18,8 @@ $(document).ready(function () {
     propertyPriceOptions.style.display = 'none';
     rentQuestions.style.display = 'none';
     buyQuestions.style.display = 'none';
+
+    childcareOptions.style.display = 'none';
 
     $('#cities-checkboxes :checkbox').change(function () {
         var $cs = $(this).closest('#cities-checkboxes').find(':checkbox:checked');
@@ -81,6 +85,17 @@ $(document).ready(function () {
             rentQuestions.style.display = 'none'
         }
         buyQuestions.style.display = 'block'
+    })
+
+    $('#childcare-checkbox').click(function () {
+        console.log("clicked it!")
+        if ($(this).is(":checked")) {
+            console.log("it's checked now!")
+            childcareOptions.style.display = 'block'
+        } else{
+            console.log("it's not checked...")
+            childcareOptions.style.display = 'none'
+        }
     })
 
     submitForms = function() {

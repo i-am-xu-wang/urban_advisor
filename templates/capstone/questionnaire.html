@@ -52,8 +52,16 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6 col-md-4 col-lg-3">
+                        <input type="checkbox" id="property-price-checkbox" name="feature-option" value="property"/>
+                        <label for="property-price-checkbox">Property Price</label>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-3">
                         <input type="checkbox" id="childcare-checkbox" name="feature-option" value="childcare"/>
                         <label for="childcare-checkbox">Childcare</label>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                        <input type="checkbox" id="healthcare-checkbox" name="feature-option" value="healthcare"/>
+                        <label for="healthcare-checkbox">Healthcare</label>
                     </div>
                     <div class="col-sm-6 col-md-4 col-lg-3">
                         <input type="checkbox" id="crime-rate-checkbox" name="feature-option" value="crime-rate"/>
@@ -62,14 +70,6 @@
                     <div class="col-sm-6 col-md-4 col-lg-3">
                         <input type="checkbox" id="food-checkbox" name="feature-option" value="food"/>
                         <label for="food-checkbox">Food Options</label>
-                    </div>
-                    <div class="col-sm-6 col-md-4 col-lg-3">
-                        <input type="checkbox" id="healthcare-checkbox" name="feature-option" value="healthcare"/>
-                        <label for="healthcare-checkbox">Healthcare</label>
-                    </div>
-                    <div class="col-sm-6 col-md-4 col-lg-3">
-                        <input type="checkbox" id="property-price-checkbox" name="feature-option" value="property"/>
-                        <label for="property-price-checkbox">Property Price</label>
                     </div>
                 </div>
             </div>
@@ -320,6 +320,32 @@
                 <input type="number" id="buy-square-footage" name="down-payment" placeholder="10" > %
             </div>
             <!--Add more questions here-->
+        </div>
+
+        <div id="childcare-options">
+            <h4>Childcare Options</h4>
+            <div id="daycare-question">
+                <label for="daycare-number">Number of children going to daycare:</label>
+                <select id="daycare-numbers" name="daycare-numbers">
+                    <option value="0">0 children</option>
+                    <option value="1">1 child</option>
+                    <option value="2">2 children</option>
+                    <option value="3">3 children</option>
+                    <option value="4">4 children</option>
+                    <option value="5">5+ children</option>
+                </select>
+            </div>
+            <div id="private-school-question">
+                <label for="daycare-number">Number of children going to private school:</label>
+                <select id="private-school-numbers" name="private-school-numbers">
+                    <option value="0">0 children</option>
+                    <option value="1">1 child</option>
+                    <option value="2">2 children</option>
+                    <option value="3">3 children</option>
+                    <option value="4">4 children</option>
+                    <option value="5">5+ children</option>
+                </select>
+            </div>
         </div>
      <input type="button" onClick="submitForms()" id="submit-button" name="submit-button" value="Submit">
     </form>
