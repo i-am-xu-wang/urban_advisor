@@ -72,8 +72,8 @@ $(document).ready(function () {
 
     submitForms = function() {
         console.log("submit clicked")
-        $(".error-num").removeClass("error-num");
-        $(".error-select").removeClass("error-select");
+        $(".alert-danger").removeClass("alert-danger");
+        $(".alert").removeClass("alert");
 
         // cost of living quiz validation
         cities_checkboxes=document.getElementsByClassName("cities-checkbox");
@@ -86,35 +86,35 @@ $(document).ready(function () {
         }
 
         if (!cities_checked) {
-            $('#cities-checkboxes').addClass('error-select')
+            $('#cities-checkboxes').addClass('alert alert-danger')
             return alert("Please select at least one city to evaluate")
         }
 
         if ($('input[name="salary"]').val() === "") {
-            $('#salary').addClass('error-num');
+            $('#salary').addClass('alert alert-danger');
             return alert("Please enter anticipated annual salary");
         } else if ($('input[name="vacation-spending"]').val() === "") {
-            $('#vacation-spending').addClass('error-num');
+            $('#vacation-spending').addClass('alert alert-danger');
             return alert("Please enter vacation spending")
         } else {
             // property price quiz validation
             const property_price_checkbox = document.getElementById('property-price-checkbox');
             if ($(property_price_checkbox).is(":checked")) {
                 if ($('input[name="city-proximity-options"]:checked').val() === undefined) {
-                    $('#city-proximity-options').addClass('error-select');
+                    $('#city-proximity-options').addClass('alert alert-danger');
                     return alert("Please select an option for city proximity");
                 } else if ($('input[name="rent-or-buy-options"]:checked').val() === undefined) {
-                    $('#rent-or-buy-options').addClass('error-select');
+                    $('#rent-or-buy-options').addClass('alert alert-danger');
                     return alert("Please select an option for rent or buy");
                 } else {
                     if ($('input[name="rent-or-buy-options"]:checked').val() === "Rent") {
                         if ($('input[name="rental-bedroom-options"]:checked').val() === undefined) {
-                            $('#rent-questions').addClass('error-select');
+                            $('#rent-questions').addClass('alert alert-danger');
                             return alert("Please select an option for rental bedrooms");
                         }
                     } else {
                         if ($('input[name="buy-square-footage"]').val() === "") {
-                            $('#buy-square-footage').addClass('error-num');
+                            $('#buy-square-footage').addClass('alert alert-danger');
                             return alert("Please enter desired square footage")
                         }
                     }

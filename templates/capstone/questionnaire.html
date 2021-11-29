@@ -5,42 +5,70 @@
 {% block content %}
     <h2>Welcome to Powerful Financial</h2>
     <h4>Please answer the following questions for us to better evaluate your needs!</h4>
-    <p>* = required</p>
+    <strong>* = required</strong>
     <form id="cost-of-living-quiz" action="{% url "report" %}" method="post">
         {% csrf_token %}
         <!-- Cities options -->
         <div id="cities-checkboxes">
             Cities to evaluate (at least one, maximum three)*:
-            <input type="checkbox" id="washington-dc-checkbox" name="cities-checkbox" value="dc"
-                   class="cities-checkbox"/>
-            <label for="washington-dc-checkbox">Washington DC</label>
-            <input type="checkbox" id="philadelphia-checkbox" name="cities-checkbox" value="Philadelphia"
-                   class="cities-checkbox"/>
-            <label for="philadelphia-checkbox">Philadelphia</label>
-            <input type="checkbox" id="boston-checkbox" name="cities-checkbox" value="Boston" class="cities-checkbox"/>
-            <label for="boston-checkbox">Boston</label>
-            <input type="checkbox" id="seattle-checkbox" name="cities-checkbox" value="Seattle"
-                   class="cities-checkbox"/>
-            <label for="seattle-checkbox">Seattle</label>
-            <input type="checkbox" id="silicon-valley-checkbox" name="cities-checkbox" value="sf"
-                   class="cities-checkbox"/>
-            <label for="silicon-valley-checkbox">Silicon Valley</label>
-            <input type="checkbox" id="roanoke-checkbox" name="cities-checkbox" value="Roanoke"
-                   class="cities-checkbox"/>
-            <label for="roanoke-checkbox">Roanoke</label>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                        <input type="checkbox" id="washington-dc-checkbox" name="cities-checkbox" value="dc"
+                            class="cities-checkbox"/>
+                        <label for="washington-dc-checkbox">Washington DC</label>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                        <input type="checkbox" id="philadelphia-checkbox" name="cities-checkbox" value="Philadelphia"
+                               class="cities-checkbox"/>
+                        <label for="philadelphia-checkbox">Philadelphia</label>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                        <input type="checkbox" id="boston-checkbox" name="cities-checkbox" value="Boston" class="cities-checkbox"/>
+                        <label for="boston-checkbox">Boston</label>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                        <input type="checkbox" id="seattle-checkbox" name="cities-checkbox" value="Seattle"
+                               class="cities-checkbox"/>
+                        <label for="seattle-checkbox">Seattle</label>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                        <input type="checkbox" id="silicon-valley-checkbox" name="cities-checkbox" value="sf"
+                            class="cities-checkbox"/>
+                        <label for="silicon-valley-checkbox">Silicon Valley</label>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                        <input type="checkbox" id="roanoke-checkbox" name="cities-checkbox" value="Roanoke"
+                            class="cities-checkbox"/>
+                        <label for="roanoke-checkbox">Roanoke</label>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- Checkbox options -->
         <div>
             What are you looking for?
             <input type="checkbox" id="cost-of-living-checkbox" name="feature-option" value="cost-living" style="display: none;" checked disabled />
-            <input type="checkbox" id="property-price-checkbox" name="feature-option" value="property"/>
-            <label for="property-price-checkbox">Property Price</label>
-            <input type="checkbox" id="healthcare-checkbox" name="feature-option" value="healthcare"/>
-            <label for="healthcare-checkbox">Healthcare</label>
-            <input type="checkbox" id="crime-rate-checkbox" name="feature-option" value="crime-rate"/>
-            <label for="crime-rate-checkbox">Crime Rate</label>
-            <input type="checkbox" id="childcare-checkbox" name="feature-option" value="childcare"/>
-            <label for="childcare-checkbox">Childcare</label>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                        <input type="checkbox" id="childcare-checkbox" name="feature-option" value="childcare"/>
+                        <label for="childcare-checkbox">Childcare</label>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                        <input type="checkbox" id="crime-rate-checkbox" name="feature-option" value="crime-rate"/>
+                        <label for="crime-rate-checkbox">Crime Rate</label>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                        <input type="checkbox" id="healthcare-checkbox" name="feature-option" value="healthcare"/>
+                        <label for="healthcare-checkbox">Healthcare</label>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                        <input type="checkbox" id="property-price-checkbox" name="feature-option" value="property"/>
+                        <label for="property-price-checkbox">Property Price</label>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- Lifestyle options -->
         <h4>Lifestyle Options</h4>
@@ -160,12 +188,22 @@
         <!-- Public transportation options -->
         <div id="transit-options">
             Does your household use public transportation?
-            <input type="radio" id="public-monthly" name="public-transit-options" value="Monthly">
-            <label for="public-monthly">Monthly Pass</label>
-            <input type="radio" id="public-on-demand" name="public-transit-options" value="On Demand Tickets">
-            <label for="public-on-demand">On Demand Tickets</label>
-            <input type="radio" id="public-no" name="public-transit-options" value="No" checked>
-            <label for="public-no">No</label>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <input type="radio" id="public-monthly" name="public-transit-options" value="Monthly">
+                        <label for="public-monthly">Monthly Pass</label>
+                    </div>
+                    <div class="col">
+                        <input type="radio" id="public-on-demand" name="public-transit-options" value="On Demand Tickets">
+                        <label for="public-on-demand">On Demand Tickets</label>
+                    </div>
+                    <div class="col">
+                        <input type="radio" id="public-no" name="public-transit-options" value="No" checked>
+                        <label for="public-no">No</label>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Display the following two options dynamically
@@ -249,12 +287,22 @@
             <!-- Rent question -->
             <div id="rent-questions">
                 How many bedrooms are you looking for in your rental property?*
-                <input type="radio" id="one-bedroom" name="rental-bedroom-options" value="One Bedroom" required>
-                <label for="one-bedroom">1 bedroom</label>
-                <input type="radio" id="two-bedrooms" name="rental-bedroom-options" value="Two Bedrooms">
-                <label for="two-bedrooms">2 bedrooms</label>
-                <input type="radio" id="three-bedrooms" name="rental-bedroom-options" value="Three Bedrooms">
-                <label for="three-bedrooms">3+ bedrooms</label>
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <input type="radio" id="one-bedroom" name="rental-bedroom-options" value="One Bedroom" required>
+                            <label for="one-bedroom">1 bedroom</label>
+                        </div>
+                        <div class="col">
+                            <input type="radio" id="two-bedrooms" name="rental-bedroom-options" value="Two Bedrooms">
+                            <label for="two-bedrooms">2 bedrooms</label>
+                        </div>
+                        <div class="col">
+                            <input type="radio" id="three-bedrooms" name="rental-bedroom-options" value="Three Bedrooms">
+                            <label for="three-bedrooms">3+ bedrooms</label>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Buy questions -->
