@@ -57,7 +57,6 @@ class HealthCareResult:
 
 
 def register_user(salary, feature_options):
-    #print("register user feature options: " + feature_options[0])
     property_option = False
     crime_rate = False
     healthcare = False
@@ -81,7 +80,6 @@ def cost_of_living_calculation(cities, household_member, eating_options, inexpen
                                coffee_option, going_out_options, smoking_option, drinking_options, driving_options,
                                rideshare_options, public_transit_options, public_transit_members, public_transit_trips,
                                gym_options, vacation_spending, clothing_options):
-    print(public_transit_options)
     food = []
     grocery = []
     entertainment = []
@@ -96,24 +94,6 @@ def cost_of_living_calculation(cities, household_member, eating_options, inexpen
     avg_mpg = 25
     mil = 0
     for i, v in enumerate(cities):
-        if v == 'Boston':
-            v = 'boston'
-            mil = 13109/52
-        elif v == 'Washington D.C.':
-            v = 'dc'
-            mil = 	14509/52
-        elif v == 'Philadelphia':
-            v = 'philly'
-            mil = 11445/52
-        elif v == 'Seattle':
-            v = 'seattle'
-            mil = 12000/52
-        elif v == 'Silicon Valley':
-            v = 'sf'
-            mil = 12524/52
-        elif v == 'Roanoke':
-            v = 'roanoke'
-            mil = 14509/52
         food.append((int(eating_options)*int(household_member)*getattr(Expense.objects.get(id=1), v)) + (int(inexpensive_restaurant_options)*int(household_member)*getattr(Expense.objects.get(id=2), v))/2 + (int(coffee_option)*int(household_member)*getattr(Expense.objects.get(id=6), v)))
         grocery.append(getattr(Expense.objects.get(id=10),v))
         entertainment.append(int(going_out_options)*int(household_member)*getattr(Expense.objects.get(id=16),v))
@@ -134,25 +114,8 @@ def cost_of_living_calculation(cities, household_member, eating_options, inexpen
 
 
 def cost_of_property_calculation(cities,proximity, rent_or_buy, property_size, down_payment_percent):
-    # todo: perform property calculation logic here
-    print("cost of property calculation property size: " + property_size)
-    print('proximity',proximity)
-    print('rent_or_buy',rent_or_buy)
-    print('property_size',property_size)
     cities_property_expense = []
     for i, v in enumerate(cities):
-        if v == 'Boston':
-            v = 'boston'
-        elif v == 'Washington D.C.':
-            v = 'dc'
-        elif v == 'Philadelphia':
-            v = 'philly'
-        elif v == 'Seattle':
-            v = 'seattle'
-        elif v == 'Silicon Valley':
-            v = 'sf'
-        elif v == 'Roanoke':
-            v = 'roanoke'
         if rent_or_buy == "Rent":
             if proximity == 'City Center' and property_size == 'One Bedroom':
                 cities_property_expense.append(CostPropertyResult(cities[i], rent_or_buy,getattr(Expense.objects.get(id=32), v), property_size))
@@ -187,17 +150,5 @@ def cost_of_property_calculation(cities,proximity, rent_or_buy, property_size, d
 def cost_of_health_calculation(cities):
     health_care_city = []
     for i, v in enumerate(cities):
-        if v == 'Boston':
-            v = 'boston'
-        elif v == 'Washington D.C.':
-            v = 'dc'
-        elif v == 'Philadelphia':
-            v = 'philly'
-        elif v == 'Seattle':
-            v = 'seattle'
-        elif v == 'Silicon Valley':
-            v = 'sf'
-        elif v == 'Roanoke':
-            v = 'roanoke'
         health_care_city.append(HealthCareResult((getattr(Expense.objects.get(id=19),v)), (getattr(Expense.objects.get(id=20),v)), (getattr(Expense.objects.get(id=21),v)), (getattr(Expense.objects.get(id=22),v)), (getattr(Expense.objects.get(id=23),v)), (getattr(Expense.objects.get(id=24),v)), (getattr(Expense.objects.get(id=25),v)), (getattr(Expense.objects.get(id=26),v)), (getattr(Expense.objects.get(id=27),v)), (getattr(Expense.objects.get(id=28),v)), (getattr(Expense.objects.get(id=29),v)), (getattr(Expense.objects.get(id=30),v)), (getattr(Expense.objects.get(id=31),v))))
     return health_care_city
