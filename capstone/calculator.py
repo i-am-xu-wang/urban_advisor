@@ -4,13 +4,13 @@ from capstone.models import Expense
 
 
 class UserInfo:
-    def __init__(self, salary, property_option, crime_rate, healthcare, childcare):
+    def __init__(self, cities, salary, property_option, crime_rate, healthcare, childcare):
         self.salary = salary
         self.property_option = property_option
         self.crime_rate = crime_rate
         self.healthcare = healthcare
         self.childcare = childcare
-
+        self.cities = cities
 
 class CostLivingResult:
     def __init__(self, city, restaurant, grocery, public_transportation, ride_share, gas, fitness, cinema, vacation,
@@ -61,6 +61,7 @@ def register_user(salary, feature_options):
     crime_rate = False
     healthcare = False
     childcare = False
+
     for option in feature_options:
         if option == 'property':
             property_option = True
@@ -76,6 +77,7 @@ def register_user(salary, feature_options):
 
 # pass a list of cities and user selections. Calculated each cities' result based selection, return a list of
 # results of each city. The function need to add cities into selected_cities for other functions to access it
+selected_cities = []
 def cost_of_living_calculation(cities, household_member, eating_options, inexpensive_restaurant_options,
                                coffee_option, going_out_options, smoking_option, drinking_options, driving_options,
                                rideshare_options, public_transit_options, public_transit_members, public_transit_trips,
