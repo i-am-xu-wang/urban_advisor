@@ -6,6 +6,10 @@ $(document).ready(function () {
     const rentQuestions = document.getElementById('rent-questions')
     const buyQuestions = document.getElementById('buy-questions')
 
+    const driveDistance = document.getElementById('when-driving')
+
+    driveDistance.style.display = 'none';
+
     monthlyOptions.style.display = 'none';
     onDemandOptions.style.display = 'none';
 
@@ -19,6 +23,14 @@ $(document).ready(function () {
             this.checked = false;
         }
     });
+
+    $('#driving-options').change(function () {
+        if ($('#driving-options').val() === '0') {
+            driveDistance.style.display = 'none';
+        } else{
+            driveDistance.style.display = 'block';
+        }
+    })
 
     $('#public-monthly').click(function () {
         console.log('monthly display')
