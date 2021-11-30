@@ -25,4 +25,24 @@ def generate_rating_qualifier(city):
         return "Washington D.C."
     else:
         return city
-# register.filter('rating', generate_rating_qualifier)
+
+
+@register.filter(name='zip')
+def zip_lists(a, b):
+    return zip(a, b)
+
+
+@register.filter(name='salary_percentage')
+def salary_percentage_filter(salary_compare):
+    if salary_compare > 0:
+        return salary_compare
+    else:
+        return -salary_compare
+
+
+@register.filter(name='modifier')
+def salary_percentage_modifier(salary_compare):
+    if salary_compare > 0:
+        return "higher"
+    else:
+        return "lower"

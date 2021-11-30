@@ -13,7 +13,8 @@ def register_form(request):
 
     # for registering user info
     feature_options = request.POST.getlist('feature-option')
-    salary = request.POST.getlist('salary')
+    salary = request.POST.get('salary')
+
     cities = request.POST.getlist('cities-checkbox')
 
     # for cost of living option

@@ -6,6 +6,15 @@
 {% block content %}
     <link rel="stylesheet" type="text/css" href="{% static "css/report.css" %}?{% now "U" %}">
     <h1>Here is your customized financial report:</h1>
+    <div id="summary">
+        <p>Currently you earn ${{ user_info.salary |intcomma }} per year.</p>
+        {% for city_result, salary_compare in user_info.cities|zip:user_info.salary_comparison %}
+            <p> This number is {{ salary_compare | salary_percentage|floatformat:2}}% {{ salary_compare|modifier }} than the average
+                salary in {{ city_result | city_name }}.   </p>
+        {% endfor %}
+        <h2>Overall Quality of Life</h2>
+
+    </div>
     <h2>Cost of Living Report (Monthly)</h2>
     <table id="cost-living" class="table">
         <tr>
@@ -154,7 +163,7 @@
             <tr>
                 <th class="first-col"></th>
                 {% for city_result in user_info.cities %}
-                   <th>{{ city_result | city_name }}   </th>
+                    <th>{{ city_result | city_name }}   </th>
                 {% endfor %}
             </tr>
             <tr>

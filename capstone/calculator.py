@@ -7,8 +7,9 @@ from capstone.models import Expense
 
 @dataclass
 class UserInfo:
-    cities: List
+    cities: List[str]
     salary: int
+    salary_comparison: List[int]
     property_option: bool
     crime_rate: bool
     healthcare: bool
@@ -63,7 +64,11 @@ def register_user(cities, salary, feature_options: List[str]):
     crime_rate = 'crime-rate' in feature_options
     healthcare = 'healthcare' in feature_options
     childcare = 'childcare' in feature_options
-    return UserInfo(cities, salary, property_option, crime_rate, healthcare, childcare)
+    # todo:add salary comparison list to user info
+    # for the lower than the average salary, store negative percentage number, for the higher than the average salary
+    # store positive percentage number
+    salary_comparison = [40, -50, 60]  # dummy data
+    return UserInfo(cities, salary, salary_comparison, property_option, crime_rate, healthcare, childcare)
 
 
 # pass a list of cities and user selections. Calculated each cities' result based selection, return a list of
