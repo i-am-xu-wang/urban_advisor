@@ -14,6 +14,18 @@ class UserInfo:
     crime_rate: bool
     healthcare: bool
     childcare: bool
+    food_option: bool
+
+
+@dataclass
+class OverallQualityResult:
+    cost_of_living_ratio: float
+    housing_expense_ratio: float
+    health_care_ratio: float
+    crime_index: float
+    safety_index: float
+    food_option: float
+    overall_index: float
 
 
 @dataclass
@@ -40,20 +52,57 @@ class CostPropertyResult:
 
 
 @dataclass
+class ChildCareResult:
+    daycare_cost: float
+    private_school_cost: float
+
+
+@dataclass
 class HealthCareResult:
-    skill: int
-    speed: int
-    equipment: int
-    accuracy: int
-    friendliness: int
-    satisfaction_responsiveness: int
-    satisfaction_cost: int
-    location: int
-    doctor_visit: int
-    dentist_visit: int
-    optometrist_visit: int
-    RX_drug: int
-    veterinary_visit: int
+    skill: float
+    speed: float
+    equipment: float
+    accuracy: float
+    friendliness: float
+    satisfaction_responsiveness: float
+    satisfaction_cost: float
+    location: float
+    doctor_visit: float
+    dentist_visit: float
+    optometrist_visit: float
+    RX_drug: float
+    veterinary_visit: float
+
+
+@dataclass
+class CrimeSafetyResult:
+    crime_level: float
+    crime_increasing: float
+    home_broken: float
+    mugged_or_robbed: float
+    car_stolen: float
+    things_from_car: float
+    worries_attack: float
+    worries_insult: float
+    worries_racist: float
+    problem_drugs: float
+    property_crime: float
+    violent_crime: float
+    corruption: float
+    safety_day: float
+    safety_night: float
+
+
+@dataclass
+class FoodResult:
+    restaurant_mile: float
+    diversity_score: float
+    cuisine_per_metro: float
+    dine_out_money: float
+    final_index: float
+
+
+selected_cities = []
 
 
 def register_user(cities, salary, feature_options: List[str]):
@@ -64,18 +113,26 @@ def register_user(cities, salary, feature_options: List[str]):
     crime_rate = 'crime-rate' in feature_options
     healthcare = 'healthcare' in feature_options
     childcare = 'childcare' in feature_options
-    # todo:add salary comparison list to user info
+    food_option = 'food' in feature_options
+    # todo:add salary comparison of each city into the comparison list
     # for the lower than the average salary, store negative percentage number, for the higher than the average salary
     # store positive percentage number
     salary_comparison = [40, -50, 60]  # dummy data
-    return UserInfo(cities, salary, salary_comparison, property_option, crime_rate, healthcare, childcare)
+    return UserInfo(cities, salary, salary_comparison, property_option, crime_rate, healthcare, childcare, food_option)
+
+
+# todo: return a list of overall quality_of_life_result
+def overall_quality_of_life(userInfo: UserInfo, living_expense: CostLivingResult, property_expense: CostPropertyResult):
+    overall_quality_results = []
+    for city in selected_cities:
+        overall_quality_results.append(
+            OverallQualityResult(40, 30, 20, 10, 11, 12, 82)  # dummy data
+        )
+    return overall_quality_results
 
 
 # pass a list of cities and user selections. Calculated each cities' result based selection, return a list of
-# results of each city. The function need to add cities into selected_cities for other functions to access it
-selected_cities = []
-
-
+# results of each city.
 def cost_of_living_calculation(household_member, eating_options, inexpensive_restaurant_options,
                                coffee_option, going_out_options, smoking_option, drinking_options, driving_options,
                                rideshare_options, public_transit_options, public_transit_members, public_transit_trips,
@@ -164,6 +221,14 @@ def cost_of_property_calculation(proximity, rent_or_buy, property_size, down_pay
     return cities_property_expense
 
 
+# todo: childcare calculation
+def cost_of_child_care(daycare_number, private_school_number):
+    child_care_city = []
+    for city in selected_cities:
+        child_care_city.append(ChildCareResult(1000, 2000))
+    return child_care_city
+
+
 # this function purely fetch data from DB, not using data pass from frontend.
 def cost_of_health_calculation():
     health_care_city = []
@@ -177,3 +242,23 @@ def cost_of_health_calculation():
                              (getattr(Expense.objects.get(id=29), v)), (getattr(Expense.objects.get(id=30), v)),
                              (getattr(Expense.objects.get(id=31), v))))
     return health_care_city
+
+
+# todo: this function purely fetch data from DB, not using data pass from frontend.
+def cost_of_crime_calculation():
+    crime_city = []
+    for city in selected_cities:
+        crime_city.append(
+            CrimeSafetyResult(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15)
+        )
+    return crime_city
+
+
+# todo: this function purely fetch data from DB, not using data pass from frontend.
+def food_option_calculation():
+    food_city = []
+    for city in selected_cities:
+        food_city.append(
+            FoodResult(1, 2, 3, 4, 5)
+        )
+    return food_city

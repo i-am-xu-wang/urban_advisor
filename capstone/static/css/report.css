@@ -35,11 +35,32 @@ div.title {
     background-color: lightskyblue;
     color: white;
 }
-#health-care th {
+#child-care th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: center;
     background-color: lightseagreen;
+    color: white;
+}
+#health-care th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: limegreen;
+    color: white;
+}
+#crime-rate th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: lightpink;
+    color: white;
+}
+#food-option th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: lightsalmon;
     color: white;
 }
 th:first-child{

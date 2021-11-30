@@ -60,8 +60,26 @@ def register_form(request):
     property_expense = calculator.cost_of_property_calculation(proximity, rent_or_buy, property_size,
                                                                down_payment_percent)
 
+    # for child care questions
+    daycare_number = request.POST.get('daycare-numbers')
+    print(daycare_number)
+    private_school_number = request.POST.get('private-school-numbers')
+    print(private_school_number)
+    child_care_expense = calculator.cost_of_child_care(daycare_number, private_school_number)
+
+    # for overall quality of life option
+    overall_quality = calculator.overall_quality_of_life(user_info, living_expense, property_expense)
     # for health care option
     cities_health_care = calculator.cost_of_health_calculation()
-    return render(request, "capstone/report.html", {"cities_living_expense": living_expense, "user_info": user_info,
-                                                    "cities_property_expense": property_expense,
-                                                    "cities_health_care": cities_health_care})
+
+    # for crime rate option
+    cities_crime_rate = calculator.cost_of_crime_calculation()
+
+    # for food option
+    cities_food_option = calculator.food_option_calculation()
+
+    return render(request, "capstone/report.html",
+                  {"cities_living_expense": living_expense, "user_info": user_info, "overall_quality": overall_quality,
+                   "cities_property_expense": property_expense, "child_care": child_care_expense,
+                   "cities_health_care": cities_health_care, "cities_crime_rate": cities_crime_rate,
+                   "cities_food_option": cities_food_option})
