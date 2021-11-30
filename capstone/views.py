@@ -55,7 +55,6 @@ def register_form(request):
         clothing_options,
     )
     proximity = request.POST.get('city-proximity-options')
-    # print("register form proximity: " + proximity)
     rent_or_buy = request.POST.get('rent-or-buy-options')
     if rent_or_buy == "Rent":
         property_size = request.POST.get('rental-bedroom-options')
@@ -64,8 +63,6 @@ def register_form(request):
         property_size = request.POST.get('buy-square-footage')
         down_payment_percent = request.POST.get('down-payment')
         print(down_payment_percent)
-
-    # print("register form property size: " + property_size)
     property_expense = calculator.cost_of_property_calculation(cities, proximity, rent_or_buy, property_size,
                                                                down_payment_percent)
     cities_health_care = calculator.cost_of_health_calculation(cities)

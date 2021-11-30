@@ -87,6 +87,7 @@ def cost_of_living_calculation(cities, household_member, eating_options, inexpen
     avg_mpg = 25
     mil = 0
     for i, v in enumerate(cities):
+        #selected_cities.append(v)
         food.append((int(eating_options) * int(household_member) * getattr(Expense.objects.get(id=1), v)) + (
                 int(inexpensive_restaurant_options) * int(household_member) * getattr(Expense.objects.get(id=2),
                                                                                       v)) / 2 + (
@@ -170,3 +171,6 @@ def cost_of_health_calculation(cities):
                              (getattr(Expense.objects.get(id=29), v)), (getattr(Expense.objects.get(id=30), v)),
                              (getattr(Expense.objects.get(id=31), v))))
     return health_care_city
+
+
+

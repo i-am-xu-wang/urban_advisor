@@ -2,6 +2,7 @@
 {% block page-title %}Report Page{% endblock %}
 {% load static %}
  {% load humanize %}
+{% load filter_extras %}
 {% block content %}
     <link rel="stylesheet" type="text/css" href="{% static "css/report.css" %}?{% now "U" %}">
     <h1>Here is your customized financial report:</h1>
@@ -105,7 +106,7 @@
         </tr>
         <tr>
             <td>
-                Estimated Cinema and Nightlife expense:
+                Estimated Cinema and Nightlife Expense:
             </td>
             {% for city_result in cities_living_expense %}
                 <td>
@@ -208,7 +209,7 @@
                 <td>Skill and competency of medical staff:</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        {{ city_health.skill |floatformat:2 }}%
+                        {{ city_health.skill |floatformat:2 }} &#160 {{ city_health.skill|rating }}
                     </td>
                 {% endfor %}
             </tr>
@@ -216,7 +217,7 @@
                 <td>Speed in completing examination and reports</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        {{ city_health.speed |floatformat:2 }}%
+                        {{ city_health.speed |floatformat:2 }} &#160 {{ city_health.speed|rating }}
                     </td>
                 {% endfor %}
             </tr>
@@ -224,7 +225,7 @@
                 <td>Equipment for modern diagnosis and treatment</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        {{ city_health.equipment |floatformat:2 }}%
+                        {{ city_health.equipment |floatformat:2 }} &#160 {{ city_health.equipment|rating }}
                     </td>
                 {% endfor %}
             </tr>
@@ -232,7 +233,7 @@
                 <td>Accuracy and completeness in filling out reports</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        {{ city_health.accuracy |floatformat:2 }}%
+                        {{ city_health.accuracy |floatformat:2 }} &#160 {{ city_health.accuracy|rating }}
                     </td>
                 {% endfor %}
             </tr>
@@ -240,7 +241,7 @@
                 <td>Friendliness and courtesy of the staff</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        {{ city_health.friendliness |floatformat:2 }}%
+                        {{ city_health.friendliness |floatformat:2 }} &#160 {{ city_health.friendliness|rating }}
                     </td>
                 {% endfor %}
             </tr>
@@ -248,7 +249,7 @@
                 <td>Satisfaction with responsiveness (waiting time) in medical institutions</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        {{ city_health.satisfaction_responsiveness |floatformat:2 }}%
+                        {{ city_health.satisfaction_responsiveness |floatformat:2 }} &#160 {{ city_health.satisfaction_responsiveness|rating }}
                     </td>
                 {% endfor %}
             </tr>
@@ -256,7 +257,7 @@
                 <td>Satisfaction with cost to you</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        {{ city_health.satisfaction_cost |floatformat:2 }}%
+                        {{ city_health.satisfaction_cost |floatformat:2 }} &#160 {{ city_health.satisfaction_cost|rating }}
                     </td>
                 {% endfor %}
             </tr>
@@ -264,7 +265,7 @@
                 <td>Convenience of location for you</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        {{ city_health.location |floatformat:2 }}%
+                        {{ city_health.location |floatformat:2 }} &#160 {{ city_health.location|rating }}
                     </td>
                 {% endfor %}
             </tr>
