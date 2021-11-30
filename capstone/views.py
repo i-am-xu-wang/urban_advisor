@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect
-from . import models, calculator
+from django.shortcuts import render
+from . import calculator
 
 
 # Create your views here.
@@ -10,9 +10,13 @@ def index_page(request):
 def register_form(request):
     # TODO: change 'end city' to city list selected from checkboxes. pass city_list to output page
     # TODO: pass checkbox_selections and additional property questions to calculator
+
+    # for registering user info
     feature_options = request.POST.getlist('feature-option')
     salary = request.POST.getlist('salary')
     cities = request.POST.getlist('cities-checkbox')
+
+    # for cost of living option
     household_member = request.POST["household-options"]
     eating_options = request.POST["eating-out-options"]
     inexpensive_restaurant_options = request.POST["inexpensive-restaurant-options"]
@@ -35,25 +39,14 @@ def register_form(request):
     gym_options = request.POST["gym-options"]
     vacation_spending = request.POST["vacation-spending"]
     clothing_options = request.POST["clothing-options"]
-    user_info = calculator.register_user(salary, feature_options)
+    user_info = calculator.register_user(cities, salary, feature_options)
     living_expense = calculator.cost_of_living_calculation(
-        cities,
-        household_member,
-        eating_options,
-        inexpensive_restaurant_options,
-        coffee_option,
-        going_out_options,
-        smoking_option,
-        drinking_options,
-        driving_options,
-        rideshare_options,
-        public_transit_options,
-        public_transit_members,
-        public_transit_trips,
-        gym_options,
-        vacation_spending,
-        clothing_options,
+        household_member, eating_options, inexpensive_restaurant_options, coffee_option, going_out_options,
+        smoking_option, drinking_options, driving_options, rideshare_options, public_transit_options,
+        public_transit_members, public_transit_trips, gym_options, vacation_spending, clothing_options,
     )
+
+    # for property option
     proximity = request.POST.get('city-proximity-options')
     rent_or_buy = request.POST.get('rent-or-buy-options')
     if rent_or_buy == "Rent":
@@ -63,10 +56,11 @@ def register_form(request):
         property_size = request.POST.get('buy-square-footage')
         down_payment_percent = request.POST.get('down-payment')
         print(down_payment_percent)
-    property_expense = calculator.cost_of_property_calculation(cities, proximity, rent_or_buy, property_size,
+    property_expense = calculator.cost_of_property_calculation(proximity, rent_or_buy, property_size,
                                                                down_payment_percent)
-    cities_health_care = calculator.cost_of_health_calculation(cities)
+
+    # for health care option
+    cities_health_care = calculator.cost_of_health_calculation()
     return render(request, "capstone/report.html", {"cities_living_expense": living_expense, "user_info": user_info,
                                                     "cities_property_expense": property_expense,
                                                     "cities_health_care": cities_health_care})
-

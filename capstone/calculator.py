@@ -7,6 +7,7 @@ from capstone.models import Expense
 
 @dataclass
 class UserInfo:
+    cities: List
     salary: int
     property_option: bool
     crime_rate: bool
@@ -16,7 +17,6 @@ class UserInfo:
 
 @dataclass
 class CostLivingResult:
-    city: str
     restaurant: float
     grocery: float
     public_transportation: float
@@ -33,7 +33,6 @@ class CostLivingResult:
 
 @dataclass
 class CostPropertyResult:
-    city: str
     rent_or_buy: str
     monthly_payment: float
     property_size: str
@@ -56,12 +55,15 @@ class HealthCareResult:
     veterinary_visit: int
 
 
-def register_user(salary, feature_options: List[str]):
+def register_user(cities, salary, feature_options: List[str]):
+    selected_cities.clear()
+    for city in cities:
+        selected_cities.append(city)
     property_option = 'property' in feature_options
     crime_rate = 'crime-rate' in feature_options
     healthcare = 'healthcare' in feature_options
     childcare = 'childcare' in feature_options
-    return UserInfo(salary, property_option, crime_rate, healthcare, childcare)
+    return UserInfo(cities, salary, property_option, crime_rate, healthcare, childcare)
 
 
 # pass a list of cities and user selections. Calculated each cities' result based selection, return a list of
@@ -69,7 +71,7 @@ def register_user(salary, feature_options: List[str]):
 selected_cities = []
 
 
-def cost_of_living_calculation(cities, household_member, eating_options, inexpensive_restaurant_options,
+def cost_of_living_calculation(household_member, eating_options, inexpensive_restaurant_options,
                                coffee_option, going_out_options, smoking_option, drinking_options, driving_options,
                                rideshare_options, public_transit_options, public_transit_members, public_transit_trips,
                                gym_options, vacation_spending, clothing_options):
@@ -86,8 +88,7 @@ def cost_of_living_calculation(cities, household_member, eating_options, inexpen
     total = []
     avg_mpg = 25
     mil = 0
-    for i, v in enumerate(cities):
-        #selected_cities.append(v)
+    for i, v in enumerate(selected_cities):
         food.append((int(eating_options) * int(household_member) * getattr(Expense.objects.get(id=1), v)) + (
                 int(inexpensive_restaurant_options) * int(household_member) * getattr(Expense.objects.get(id=2),
                                                                                       v)) / 2 + (
@@ -107,38 +108,38 @@ def cost_of_living_calculation(cities, household_member, eating_options, inexpen
                 cigarettes[i]) + int(drinks[i]) + int(public_transport[i]) + clothing[i] + gas[i] + taxi[i])
 
     cost_of_living_result = []
-    for i in range(len(cities)):
+    for i in range(len(selected_cities)):
         cost_of_living_result.append(
-            CostLivingResult(cities[i], food[i], grocery[i], public_transport[i], taxi[i], gas[i], gym[i],
+            CostLivingResult(food[i], grocery[i], public_transport[i], taxi[i], gas[i], gym[i],
                              entertainment[i],
                              int(vacation_spending) / 12.0, clothing[i], cigarettes[i], drinks[i], total[i]))
     return cost_of_living_result
 
 
-def cost_of_property_calculation(cities, proximity, rent_or_buy, property_size, down_payment_percent):
+def cost_of_property_calculation(proximity, rent_or_buy, property_size, down_payment_percent):
     cities_property_expense = []
-    for i, v in enumerate(cities):
+    for i, v in enumerate(selected_cities):
         if rent_or_buy == "Rent":
             if proximity == 'City Center' and property_size == 'One Bedroom':
                 cities_property_expense.append(
-                    CostPropertyResult(cities[i], rent_or_buy, getattr(Expense.objects.get(id=32), v), property_size))
+                    CostPropertyResult(rent_or_buy, getattr(Expense.objects.get(id=32), v), property_size))
             elif proximity == 'City Center' and property_size == 'Two Bedrooms':
-                cities_property_expense.append(CostPropertyResult(cities[i], rent_or_buy, (
-                        int(getattr(Expense.objects.get(id=32), v)) + int(
-                    getattr(Expense.objects.get(id=34), v)) / 2), property_size))
+                cities_property_expense.append(CostPropertyResult(rent_or_buy, (
+                        int(getattr(Expense.objects.get(id=32), v)) + int(getattr(Expense.objects.get(id=34), v)) / 2),
+                                                                  property_size))
             elif proximity == 'City Center' and property_size == 'Three Bedrooms':
                 cities_property_expense.append(
-                    CostPropertyResult(cities[i], rent_or_buy, getattr(Expense.objects.get(id=34), v), property_size))
+                    CostPropertyResult(rent_or_buy, getattr(Expense.objects.get(id=34), v), property_size))
             elif proximity == 'Suburb' and property_size == 'One Bedroom':
                 cities_property_expense.append(
-                    CostPropertyResult(cities[i], rent_or_buy, getattr(Expense.objects.get(id=33), v), property_size))
+                    CostPropertyResult(rent_or_buy, getattr(Expense.objects.get(id=33), v), property_size))
             elif proximity == 'Suburb' and property_size == 'Two Bedrooms':
-                cities_property_expense.append(CostPropertyResult(cities[i], rent_or_buy, (
-                        int(getattr(Expense.objects.get(id=33), v)) + int(
-                    getattr(Expense.objects.get(id=35), v)) / 2), property_size))
+                cities_property_expense.append(CostPropertyResult(rent_or_buy, (
+                        int(getattr(Expense.objects.get(id=33), v)) + int(getattr(Expense.objects.get(id=35), v)) / 2),
+                                                                  property_size))
             elif proximity == 'Suburb' and property_size == 'Three Bedrooms':
                 cities_property_expense.append(
-                    CostPropertyResult(cities[i], rent_or_buy, getattr(Expense.objects.get(id=35), v), property_size))
+                    CostPropertyResult(rent_or_buy, getattr(Expense.objects.get(id=35), v), property_size))
         else:
             r = getattr(Expense.objects.get(id=18), v) / 1200
             n = 20 * 12
@@ -147,21 +148,21 @@ def cost_of_property_calculation(cities, proximity, rent_or_buy, property_size, 
                     down_payment_percent) / 100
                 p = (int(property_size) * int(getattr(Expense.objects.get(id=37), v))) - down
                 m = p * ((r * ((1 + r) ** n)) / ((1 + r) ** n - 1))
-                cities_property_expense.append(CostPropertyResult(cities[i], rent_or_buy, m, property_size))
+                cities_property_expense.append(CostPropertyResult(rent_or_buy, m, property_size))
             elif proximity == 'City Center':
                 down = (int(property_size) * int(getattr(Expense.objects.get(id=37), v))) * int(
                     down_payment_percent) / 100
                 p = int(property_size) * int(getattr(Expense.objects.get(id=36), v)) - down
                 m = p * ((r * ((1 + r) ** n)) / ((1 + r) ** n - 1))
-                cities_property_expense.append(CostPropertyResult(cities[i], rent_or_buy, m, property_size))
+                cities_property_expense.append(CostPropertyResult(rent_or_buy, m, property_size))
 
     return cities_property_expense
 
 
 # this function purely fetch data from DB, not using data pass from frontend.
-def cost_of_health_calculation(cities):
+def cost_of_health_calculation():
     health_care_city = []
-    for i, v in enumerate(cities):
+    for i, v in enumerate(selected_cities):
         health_care_city.append(
             HealthCareResult((getattr(Expense.objects.get(id=19), v)), (getattr(Expense.objects.get(id=20), v)),
                              (getattr(Expense.objects.get(id=21), v)), (getattr(Expense.objects.get(id=22), v)),
@@ -171,6 +172,3 @@ def cost_of_health_calculation(cities):
                              (getattr(Expense.objects.get(id=29), v)), (getattr(Expense.objects.get(id=30), v)),
                              (getattr(Expense.objects.get(id=31), v))))
     return health_care_city
-
-
-

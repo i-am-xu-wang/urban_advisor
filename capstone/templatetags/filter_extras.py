@@ -17,4 +17,12 @@ def generate_rating_qualifier(score):
         return "Very High"
 
 
+@register.filter(name='city_name')
+def generate_rating_qualifier(city):
+    if city == "sf":
+        return "Silicon Valley"
+    elif city == "dc":
+        return "Washington D.C."
+    else:
+        return city
 # register.filter('rating', generate_rating_qualifier)

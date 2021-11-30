@@ -1,7 +1,7 @@
 {% extends "capstone/base.html" %}
 {% block page-title %}Report Page{% endblock %}
 {% load static %}
- {% load humanize %}
+{% load humanize %}
 {% load filter_extras %}
 {% block content %}
     <link rel="stylesheet" type="text/css" href="{% static "css/report.css" %}?{% now "U" %}">
@@ -10,12 +10,12 @@
     <table id="cost-living" class="table">
         <tr>
             <th></th>
-            {% for city_result in cities_living_expense %}
-                <th>{{ city_result.city }}   </th>
+            {% for city_result in user_info.cities %}
+                <th>{{ city_result | city_name }}   </th>
             {% endfor %}
         </tr>
-        <tr class = "category">
-            <td class = "category-cell">
+        <tr class="category">
+            <td class="category-cell">
                 <div class="title">Restaurant:</div>
             </td>
         </tr>
@@ -40,7 +40,7 @@
                 </td>
             {% endfor %}
         </tr>
-            <tr>
+        <tr>
             <td>Estimated Smoking Expense:</td>
             {% for city_result in cities_living_expense %}
                 <td>
@@ -85,7 +85,7 @@
             </td>
             {% for city_result in cities_living_expense %}
                 <td>
-                    ${{ city_result.gas |floatformat:2|intcomma}}
+                    ${{ city_result.gas |floatformat:2|intcomma }}
                 </td>
             {% endfor %}
         </tr>
@@ -120,7 +120,7 @@
             </td>
             {% for city_result in cities_living_expense %}
                 <td>
-                    ${{ city_result.vacation |floatformat:2|intcomma}}
+                    ${{ city_result.vacation |floatformat:2|intcomma }}
                 </td>
             {% endfor %}
         </tr>
@@ -152,9 +152,9 @@
         <h2 class="report">Cost of Property Report</h2>
         <table id="cost-property" class="table">
             <tr>
-                <th class = "first-col"></th>
-                {% for city_result in cities_living_expense %}
-                    <th>{{ city_result.city }}   </th>
+                <th class="first-col"></th>
+                {% for city_result in user_info.cities %}
+                   <th>{{ city_result | city_name }}   </th>
                 {% endfor %}
             </tr>
             <tr>
@@ -168,11 +168,11 @@
                 <td>
                     {% if cities_property_expense.0.rent_or_buy == "Rent" %}
 
-                            For {{ cities_property_expense.0.property_size }} Apartment:
+                        For {{ cities_property_expense.0.property_size }} Apartment:
 
                     {% else %}
 
-                            For {{ cities_property_expense.0.property_size }} &#8202 sqft:
+                        For {{ cities_property_expense.0.property_size }} &#8202 sqft:
 
                     {% endif %}
                 </td>
@@ -185,7 +185,7 @@
                 </td>
                 {% for city_property in cities_property_expense %}
                     <td>
-                        ${{ city_property.monthly_payment |floatformat:2|intcomma}}
+                        ${{ city_property.monthly_payment |floatformat:2|intcomma }}
                     </td>
                 {% endfor %}
             </tr>
@@ -195,9 +195,9 @@
         <h2>Health Care Report</h2>
         <table id="health-care" class="table">
             <tr>
-                <th class = "first-col"></th>
-                {% for city_result in cities_living_expense %}
-                    <th>{{ city_result.city }}   </th>
+                <th class="first-col"></th>
+                {% for city_result in user_info.cities %}
+                    <th>{{ city_result | city_name }}   </th>
                 {% endfor %}
             </tr>
             <tr>
@@ -249,7 +249,8 @@
                 <td>Satisfaction with responsiveness (waiting time) in medical institutions</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        {{ city_health.satisfaction_responsiveness |floatformat:2 }} &#160 {{ city_health.satisfaction_responsiveness|rating }}
+                        {{ city_health.satisfaction_responsiveness |floatformat:2 }}
+                        &#160 {{ city_health.satisfaction_responsiveness|rating }}
                     </td>
                 {% endfor %}
             </tr>
@@ -257,7 +258,8 @@
                 <td>Satisfaction with cost to you</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        {{ city_health.satisfaction_cost |floatformat:2 }} &#160 {{ city_health.satisfaction_cost|rating }}
+                        {{ city_health.satisfaction_cost |floatformat:2 }}
+                        &#160 {{ city_health.satisfaction_cost|rating }}
                     </td>
                 {% endfor %}
             </tr>
