@@ -129,9 +129,15 @@ def register_user(cities, salary, feature_options: List[str]):
 # todo: return a list of overall quality_of_life_result
 def overall_quality_of_life(userInfo: UserInfo, living_expense: CostLivingResult, property_expense: CostPropertyResult):
     overall_quality_results = []
-    for city in selected_cities:
+    for i, city in enumerate (selected_cities):
         overall_quality_results.append(
-            OverallQualityResult(40, 30, 20, 10, 11, 12, 82)  # dummy data
+            OverallQualityResult(int(living_expense[i].total)/int(userInfo.salary),
+                                 int(property_expense[i].monthly_payment)/int(userInfo.salary),
+                                 (getattr(Expense.objects.get(id=72), city)),
+                                 (getattr(Expense.objects.get(id=70), city)),
+                                 (getattr(Expense.objects.get(id=71), city)),
+                                 (getattr(Expense.objects.get(id=77), city)),
+                                 82)  # dummy data
         )
     return overall_quality_results
 
@@ -230,7 +236,8 @@ def cost_of_property_calculation(proximity, rent_or_buy, property_size, down_pay
 def cost_of_child_care(daycare_number, private_school_number):
     child_care_city = []
     for city in selected_cities:
-        child_care_city.append(ChildCareResult(1000, 2000))
+        child_care_city.append(ChildCareResult(int(getattr(Expense.objects.get(id=54), city))*int(daycare_number),
+                                               int(getattr(Expense.objects.get(id=55), city))/12.0*int(private_school_number)))
     return child_care_city
 
 
@@ -254,7 +261,14 @@ def cost_of_crime_calculation():
     crime_city = []
     for city in selected_cities:
         crime_city.append(
-            CrimeSafetyResult(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15)
+            CrimeSafetyResult((getattr(Expense.objects.get(id=39), city)), (getattr(Expense.objects.get(id=40), city)),
+                              (getattr(Expense.objects.get(id=41), city)), (getattr(Expense.objects.get(id=42), city)),
+                              (getattr(Expense.objects.get(id=43), city)), (getattr(Expense.objects.get(id=44), city)),
+                              (getattr(Expense.objects.get(id=45), city)), (getattr(Expense.objects.get(id=46), city)),
+                              (getattr(Expense.objects.get(id=47), city)), (getattr(Expense.objects.get(id=48), city)),
+                              (getattr(Expense.objects.get(id=49), city)), (getattr(Expense.objects.get(id=50), city)),
+                              (getattr(Expense.objects.get(id=51), city)), (getattr(Expense.objects.get(id=52), city)),
+                              (getattr(Expense.objects.get(id=53), city)))
         )
     return crime_city
 
@@ -264,6 +278,8 @@ def food_option_calculation():
     food_city = []
     for city in selected_cities:
         food_city.append(
-            FoodResult(1, 2, 3, 4, 5)
+            FoodResult((getattr(Expense.objects.get(id=73), city)), (getattr(Expense.objects.get(id=74), city)),
+                       (getattr(Expense.objects.get(id=75), city)), (getattr(Expense.objects.get(id=76), city)),
+                       (getattr(Expense.objects.get(id=77), city)))
         )
     return food_city
