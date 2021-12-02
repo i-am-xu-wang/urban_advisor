@@ -169,7 +169,7 @@ $(document).ready(function () {
             salaryQuestion.addClass('alert alert-danger');
             valid = false;
             message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
-                '    <strong>Error!</strong> Please enter anticipated annual salary\n' +
+                '    <strong>Error!</strong> Please enter anticipated annual income\n' +
                 '</div>');
             salaryQuestion.before(message);
             errorScroll();
