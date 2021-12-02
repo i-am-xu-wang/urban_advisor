@@ -3,14 +3,14 @@
 {% load static %}
 
 {% block content %}
-    <h2>Welcome to Powerful Financial</h2>
+    <link rel="stylesheet" type="text/css" href="{% static "css/questionnaire.css" %}?{% now "U" %}">
+    <script src="{% static "js/questionnaire.js" %}"></script>
     <h4>Please answer the following questions for us to better evaluate your needs!</h4>
-    <strong>* = required</strong>
     <form id="cost-of-living-quiz" action="{% url "report" %}" method="post">
         {% csrf_token %}
         <!-- Cities options -->
         <div id="cities-checkboxes">
-            Cities to evaluate (at least one, maximum three)*:
+            Cities to evaluate (<span id="at-least-one">at least one</span>, <span id="maximum-three">maximum three</span>)*:  <span class = "note">* = required</span>
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6 col-md-4 p-1">
@@ -53,10 +53,14 @@
         </div>
         <!-- Checkbox options -->
         <div>
-            What are you looking for?
-            <input type="checkbox" id="cost-of-living-checkbox" name="feature-option" value="cost-living" style="display: none;" checked disabled />
+           <h4>What are you looking for?</h4>
+{#            <input type="checkbox" id="cost-of-living-checkbox" name="feature-option" value="cost-living" checked disabled />#}
             <div class="container">
                 <div class="row">
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                        <input type="checkbox" id="cost-of-living-checkbox" name="feature-option" value="cost-living" checked disabled/>
+                        <label for="cost-of-living-checkbox">Cost of Living</label>
+                    </div>
                     <div class="col-sm-6 col-md-4 col-lg-3">
                         <input type="checkbox" id="property-price-checkbox" name="feature-option" value="property"/>
                         <label for="property-price-checkbox">Property Price</label>
@@ -84,73 +88,77 @@
         <h4>Lifestyle Options</h4>
         <!-- Salary box -->
         <div id="salary-question">
-            <label for="salary">Anticipated annual salary (USD)*:</label>
-            <input type="number" id="salary" name="salary" placeholder="50,000"/>
+            <label class="form-label" for="salary">Anticipated annual income (USD)*:</label>
+            <div class="input-group-text">
+                <span class="input-group-text">$</span>
+                <input class="form-control" type="number" id="salary" name="salary" placeholder="50000"/>
+                <span class="input-group-text" id="salary-help">Numerals only</span>
+            </div>
         </div>
         <!-- Members of household options -->
         <div>
-            <label for="household-options">How many members are in your household:</label>
-            <select id="household-options" name="household-options">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5+</option>
+            <label class="form-label" for="household-options">How many members are in your household:</label>
+            <select class="form-select" id="household-options" name="household-options">
+                <option value="1">1 member</option>
+                <option value="2">2 members</option>
+                <option value="3">3 members</option>
+                <option value="4">4 members</option>
+                <option value="5">5+ members</option>
             </select>
         </div>
         <!-- Eating out options -->
         <div>
-            <label for="eating-out-options">How often do you eat meals at restaurants or get food delivered?</label>
-            <select id="eating-out-options" name="eating-out-options">
+            <label class="form-label" for="eating-out-options">How often do you eat meals at restaurants or get food delivered?</label>
+            <select class="form-select" id="eating-out-options" name="eating-out-options">
                 <option value="0">Never</option>
-                <option value="1">1 per week</option>
-                <option value="2">2 per week</option>
-                <option value="3">3 per week</option>
+                <option value="1">1 time per week</option>
+                <option value="2">2 times per week</option>
+                <option value="3">3 times per week</option>
                 <option value="4">4 times per week</option>
                 <option value="5">5+ times per week</option>
             </select>
         </div>
         <!-- Inexpensive restaurant options -->
         <div>
-            <label for="inexpensive-restaurant-options">How often do you choose expensive restaurants?</label>
-            <select id="inexpensive-restaurant-options" name="inexpensive-restaurant-options">
+            <label class="form-label" for="inexpensive-restaurant-options">How often do you choose expensive restaurants?</label>
+            <select class="form-select" id="inexpensive-restaurant-options" name="inexpensive-restaurant-options">
                 <option value="0">Never</option>
                 <option value="1">1 time per week</option>
-                <option value="2">2 time per week</option>
-                <option value="3">3 time per week</option>
-                <option value="4">4 time per week</option>
-                <option value="5">5+ time per week</option>
+                <option value="2">2 times per week</option>
+                <option value="3">3 times per week</option>
+                <option value="4">4 times per week</option>
+                <option value="5">5+ times per week</option>
             </select>
         </div>
         <!-- Coffee options -->
         <div>
-            <label for="coffee-options">How often do you get coffee?</label>
-            <select id="coffee-options" name="coffee-options">
+            <label class="form-label" for="coffee-options">How often do you get coffee?</label>
+            <select class="form-select" id="coffee-options" name="coffee-options">
                 <option value="0">Never</option>
                 <option value="1">1 time per week</option>
-                <option value="2">2 time per week</option>
-                <option value="3">3 time per week</option>
-                <option value="4">4 time per week</option>
-                <option value="5">5+ time per week</option>
+                <option value="2">2 times per week</option>
+                <option value="3">3 times per week</option>
+                <option value="4">4 times per week</option>
+                <option value="5">5+ times per week</option>
             </select>
         </div>
         <!-- Going out options -->
         <div>
-            <label for="going-out-options">How often do you pay for entertainment (movies/nightlife/etc)?</label>
-            <select id="going-out-options" name="going-out-options">
+            <label class="form-label" for="going-out-options">How often do you pay for entertainment (movies/nightlife/etc)?</label>
+            <select class="form-select" id="going-out-options" name="going-out-options">
                 <option value="0">Never</option>
                 <option value="1">1 time per week</option>
-                <option value="2">2 time per week</option>
-                <option value="3">3 time per week</option>
-                <option value="4">4 time per week</option>
-                <option value="5">5+ time per week</option>
+                <option value="2">2 times per week</option>
+                <option value="3">3 times per week</option>
+                <option value="4">4 times per week</option>
+                <option value="5">5+ times per week</option>
             </select>
         </div>
         <!-- Smoking options -->
         <!-- maybe take this one out since most people don't smoke? or change to 1, 2, 3 packs per week, 1 every two weeks or 1 every month like clothing question-->
         <div>
-            <label for="smoking-options">How many packs of cigarettes does your household smoke?</label>
-            <select id="smoking-options" name="smoking-options">
+            <label class="form-label" for="smoking-options">How many packs of cigarettes does your household smoke?</label>
+            <select class="form-select" id="smoking-options" name="smoking-options">
                 <option value="0">None</option>
                 <option value="1">1 pack per week</option>
                 <option value="2">2 packs per week</option>
@@ -161,8 +169,8 @@
         </div>
         <!-- Drinking options -->
         <div>
-            <label for="drinking-options">How often does your household drink alcohol?</label>
-            <select id="drinking-options" name="drinking-options">
+            <label class="form-label" for="drinking-options">How often does your household drink alcohol?</label>
+            <select class="form-select" id="drinking-options" name="drinking-options">
                 <option value="0">Never</option>
                 <option value="1">1 day per week</option>
                 <option value="2">2 days per week</option>
@@ -173,8 +181,8 @@
         </div>
         <!-- Driving options -->
         <div>
-            <label for="driving-options">How frequently do you drive?</label>
-            <select id="driving-options" name="driving-options">
+            <label class="form-label" for="driving-options">How frequently do you drive?</label>
+            <select class="form-select" id="driving-options" name="driving-options">
                 <option value="0">Never</option>
                 <option value="1">1 day per week</option>
                 <option value="2">2 days per week</option>
@@ -184,13 +192,16 @@
             </select>
         </div>
         <div id="when-driving">
-            <label for="driving-distance">How many miles do you drive per day?</label>
-            <input type="number" id="driving-distance" name="driving-distance" placeholder="0" value="0"/>
+            <label class="form-label" for="driving-distance">How many miles do you drive per day?</label>
+            <div class="input-group-text">
+                <input class="form-control" type="number" id="driving-distance" name="driving-distance" placeholder="0"/>
+                <span class="input-group-text">miles (numerals only)</span>
+            </div>
         </div>
         <!-- Rideshare options -->
         <div>
-            <label for="rideshare-options">How frequently do you use a taxi or rideshare app?</label>
-            <select id="rideshare-options" name="rideshare-options">
+            <label class="form-label" for="rideshare-options">How frequently do you use a taxi or rideshare app?</label>
+            <select class="form-select" id="rideshare-options" name="rideshare-options">
                 <option value="0">Never</option>
                 <option value="1">1 day per week</option>
                 <option value="2">2 days per week</option>
@@ -204,17 +215,17 @@
             Does your household use public transportation?
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-6 col-md-4">
-                        <input type="radio" id="public-monthly" name="public-transit-options" value="Monthly">
-                        <label for="public-monthly">Monthly Pass</label>
+                    <div class="col-auto form-check">
+                        <input type="radio" class="btn-check" name="public-transit-options" id="public-monthly" value="Monthly" autocomplete="off">
+                        <label class="btn btn-outline-success" for="public-monthly">Monthly Pass</label>
                     </div>
-                    <div class="col-sm-6 col-md-4">
-                        <input type="radio" id="public-on-demand" name="public-transit-options" value="On Demand Tickets">
-                        <label for="public-on-demand">On Demand Tickets</label>
+                    <div class="col-auto form-check">
+                        <input type="radio" class="btn-check" name="public-transit-options" id="public-on-demand" value="On Demand Tickets" autocomplete="off">
+                        <label class="btn btn-outline-success" for="public-on-demand">On Demand Tickets</label>
                     </div>
-                    <div class="col-sm-6 col-md-4">
-                        <input type="radio" id="public-no" name="public-transit-options" value="No" checked>
-                        <label for="public-no">No</label>
+                    <div class="col-auto form-check">
+                        <input type="radio" class="btn-check" name="public-transit-options" id="public-no" value="No" autocomplete="off" checked>
+                        <label class="btn btn-outline-success" for="public-no">No</label>
                     </div>
                 </div>
             </div>
@@ -223,56 +234,60 @@
         <!-- Display the following two options dynamically
         depending on which radio button the user selects above -->
         <div id="when-public-monthly">
-            <label for="public-transit-members">How many members of your household use a monthly public transportation
+            <label class="form-label" for="public-transit-members">How many members of your household use a monthly public transportation
                 pass?</label>
-            <select id="public-transit-members" name="public-transit-members">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5+</option>
+            <select class="form-select" id="public-transit-members" name="public-transit-members">
+                <option value="1">1 member</option>
+                <option value="2">2 members</option>
+                <option value="3">3 members</option>
+                <option value="4">4 members</option>
+                <option value="5">5+ members</option>
             </select>
         </div>
         <div id="when-public-on-demand">
-            <label for="public-transit-trips">How many times per week does someone in your household take public
+            <label class="form-label" for="public-transit-trips">How many times per week does someone in your household take public
                 transportation?</label>
-            <select id="public-transit-trips" name="public-transit-trips">
+            <select class="form-select" id="public-transit-trips" name="public-transit-trips">
                 <option value="1">1 time per week</option>
-                <option value="2">2 time per week</option>
-                <option value="3">3 time per week</option>
-                <option value="4">4 time per week</option>
-                <option value="5">5+ time per week</option>
+                <option value="2">2 times per week</option>
+                <option value="3">3 times per week</option>
+                <option value="4">4 times per week</option>
+                <option value="5">5+ times per week</option>
             </select>
         </div>
 
         <!-- Gym options -->
         <div>
-            <label for="gym-options">How many members of your household have a gym membership?</label>
-            <select id="gym-options" name="gym-options">
+            <label class="form-label" for="gym-options">How many members of your household have a gym membership?</label>
+            <select class="form-select" id="gym-options" name="gym-options">
                 <option value="0">None</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5+</option>
+                <option value="1">1 member</option>
+                <option value="2">2 members</option>
+                <option value="3">3 members</option>
+                <option value="4">4 members</option>
+                <option value="5">5+ members</option>
             </select>
         </div>
         <!-- Vacation spending -->
         <div id="vacation-spending-question">
-            <label for="vacation-spending">How much money do you spend on vacations per year?*</label>
-            <input type="number" id="vacation-spending" name="vacation-spending" placeholder="2,000"/>
+            <label class="form-label" for="vacation-spending">How much money do you spend on vacations per year?*</label>
+            <div class="input-group-text">
+                <span class="input-group-text">$</span>
+                <input class="form-control" aria-describedby="vacation-spending-help" type="number" id="vacation-spending" name="vacation-spending" placeholder="2000"/>
+                <span class="input-group-text" id="vacaation-spending-help">Numerals only</span>
+            </div>
         </div>
         <!-- Clothing options -->
         <!-- maybe have 1, 2, 3 times per week, every 2 weeks, and once a month------------------------------------------------->
         <div>
-            <label for="clothing-options">How often do you buy new clothing/shoes?</label>
-            <select id="clothing-options" name="clothing-options">
-                <option value="0">Not every week</option>
-                <option value="1">1 time per week</option>
-                <option value="2">2 time per week</option>
-                <option value="3">3 time per week</option>
-                <option value="4">4 time per week</option>
-                <option value="5">5+ time per week</option>
+            <label class="form-label" for="clothing-options">How often do you buy new clothing/shoes?</label>
+            <select class="form-select" id="clothing-options" name="clothing-options">
+                <option value="0">Not every month</option>
+                <option value="1">1 time per month</option>
+                <option value="2">2 times per month</option>
+                <option value="3">3 times per month</option>
+                <option value="4">4 times per month</option>
+                <option value="5">5+ times per month</option>
             </select>
         </div>
 
@@ -282,19 +297,35 @@
             <!-- City proximity options -->
             <div id="city-proximity-options">
                 Where are you looking to live?*
-                <input type="radio" id="city-center" name="city-proximity-options" value="City Center" >
-                <label for="city-center">Inside City Center</label>
-                <input type="radio" id="suburb" name="city-proximity-options" value="Suburb">
-                <label for="suburb">Outside of City Center</label>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-auto form-check">
+                            <input type="radio" class="btn-check" id="city-center" name="city-proximity-options" value="City Center" >
+                            <label class="btn btn-outline-success" for="city-center">Inside City Center</label>
+                        </div>
+                        <div class="col-auto form-check">
+                            <input type="radio" class="btn-check" id="suburb" name="city-proximity-options" value="Suburb">
+                            <label class="btn btn-outline-success" for="suburb">Outside of City Center</label>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Rent or buy options -->
             <div id="rent-or-buy-options">
                 Do you plan to rent or buy?*
-                <input type="radio" id="rent" name="rent-or-buy-options" value="Rent" >
-                <label for="rent">Rent</label>
-                <input type="radio" id="buy" name="rent-or-buy-options" value="Buy">
-                <label for="buy">Buy</label>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-auto form-check">
+                            <input type="radio" class="btn-check" id="rent" name="rent-or-buy-options" value="Rent" >
+                            <label class="btn btn-outline-success" for="rent">Rent</label>
+                        </div>
+                        <div class="col-auto form-check">
+                            <input type="radio" class="btn-check" id="buy" name="rent-or-buy-options" value="Buy">
+                            <label class="btn btn-outline-success" for="buy">Buy</label>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Rent question -->
@@ -302,17 +333,17 @@
                 How many bedrooms are you looking for in your rental property?*
                 <div class="container">
                     <div class="row">
-                        <div class="col-sm-6 col-md-4">
-                            <input type="radio" id="one-bedroom" name="rental-bedroom-options" value="One Bedroom" >
-                            <label for="one-bedroom">1 bedroom</label>
+                        <div class="col-auto">
+                            <input type="radio" class="btn-check" id="one-bedroom" name="rental-bedroom-options" value="One Bedroom" >
+                            <label class="btn btn-outline-success" for="one-bedroom">1 bedroom</label>
                         </div>
-                        <div class="col-sm-6 col-md-4">
-                            <input type="radio" id="two-bedrooms" name="rental-bedroom-options" value="Two Bedrooms">
-                            <label for="two-bedrooms">2 bedrooms</label>
+                        <div class="col-auto">
+                            <input type="radio" class="btn-check" id="two-bedrooms" name="rental-bedroom-options" value="Two Bedrooms">
+                            <label class="btn btn-outline-success" for="two-bedrooms">2 bedrooms</label>
                         </div>
-                        <div class="col-sm-6 col-md-4">
-                            <input type="radio" id="three-bedrooms" name="rental-bedroom-options" value="Three Bedrooms">
-                            <label for="three-bedrooms">3+ bedrooms</label>
+                        <div class="col-auto">
+                            <input type="radio" class="btn-check" id="three-bedrooms" name="rental-bedroom-options" value="Three Bedrooms">
+                            <label class="btn btn-outline-success" for="three-bedrooms">3+ bedrooms</label>
                         </div>
                     </div>
                 </div>
@@ -321,12 +352,18 @@
             <!-- Buy questions -->
             <div id="buy-questions">
                 <div id="buy-square-footage-question">
-                    <label for="buy-square-footage">How many square feet are you looking to buy?*</label>
-                    <input type="number" id="buy-square-footage" name="buy-square-footage" placeholder="2,000">
+                    <label class="form-label" for="buy-square-footage">How many square feet are you looking to buy?*</label>
+                    <div class="input-group-text">
+                        <input class="form-control" type="number" id="buy-square-footage" name="buy-square-footage" placeholder="2,000">
+                        <span class="input-group-text">sq ft. (numerals only)</span>
+                    </div>
                 </div>
                 <div id="down-payment-question">
-                    <label for="down-payment">How much are you prepared to pay as a down payment?*</label>
-                    <input type="number" id="down-payment" name="down-payment" placeholder="10" > %
+                    <label class="form-label" for="down-payment">How much are you prepared to pay as a down payment?*</label>
+                    <div class="input-group-text">
+                        <input class="form-control" type="number" id="down-payment" name="down-payment" placeholder="10" >
+                        <span class="input-group-text">% (numerals only)</span>
+                    </div>
                 </div>
             </div>
             <!--Add more questions here-->
@@ -335,8 +372,8 @@
         <div id="childcare-options">
             <h4>Childcare Options</h4>
             <div id="daycare-question">
-                <label for="daycare-number">Number of children going to daycare:</label>
-                <select id="daycare-numbers" name="daycare-numbers">
+                <label class="form-label" for="daycare-numbers">Number of children going to daycare:</label>
+                <select class="form-select" id="daycare-numbers" name="daycare-numbers">
                     <option value="0">0 children</option>
                     <option value="1">1 child</option>
                     <option value="2">2 children</option>
@@ -346,8 +383,8 @@
                 </select>
             </div>
             <div id="private-school-question">
-                <label for="daycare-number">Number of children going to private school:</label>
-                <select id="private-school-numbers" name="private-school-numbers">
+                <label class="form-label" for="private-school-numbers">Number of children going to private school:</label>
+                <select class="form-select" id="private-school-numbers" name="private-school-numbers">
                     <option value="0">0 children</option>
                     <option value="1">1 child</option>
                     <option value="2">2 children</option>
@@ -357,6 +394,6 @@
                 </select>
             </div>
         </div>
-     <input type="button" onClick="submitForms()" id="submit-button" name="submit-button" value="Submit">
+     <input class="btn btn-success" type="button" onClick="submitForms()" id="submit-button" name="submit-button" value="Submit">
     </form>
 {% endblock %}

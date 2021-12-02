@@ -7,6 +7,14 @@ def index_page(request):
     return render(request, "capstone/questionnaire.html", )
 
 
+def about_us(request):
+    return render(request, "capstone/about-us.html")
+
+
+def methodology_page(request):
+    return render(request, "capstone/methodology.html")
+
+
 def register_form(request):
     # for registering user info
     feature_options = request.POST.getlist('feature-option')

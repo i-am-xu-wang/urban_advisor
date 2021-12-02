@@ -1,0 +1,19 @@
+#cost-of-living-quiz > div,
+#transit-options > div,
+#property-price-options > div,
+#city-proximity-options > div,
+#rent-or-buy-options > div,
+#rent-questions > div,
+#buy-questions > div,
+#childcare-options > div {
+    margin: 10px 0 10px 0;
+}
+
+h4{
+    margin-top: 20px;
+}
+span.note{
+    color: gray;
+    font-size: small;
+    margin-left: 200px;
+}
