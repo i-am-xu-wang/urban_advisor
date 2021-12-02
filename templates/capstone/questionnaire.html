@@ -5,14 +5,12 @@
 {% block content %}
     <link rel="stylesheet" type="text/css" href="{% static "css/questionnaire.css" %}?{% now "U" %}">
     <script src="{% static "js/questionnaire.js" %}"></script>
-    <h2>Welcome to Powerful Financial</h2>
     <h4>Please answer the following questions for us to better evaluate your needs!</h4>
-    <strong>* = required</strong>
     <form id="cost-of-living-quiz" action="{% url "report" %}" method="post">
         {% csrf_token %}
         <!-- Cities options -->
         <div id="cities-checkboxes">
-            Cities to evaluate (<span id="at-least-one">at least one</span>, <span id="maximum-three">maximum three</span>)*:
+            Cities to evaluate (<span id="at-least-one">at least one</span>, <span id="maximum-three">maximum three</span>)*:  <span class = "note">* = required</span>
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6 col-md-4 p-1">
@@ -55,10 +53,14 @@
         </div>
         <!-- Checkbox options -->
         <div>
-            What are you looking for?
-            <input type="checkbox" id="cost-of-living-checkbox" name="feature-option" value="cost-living" style="display: none;" checked disabled />
+           <h4>What are you looking for?</h4>
+{#            <input type="checkbox" id="cost-of-living-checkbox" name="feature-option" value="cost-living" checked disabled />#}
             <div class="container">
                 <div class="row">
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                        <input type="checkbox" id="cost-of-living-checkbox" name="feature-option" value="cost-living" checked disabled/>
+                        <label for="cost-of-living-checkbox">Cost of Living</label>
+                    </div>
                     <div class="col-sm-6 col-md-4 col-lg-3">
                         <input type="checkbox" id="property-price-checkbox" name="feature-option" value="property"/>
                         <label for="property-price-checkbox">Property Price</label>

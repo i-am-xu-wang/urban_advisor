@@ -23,6 +23,7 @@ header {
     border-bottom-style: groove;
     border-color: whitesmoke;
     border-width: 2px;
+    justify-content: space-between;
 }
 
 select {
@@ -31,6 +32,7 @@ select {
 
 #left-header {
     width: 100px;
+    margin-bottom: 10px;
 }
 
 #header-logo {
