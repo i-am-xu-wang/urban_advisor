@@ -19,6 +19,7 @@ header {
     margin-left: 20px;
     display: flex;
     flex-direction: row;
+    gap: 1em;
     border-bottom-style: groove;
     border-color: whitesmoke;
     border-width: 2px;
@@ -32,16 +33,13 @@ select {
     width: 100px;
 }
 
-label {
-    padding-top: 0.5em;
-}
-
 #header-logo {
     max-width: 100%;
 }
 
 #mid-header {
     text-align: center;
+    align-self: center;
 }
 
 #header-text a {
@@ -61,7 +59,14 @@ main {
 margin: 0 30px;
 }
 
-#cost-of-living-quiz > div {
+#cost-of-living-quiz > div,
+#transit-options > div,
+#property-price-options > div,
+#city-proximity-options > div,
+#rent-or-buy-options > div,
+#rent-questions > div,
+#buy-questions > div,
+#childcare-options > div {
     margin: 10px 0 10px 0;
 }
 
