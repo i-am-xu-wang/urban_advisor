@@ -49,6 +49,7 @@ class CostPropertyResult:
     rent_or_buy: str
     monthly_payment: float
     property_size: str
+    proximity: str
 
 
 @dataclass
@@ -184,24 +185,24 @@ def cost_of_property_calculation(proximity, rent_or_buy, property_size, down_pay
         if rent_or_buy == "Rent":
             if proximity == 'City Center' and property_size == 'One Bedroom':
                 cities_property_expense.append(
-                    CostPropertyResult(rent_or_buy, getattr(Expense.objects.get(id=32), v), property_size))
+                    CostPropertyResult(rent_or_buy, getattr(Expense.objects.get(id=32), v), property_size, proximity))
             elif proximity == 'City Center' and property_size == 'Two Bedrooms':
                 cities_property_expense.append(CostPropertyResult(rent_or_buy, (
                         int(getattr(Expense.objects.get(id=32), v)) + int(getattr(Expense.objects.get(id=34), v)) / 2),
                                                                   property_size))
             elif proximity == 'City Center' and property_size == 'Three Bedrooms':
                 cities_property_expense.append(
-                    CostPropertyResult(rent_or_buy, getattr(Expense.objects.get(id=34), v), property_size))
+                    CostPropertyResult(rent_or_buy, getattr(Expense.objects.get(id=34), v), property_size, proximity))
             elif proximity == 'Suburb' and property_size == 'One Bedroom':
                 cities_property_expense.append(
-                    CostPropertyResult(rent_or_buy, getattr(Expense.objects.get(id=33), v), property_size))
+                    CostPropertyResult(rent_or_buy, getattr(Expense.objects.get(id=33), v), property_size, proximity))
             elif proximity == 'Suburb' and property_size == 'Two Bedrooms':
                 cities_property_expense.append(CostPropertyResult(rent_or_buy, (
                         int(getattr(Expense.objects.get(id=33), v)) + int(getattr(Expense.objects.get(id=35), v)) / 2),
-                                                                  property_size))
+                                                                  property_size, proximity))
             elif proximity == 'Suburb' and property_size == 'Three Bedrooms':
                 cities_property_expense.append(
-                    CostPropertyResult(rent_or_buy, getattr(Expense.objects.get(id=35), v), property_size))
+                    CostPropertyResult(rent_or_buy, getattr(Expense.objects.get(id=35), v), property_size, proximity))
         else:
             r = getattr(Expense.objects.get(id=18), v) / 1200
             n = 20 * 12
@@ -210,13 +211,13 @@ def cost_of_property_calculation(proximity, rent_or_buy, property_size, down_pay
                     down_payment_percent) / 100
                 p = (int(property_size) * int(getattr(Expense.objects.get(id=37), v))) - down
                 m = p * ((r * ((1 + r) ** n)) / ((1 + r) ** n - 1))
-                cities_property_expense.append(CostPropertyResult(rent_or_buy, m, property_size))
+                cities_property_expense.append(CostPropertyResult(rent_or_buy, m, property_size, proximity))
             elif proximity == 'City Center':
                 down = (int(property_size) * int(getattr(Expense.objects.get(id=37), v))) * int(
                     down_payment_percent) / 100
                 p = int(property_size) * int(getattr(Expense.objects.get(id=36), v)) - down
                 m = p * ((r * ((1 + r) ** n)) / ((1 + r) ** n - 1))
-                cities_property_expense.append(CostPropertyResult(rent_or_buy, m, property_size))
+                cities_property_expense.append(CostPropertyResult(rent_or_buy, m, property_size, proximity))
 
     return cities_property_expense
 

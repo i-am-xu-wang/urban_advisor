@@ -258,10 +258,11 @@
             <tr>
             <td colspan="4">
                 {% if cities_property_expense.0.rent_or_buy == "Rent" %}
-                    To <strong>Rent</strong> a {{ cities_property_expense.0.property_size }} Apartment:
+                    To <strong>Rent</strong> a {{ cities_property_expense.0.property_size }} Apartment
                 {% else %}
-                    To <strong>Buy</strong> a {{ cities_property_expense.0.property_size }} sqft property:
+                    To <strong>Buy</strong> a {{ cities_property_expense.0.property_size }} Square Foot Property
                 {% endif %}
+                 in {{ cities_property_expense.0.proximity }}:
             </td>
             </tr>
             <tr>

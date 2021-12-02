@@ -10,16 +10,61 @@ $(document).ready(function () {
 
     const childcareOptions = document.getElementById('childcare-options')
 
-    driveDistance.style.display = 'none';
+    toggleDrivingOptions = function() {
+        if ($('#driving-options').val() === '0') {
+            driveDistance.style.display = 'none';
+        } else{
+            driveDistance.style.display = 'block';
+        }
+    }
 
-    monthlyOptions.style.display = 'none';
-    onDemandOptions.style.display = 'none';
+    togglePublicTransport = function() {
+        if ($('#public-monthly').is(":checked")) {
+            monthlyOptions.style.display = 'block';
+            onDemandOptions.style.display = 'none';
+        } else if ($('#public-on-demand').is(":checked")) {
+            monthlyOptions.style.display = 'none';
+            onDemandOptions.style.display = 'block';
+        } else {
+            monthlyOptions.style.display = 'none';
+            onDemandOptions.style.display = 'none';
+        }
+    }
 
-    propertyPriceOptions.style.display = 'none';
-    rentQuestions.style.display = 'none';
-    buyQuestions.style.display = 'none';
+    toggleProperty = function() {
+        if ($('#property-price-checkbox').is(":checked")) {
+            propertyPriceOptions.style.display = 'block'
+        } else{
+            propertyPriceOptions.style.display = 'none'
+        }
+    }
 
-    childcareOptions.style.display = 'none';
+    toggleRentOrBuy = function() {
+        if ($('#rent').is(":checked")) {
+            rentQuestions.style.display = 'block';
+            buyQuestions.style.display = 'none';
+        } else if ($('#buy').is(":checked")) {
+            rentQuestions.style.display = 'none';
+            buyQuestions.style.display = 'block';
+        } else {
+            rentQuestions.style.display = 'none';
+            buyQuestions.style.display = 'none';
+        }
+    }
+
+    toggleChildcare = function() {
+        if ($('#childcare-checkbox').is(":checked")) {
+            childcareOptions.style.display = 'block'
+        } else{
+            childcareOptions.style.display = 'none'
+        }
+    }
+
+    toggleDrivingOptions();
+    togglePublicTransport();
+    toggleProperty();
+    toggleRentOrBuy();
+    toggleChildcare();
 
     $('#cities-checkboxes :checkbox').change(function () {
         var $cs = $(this).closest('#cities-checkboxes').find(':checkbox:checked');
@@ -29,73 +74,35 @@ $(document).ready(function () {
     });
 
     $('#driving-options').change(function () {
-        if ($('#driving-options').val() === '0') {
-            driveDistance.style.display = 'none';
-        } else{
-            driveDistance.style.display = 'block';
-        }
+        toggleDrivingOptions();
     })
 
     $('#public-monthly').click(function () {
-        console.log('monthly display')
-        if (onDemandOptions) {
-            onDemandOptions.style.display = 'none'
-        }
-        monthlyOptions.style.display = 'block'
+        togglePublicTransport();
     })
+
     $('#public-on-demand').click(function () {
-        console.log('on demand display')
-        if (monthlyOptions) {
-            monthlyOptions.style.display = 'none'
-        }
-        onDemandOptions.style.display = 'block'
+        togglePublicTransport();
     })
+
     $('#public-no').click(function () {
-        console.log('none display')
-        if (onDemandOptions) {
-            onDemandOptions.style.display = 'none'
-        }
-        if (monthlyOptions) {
-            monthlyOptions.style.display = 'none'
-        }
+        togglePublicTransport();
     })
 
     $('#property-price-checkbox').click(function () {
-        console.log("clicked it!")
-        if ($(this).is(":checked")) {
-            console.log("it's checked now!")
-            propertyPriceOptions.style.display = 'block'
-        } else{
-            console.log("it's not checked...")
-            propertyPriceOptions.style.display = 'none'
-        }
+        toggleProperty();
     })
 
     $('#rent').click(function () {
-        console.log("selected rent!")
-        if (buyQuestions) {
-            buyQuestions.style.display = 'none'
-        }
-        rentQuestions.style.display = 'block'
+        toggleRentOrBuy();
     })
 
     $('#buy').click(function () {
-        console.log("selected buy!")
-        if (rentQuestions) {
-            rentQuestions.style.display = 'none'
-        }
-        buyQuestions.style.display = 'block'
+        toggleRentOrBuy();
     })
 
     $('#childcare-checkbox').click(function () {
-        console.log("clicked it!")
-        if ($(this).is(":checked")) {
-            console.log("it's checked now!")
-            childcareOptions.style.display = 'block'
-        } else{
-            console.log("it's not checked...")
-            childcareOptions.style.display = 'none'
-        }
+        toggleChildcare();
     })
 
     submitForms = function() {
@@ -123,14 +130,14 @@ $(document).ready(function () {
                 '</div>')
             $('#submit-button').after(message)
         } else if ($('input[name="salary"]').val() === "") {
-            $('#salary').addClass('alert alert-danger');
+            $('#salary-question').addClass('alert alert-danger');
             valid = false;
             message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
                 '    <strong>Error!</strong> Please enter anticipated annual salary\n' +
                 '</div>')
             $('#submit-button').after(message)
         } else if ($('input[name="vacation-spending"]').val() === "") {
-            $('#vacation-spending').addClass('alert alert-danger');
+            $('#vacation-spending-question').addClass('alert alert-danger');
             valid = false;
             message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
                 '    <strong>Error!</strong> Please enter vacation spending\n' +
@@ -166,24 +173,27 @@ $(document).ready(function () {
                         }
                     } else {
                         if ($('input[name="buy-square-footage"]').val() === "") {
-                            $('#buy-square-footage').addClass('alert alert-danger');
+                            $('#buy-square-footage-question').addClass('alert alert-danger');
                             valid = false;
                             message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
                                 '    <strong>Error!</strong> Please enter desired square footage\n' +
                                 '</div>')
                             $('#submit-button').after(message)
+                        } else if ($('input[name="down-payment"]').val() === "") {
+                            $('#down-payment-question').addClass('alert alert-danger');
+                            valid = false;
+                            message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
+                                '    <strong>Error!</strong> Please enter desired down payment\n' +
+                                '</div>')
+                            $('#submit-button').after(message)
                         }
                     }
                 }
-                console.log("passed the checks!")
-                //document.getElementById('property-price-quiz').submit();
-                console.log("submitted property price quiz")
             }
             if (valid) {
                 document.getElementById('cost-of-living-quiz').submit();
                 console.log("submitted cost of living quiz")
             }
         }
-        console.log("done executing submitForms")
     }
 })

@@ -77,7 +77,7 @@
         <!-- Lifestyle options -->
         <h4>Lifestyle Options</h4>
         <!-- Salary box -->
-        <div>
+        <div id="salary-question">
             <label for="salary">Anticipated annual salary (USD)*:</label>
             <input type="number" id="salary" name="salary" placeholder="50,000"/>
         </div>
@@ -252,7 +252,7 @@
             </select>
         </div>
         <!-- Vacation spending -->
-        <div>
+        <div id="vacation-spending-question">
             <label for="vacation-spending">How much money do you spend on vacations per year?*</label>
             <input type="number" id="vacation-spending" name="vacation-spending" placeholder="2,000"/>
         </div>
@@ -314,10 +314,14 @@
 
             <!-- Buy questions -->
             <div id="buy-questions">
-                <label for="buy-square-footage">How many square feet are you looking to buy?*</label>
-                <input type="number" id="buy-square-footage" name="buy-square-footage" placeholder="2,000">
-                <label for="buy-square-footage">How much you prepare for down payment?</label>
-                <input type="number" id="buy-square-footage" name="down-payment" placeholder="10" > %
+                <div id="buy-square-footage-question">
+                    <label for="buy-square-footage">How many square feet are you looking to buy?*</label>
+                    <input type="number" id="buy-square-footage" name="buy-square-footage" placeholder="2,000">
+                </div>
+                <div id="down-payment-question">
+                    <label for="down-payment">How much are you prepared to pay as a down payment?*</label>
+                    <input type="number" id="down-payment" name="down-payment" placeholder="10" > %
+                </div>
             </div>
             <!--Add more questions here-->
         </div>
