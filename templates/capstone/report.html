@@ -13,14 +13,17 @@
                 than the average
                 salary in {{ city_result | city_name }}. </p>
         {% endfor %}
-        <h2>Overall Quality of Life</h2>
-        <table class="table">
+        <h2 class="report">Overall Quality of Life</h2>
+        <table id="index-table" class="table table-hover table-responsive">
+        <thead>
             <tr>
                 <th class="first-col"></th>
                 {% for city_result in user_info.cities %}
                     <th>{{ city_result | city_name }}   </th>
                 {% endfor %}
             </tr>
+        </thead>
+        <tbody>
             <tr>
                 <td>Cost of Living to Income Ratio:</td>
                 {% for city_quality in overall_quality %}
@@ -85,19 +88,23 @@
                     </td>
                 {% endfor %}
             </tr>
+        </tbody>
         </table>
 
     </div>
-    <h2>Cost of Living Report (Monthly)</h2>
-    <table id="cost-living" class="table">
+    <h2 class="report">Cost of Living Report (Monthly)</h2>
+    <table id="cost-living" class="table table-hover table-responsive">
+    <thead>
         <tr>
             <th></th>
             {% for city_result in user_info.cities %}
                 <th>{{ city_result | city_name }}   </th>
             {% endfor %}
         </tr>
-        <tr class="category">
-            <td class="category-cell">
+    </thead>
+    <tbody>
+        <tr>
+            <td colspan="4">
                 <div class="title">Restaurant:</div>
             </td>
         </tr>
@@ -110,12 +117,9 @@
             {% endfor %}
         </tr>
         <tr>
-            <td>
+            <td colspan="4">
                 <div class="title">Grocery:</div>
             </td>
-            <td></td>
-            <td></td>
-            <td></td>
         </tr>
         <tr>
             <td>Estimated Grocery Expense:</td>
@@ -142,12 +146,9 @@
             {% endfor %}
         </tr>
         <tr>
-            <td>
+            <td colspan="4">
                 <div class="title">Transportation:</div>
             </td>
-            <td></td>
-            <td></td>
-            <td></td>
         </tr>
         <tr>
             <td>Estimated Public Transportation Expense:</td>
@@ -178,12 +179,9 @@
             {% endfor %}
         </tr>
         <tr>
-            <td>
+            <td colspan="4">
                 <div class="title">Entertainment:</div>
             </td>
-            <td></td>
-            <td></td>
-            <td></td>
         </tr>
         <tr>
             <td>
@@ -216,12 +214,9 @@
             {% endfor %}
         </tr>
         <tr>
-            <td>
+            <td colspan="4">
                 <div class="title">Shopping Spending:</div>
             </td>
-            <td></td>
-            <td></td>
-            <td></td>
         </tr>
         <tr>
             <td>Estimated Shopping Spending:</td>
@@ -232,8 +227,13 @@
             {% endfor %}
         </tr>
         <tr>
+            <td colspan="4">
+                <div class="title">Total:</div>
+            </td>
+        </tr>
+        <tr>
             <td>
-                <div class="title">Total Household Estimated Spending:</div>
+                Total Household Estimated Spending:
             </td>
             {% for city_result in cities_living_expense %}
                 <td>
@@ -241,41 +241,28 @@
                 </td>
             {% endfor %}
         </tr>
+    </tbody>
     </table>
     {% if user_info.property_option %}
         <h2 class="report">Cost of Property Report</h2>
-        <table id="cost-property" class="table">
+        <table id="cost-property" class="table table-hover table-responsive">
+        <thead>
             <tr>
                 <th class="first-col"></th>
                 {% for city_result in user_info.cities %}
                     <th>{{ city_result | city_name }}   </th>
                 {% endfor %}
             </tr>
+        </thead>
+        <tbody>
             <tr>
+            <td colspan="4">
                 {% if cities_property_expense.0.rent_or_buy == "Rent" %}
-                    <td>You have chosen the <strong>Rent</strong> &#8202 option</td>
-
+                    To <strong>Rent</strong> a {{ cities_property_expense.0.property_size }} Apartment:
                 {% else %}
-                    <td> You have choose the <strong>Buy</strong> &#8202 option:</td>
+                    To <strong>Buy</strong> a {{ cities_property_expense.0.property_size }} sqft property:
                 {% endif %}
-
-            </tr>
-            <tr>
-                <td>
-                    {% if cities_property_expense.0.rent_or_buy == "Rent" %}
-
-                        For {{ cities_property_expense.0.property_size }} Apartment:
-
-                    {% else %}
-
-                        For {{ cities_property_expense.0.property_size }} &#8202 sqft:
-
-                    {% endif %}
-                </td>
-                <td></td>
-                <td></td>
-                <td></td>
-
+            </td>
             </tr>
             <tr>
                 <td>Estimated Monthly Payment:
@@ -289,11 +276,12 @@
                     </td>
                 {% endfor %}
             </tr>
+        </tbody>
         </table>
     {% endif %}
     {% if user_info.childcare %}
-        <h2>Cost of Child Care Report</h2>
-        <table id="child-care" class="table">
+        <h2 class="report">Cost of Child Care Report</h2>
+        <table id="child-care" class="table table-hover table-responsive">
             <tr>
                 <th class="first-col"></th>
                 {% for city_result in user_info.cities %}
@@ -322,8 +310,8 @@
         </table>
     {% endif %}
     {% if user_info.healthcare %}
-        <h2>Health Care Report</h2>
-        <table id="health-care" class="table">
+        <h2 class="report">Health Care Report</h2>
+        <table id="health-care" class="table table-hover table-responsive">
             <tr>
                 <th class="first-col"></th>
                 {% for city_result in user_info.cities %}
@@ -331,83 +319,78 @@
                 {% endfor %}
             </tr>
             <tr>
-                <td>
-                    <div class="title">Healthcare Quality(%):</div>
+                <td colspan="4">
+                    <div class="title">Healthcare Quality (%):</div>
                 </td>
             </tr>
             <tr>
-                <td>Skill and competency of medical staff:</td>
+                <td>Medical Staff Skill/Competency:</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        {{ city_health.skill |floatformat:2 }} &#160 {{ city_health.skill|rating }}
+                        {{ city_health.skill |floatformat:2 }}<br/>{{ city_health.skill|rating }}
                     </td>
                 {% endfor %}
             </tr>
             <tr>
-                <td>Speed in completing examination and reports</td>
+                <td>Examination and Reporting Speed</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        {{ city_health.speed |floatformat:2 }} &#160 {{ city_health.speed|rating }}
+                        {{ city_health.speed |floatformat:2 }}<br/>{{ city_health.speed|rating }}
                     </td>
                 {% endfor %}
             </tr>
             <tr>
-                <td>Equipment for modern diagnosis and treatment</td>
+                <td>Modern Equipment</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        {{ city_health.equipment |floatformat:2 }} &#160 {{ city_health.equipment|rating }}
+                        {{ city_health.equipment |floatformat:2 }}<br/>{{ city_health.equipment|rating }}
                     </td>
                 {% endfor %}
             </tr>
             <tr>
-                <td>Accuracy and completeness in filling out reports</td>
+                <td>Report Accuracy/Completeness</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        {{ city_health.accuracy |floatformat:2 }} &#160 {{ city_health.accuracy|rating }}
+                        {{ city_health.accuracy |floatformat:2 }}<br/>{{ city_health.accuracy|rating }}
                     </td>
                 {% endfor %}
             </tr>
             <tr>
-                <td>Friendliness and courtesy of the staff</td>
+                <td>Staff Friendliness/Courtesy</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        {{ city_health.friendliness |floatformat:2 }} &#160 {{ city_health.friendliness|rating }}
+                        {{ city_health.friendliness |floatformat:2 }}<br/>{{ city_health.friendliness|rating }}
                     </td>
                 {% endfor %}
             </tr>
             <tr>
-                <td>Satisfaction with responsiveness (waiting time) in medical institutions</td>
+                <td>Reasonable Responsiveness/Waiting Times</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        {{ city_health.satisfaction_responsiveness |floatformat:2 }}
-                        &#160 {{ city_health.satisfaction_responsiveness|rating }}
+                        {{ city_health.satisfaction_responsiveness |floatformat:2 }}<br/>{{ city_health.satisfaction_responsiveness|rating }}
                     </td>
                 {% endfor %}
             </tr>
             <tr>
-                <td>Satisfaction with cost to you</td>
+                <td>Satisfaction with Cost</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        {{ city_health.satisfaction_cost |floatformat:2 }}
-                        &#160 {{ city_health.satisfaction_cost|rating }}
+                        {{ city_health.satisfaction_cost |floatformat:2 }}<br/>{{ city_health.satisfaction_cost|rating }}
                     </td>
                 {% endfor %}
             </tr>
             <tr>
-                <td>Convenience of location for you</td>
+                <td>Convenience of Location</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        {{ city_health.location |floatformat:2 }} &#160 {{ city_health.location|rating }}
+                        {{ city_health.location |floatformat:2 }}<br/>{{ city_health.location|rating }}
                     </td>
                 {% endfor %}
             </tr>
             <tr>
-                <td>
+                <td colspan="4">
                     <div class="title">Health Care Expense (Per Visit):</div>
                 </td>
-                <td></td>
-                <td></td>
-                <td></td>
             </tr>
             <tr>
                 <td>Doctor's Visit</td>
@@ -452,8 +435,8 @@
         </table>
     {% endif %}
     {% if user_info.crime_rate %}
-        <h2>Crime and Safety Report</h2>
-        <table id="crime-rate" class="table">
+        <h2 class="report">Crime and Safety Report</h2>
+        <table id="crime-rate" class="table table-hover table-responsive">
             <tr>
                 <th class="first-col"></th>
                 {% for city_result in user_info.cities %}
@@ -461,146 +444,140 @@
                 {% endfor %}
             </tr>
             <tr>
-                <td>
+                <td colspan="4">
                     <div class="title">Crime Rates:</div>
                 </td>
-                <td></td>
-                <td></td>
-                <td></td>
             </tr>
             <tr>
-                <td>Level of crime</td>
+                <td>Crime Index</td>
                 {% for city_crime in cities_crime_rate %}
                     <td>
-                        {{ city_crime.crime_level |floatformat:2 }} &#160 {{ city_crime.crime_level|rating }}
+                        {{ city_crime.crime_level |floatformat:2 }}<br/>{{ city_crime.crime_level|rating }}
                     </td>
                 {% endfor %}
             </tr>
             <tr>
-                <td>Crime increasing in the past 3 years</td>
+                <td>Crime Increasing Over Time (Past Three Years)</td>
                 {% for city_crime in cities_crime_rate %}
                     <td>
-                        {{ city_crime.crime_increasing|floatformat:2 }} &#160 {{ city_crime.crime_increasing|rating }}
+                        {{ city_crime.crime_increasing|floatformat:2 }}<br/>{{ city_crime.crime_increasing|rating }}
                     </td>
                 {% endfor %}
             </tr>
             <tr>
-                <td>Worries home broken and things stolen</td>
+                <td>Home Invasion/Burglary Worries</td>
                 {% for city_crime in cities_crime_rate %}
                     <td>
-                        {{ city_crime.home_broken|floatformat:2 }} &#160 {{ city_crime.home_broken|rating }}
+                        {{ city_crime.home_broken|floatformat:2 }}<br/>{{ city_crime.home_broken|rating }}
                     </td>
                 {% endfor %}
             </tr>
             <tr>
-                <td>Worries being mugged or robbed</td>
+                <td>Mugging/Robbery Worries</td>
                 {% for city_crime in cities_crime_rate %}
                     <td>
-                        {{ city_crime.mugged_or_robbed|floatformat:2 }} &#160 {{ city_crime.mugged_or_robbed|rating }}
+                        {{ city_crime.mugged_or_robbed|floatformat:2 }}<br/>{{ city_crime.mugged_or_robbed|rating }}
                     </td>
                 {% endfor %}
             </tr>
             <tr>
-                <td>Worries car stolen</td>
+                <td>Car Theft Worries</td>
                 {% for city_crime in cities_crime_rate %}
                     <td>
-                        {{ city_crime.car_stolen|floatformat:2 }} &#160 {{ city_crime.car_stolen|rating }}
+                        {{ city_crime.car_stolen|floatformat:2 }}<br/>{{ city_crime.car_stolen|rating }}
                     </td>
                 {% endfor %}
             </tr>
             <tr>
-                <td>Worries things from car stolen</td>
+                <td>Item Theft from Car Worries</td>
                 {% for city_crime in cities_crime_rate %}
                     <td>
-                        {{ city_crime.things_from_car|floatformat:2 }} &#160 {{ city_crime.things_from_car|rating }}
+                        {{ city_crime.things_from_car|floatformat:2 }}<br/>{{ city_crime.things_from_car|rating }}
                     </td>
                 {% endfor %}
             </tr>
             <tr>
-                <td>Worries attacked</td>
+                <td>Physical Altercation/Attack Worries</td>
                 {% for city_crime in cities_crime_rate %}
                     <td>
-                        {{ city_crime.worries_attack|floatformat:2 }} &#160 {{ city_crime.worries_attack|rating }}
+                        {{ city_crime.worries_attack|floatformat:2 }}<br/>{{ city_crime.worries_attack|rating }}
                     </td>
                 {% endfor %}
             </tr>
             <tr>
-                <td>Worries being insulted</td>
+                <td>Verbal Confrontation/Insult Worries</td>
                 {% for city_crime in cities_crime_rate %}
                     <td>
-                        {{ city_crime.worries_insult|floatformat:2 }} &#160 {{ city_crime.worries_insult|rating }}
+                        {{ city_crime.worries_insult|floatformat:2 }}<br/>{{ city_crime.worries_insult|rating }}
                     </td>
                 {% endfor %}
             </tr>
             <tr>
-                <td>Worries being subject to a physical attack because of racism</td>
+                <td>Racist Violence Worries</td>
                 {% for city_crime in cities_crime_rate %}
                     <td>
-                        {{ city_crime.worries_racist|floatformat:2 }} &#160 {{ city_crime.worries_racist|rating }}
+                        {{ city_crime.worries_racist|floatformat:2 }}<br/>{{ city_crime.worries_racist|rating }}
                     </td>
                 {% endfor %}
             </tr>
             <tr>
-                <td>Problem people using or dealing drugs</td>
+                <td>Drug Use/Dealing Worries</td>
                 {% for city_crime in cities_crime_rate %}
                     <td>
-                        {{ city_crime.problem_drugs|floatformat:2 }} &#160 {{ city_crime.problem_drugs|rating }}
+                        {{ city_crime.problem_drugs|floatformat:2 }}<br/>{{ city_crime.problem_drugs|rating }}
                     </td>
                 {% endfor %}
             </tr>
             <tr>
-                <td>Problem property crimes such as vandalism and theft</td>
+                <td>Vandalism/Property Crime Worries</td>
                 {% for city_crime in cities_crime_rate %}
                     <td>
-                        {{ city_crime.property_crime|floatformat:2 }} &#160 {{ city_crime.property_crime|rating }}
+                        {{ city_crime.property_crime|floatformat:2 }}<br/>{{ city_crime.property_crime|rating }}
                     </td>
                 {% endfor %}
             </tr>
             <tr>
-                <td>Problem violent crimes such as assault and armed robbery</td>
+                <td>Assault/Armed Robbery Worries</td>
                 {% for city_crime in cities_crime_rate %}
                     <td>
-                        {{ city_crime.violent_crime|floatformat:2 }} &#160 {{ city_crime.violent_crime|rating }}
+                        {{ city_crime.violent_crime|floatformat:2 }}<br/>{{ city_crime.violent_crime|rating }}
                     </td>
                 {% endfor %}
             </tr>
             <tr>
-                <td>Problem corruption and bribery</td>
+                <td>Corruption and Bribery Worries</td>
                 {% for city_crime in cities_crime_rate %}
                     <td>
-                        {{ city_crime.corruption|floatformat:2 }} &#160 {{ city_crime.corruption|rating }}
+                        {{ city_crime.corruption|floatformat:2 }}<br/>{{ city_crime.corruption|rating }}
                     </td>
                 {% endfor %}
             </tr>
             <tr>
-                <td>
+                <td colspan="4">
                     <div class="title">Safety Concerns:</div>
                 </td>
-                <td></td>
-                <td></td>
-                <td></td>
             </tr>
             <tr>
-                <td>Safety walking alone during daylight</td>
+                <td>Safety Walking Alone During Daylight</td>
                 {% for city_crime in cities_crime_rate %}
                     <td>
-                        {{ city_crime.safety_day|floatformat:2 }} &#160 {{ city_crime.safety_day|rating }}
+                        {{ city_crime.safety_day|floatformat:2 }}<br/>{{ city_crime.safety_day|rating }}
                     </td>
                 {% endfor %}
             </tr>
             <tr>
-                <td>Safety walking alone during night</td>
+                <td>Safety Walking Alone During Night</td>
                 {% for city_crime in cities_crime_rate %}
                     <td>
-                        {{ city_crime.safety_night|floatformat:2 }} &#160 {{ city_crime.safety_night|rating }}
+                        {{ city_crime.safety_night|floatformat:2 }}<br/>{{ city_crime.safety_night|rating }}
                     </td>
                 {% endfor %}
             </tr>
         </table>
     {% endif %}
     {% if user_info.food_option %}
-        <h2>Food and Restaurant Option Report:</h2>
-        <table id="food-option" class="table">
+        <h2 class="report">Food and Restaurant Report:</h2>
+        <table id="food-option" class="table table-hover table-responsive">
             <tr>
                 <th class="first-col"></th>
                 {% for city_result in user_info.cities %}
@@ -616,7 +593,7 @@
                 {% endfor %}
             </tr>
             <tr>
-                <td>Score for overall diversity and proximity of cuisines (lower is better)</td>
+                <td>Cuisine diversity and proximity index (lower is better)</td>
                 {% for city_food in cities_food_option %}
                     <td>
                         {{ city_food.diversity_score|floatformat:2 }}
@@ -632,7 +609,7 @@
                 {% endfor %}
             </tr>
             <tr>
-                <td>Dollars Spent Out vs. at Dollars Spent at Groceries</td>
+                <td>Dollars Spent Out vs. at Dollars Spent on Groceries</td>
                 {% for city_food in cities_food_option %}
                     <td>
                         {{ city_food.dine_out_money|floatformat:2 }}
@@ -641,7 +618,7 @@
             </tr>
             <tr>
                 <td>
-                    <div class="title">Final Index (out of 100 possible):</div>
+                    <strong>Final Index (0-100):</strong>
                 </td>
                 {% for city_food in cities_food_option %}
                     <td>

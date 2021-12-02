@@ -9,66 +9,66 @@ ul#cost-living {
 h2.report {
     margin-top: 40px;
 }
-table{
 
+tbody {
+    width: 100%;
 }
 
 div.title {
     font-weight: bold;
-    margin-top: 10px;
     font-size: 17px;
     height: 25px;
+    width: 100%;
 }
 
-#cost-living th{
+th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: center;
+}
+
+#index-table th {
+    background-color: orchid;
+    color: white;
+}
+
+#cost-living th {
     background-color: cornflowerblue;
     color: white;
 }
 
 #cost-property th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: center;
     background-color: lightskyblue;
     color: white;
 }
+
 #child-care th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: center;
     background-color: lightseagreen;
     color: white;
 }
+
 #health-care th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: center;
     background-color: limegreen;
     color: white;
 }
+
 #crime-rate th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: center;
     background-color: lightpink;
     color: white;
 }
+
 #food-option th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: center;
     background-color: lightsalmon;
     color: white;
 }
+
 th:first-child{
     width: 500px;
 }
 
 th:not(:first-child){
     width: 200px;
+    padding: 0.75rem 0.3rem;
 }
 
 tr {
@@ -77,10 +77,4 @@ tr {
 
 td:not(:first-child) {
     text-align: center;
-}
-
-tr.category{
-}
-td.category-cell{
-    display: table-cell;
 }

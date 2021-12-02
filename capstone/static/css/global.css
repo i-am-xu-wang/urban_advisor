@@ -54,7 +54,7 @@ select {
 }
 
 main {
-margin-left: 30px;
+margin: 0 30px;
 }
 
 #cost-of-living-quiz > div,
