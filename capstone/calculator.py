@@ -189,7 +189,7 @@ def cost_of_property_calculation(proximity, rent_or_buy, property_size, down_pay
             elif proximity == 'City Center' and property_size == 'Two Bedrooms':
                 cities_property_expense.append(CostPropertyResult(rent_or_buy, (
                         int(getattr(Expense.objects.get(id=32), v)) + int(getattr(Expense.objects.get(id=34), v)) / 2),
-                                                                  property_size))
+                                                                  property_size, proximity))
             elif proximity == 'City Center' and property_size == 'Three Bedrooms':
                 cities_property_expense.append(
                     CostPropertyResult(rent_or_buy, getattr(Expense.objects.get(id=34), v), property_size, proximity))
