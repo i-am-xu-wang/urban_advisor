@@ -81,6 +81,12 @@ $(document).ready(function () {
         $(".alert-dismissible").remove();
     }
 
+    errorScroll = function() {
+        $([document.documentElement, document.body]).animate({
+                scrollTop: $(".alert-dismissible").offset().top
+            }, 'fast');
+    }
+
     processCitiesCheckboxes();
     toggleDrivingOptions();
     togglePublicTransport();
@@ -115,10 +121,12 @@ $(document).ready(function () {
     })
 
     $('#rent').click(function () {
+        removeError();
         toggleRentOrBuy();
     })
 
     $('#buy').click(function () {
+        removeError();
         toggleRentOrBuy();
     })
 
@@ -131,8 +139,10 @@ $(document).ready(function () {
     });
 
     submitForms = function() {
+        // valid will be set to false if form fails any validation check
         let valid = true;
-        console.log("submit clicked")
+
+        // reset error messages to perform validation anew
         removeError();
 
         // cost of living quiz validation
@@ -146,76 +156,98 @@ $(document).ready(function () {
         }
 
         if (!cities_checked) {
-            $('#cities-checkboxes').addClass('alert alert-danger')
+            const checkboxes = $('#cities-checkboxes');
+            checkboxes.addClass('alert alert-danger');
             valid = false;
             message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
                 '    <strong>Error!</strong> Please select at least one city to evaluate\n' +
-                '</div>')
-            $('#submit-button').after(message)
+                '</div>');
+            checkboxes.before(message);
+            errorScroll();
         } else if ($('input[name="salary"]').val() === "") {
-            $('#salary-question').addClass('alert alert-danger');
+            const salaryQuestion = $('#salary-question');
+            salaryQuestion.addClass('alert alert-danger');
             valid = false;
             message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
                 '    <strong>Error!</strong> Please enter anticipated annual salary\n' +
-                '</div>')
-            $('#submit-button').after(message)
+                '</div>');
+            salaryQuestion.before(message);
+            errorScroll();
         } else if ($('input[name="vacation-spending"]').val() === "") {
-            $('#vacation-spending-question').addClass('alert alert-danger');
+            const vacationSpending = $('#vacation-spending-question');
+            vacationSpending.addClass('alert alert-danger');
             valid = false;
             message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
                 '    <strong>Error!</strong> Please enter vacation spending\n' +
-                '</div>')
-            $('#submit-button').after(message)
+                '</div>');
+            vacationSpending.before(message);
+            errorScroll();
         } else {
             // property price quiz validation
             const property_price_checkbox = document.getElementById('property-price-checkbox');
             if ($(property_price_checkbox).is(":checked")) {
                 if ($('input[name="city-proximity-options"]:checked').val() === undefined) {
-                    $('#city-proximity-options').addClass('alert alert-danger');
+                    const cityProximityOptions = $('#city-proximity-options');
+                    cityProximityOptions.addClass('alert alert-danger');
                     valid = false;
                     message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
                         '    <strong>Error!</strong> Please select an option for city proximity\n' +
-                        '</div>')
-                    $('#submit-button').after(message)
+                        '</div>');
+                    cityProximityOptions.before(message);
+                    errorScroll();
                 } else if ($('input[name="rent-or-buy-options"]:checked').val() === undefined) {
-                    $('#rent-or-buy-options').addClass('alert alert-danger');
+                    const rentOrBuyOptions = $('#rent-or-buy-options');
+                    rentOrBuyOptions.addClass('alert alert-danger');
                     valid = false;
                     message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
                         '    <strong>Error!</strong> Please select an option for rent or buy\n' +
-                        '</div>')
-                    $('#submit-button').after(message)
+                        '</div>');
+                    rentOrBuyOptions.before(message);
+                    errorScroll();
                 } else {
                     if ($('input[name="rent-or-buy-options"]:checked').val() === "Rent") {
                         if ($('input[name="rental-bedroom-options"]:checked').val() === undefined) {
-                            $('#rent-questions').addClass('alert alert-danger');
+                            const rentQuestions = $('#rent-questions');
+                            rentQuestions.addClass('alert alert-danger');
                             valid = false;
                             message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
                                 '    <strong>Error!</strong> Please select an option for rental bedrooms\n' +
-                                '</div>')
-                            $('#submit-button').after(message)
+                                '</div>');
+                            rentQuestions.before(message);
+                            errorScroll();
                         }
                     } else {
                         if ($('input[name="buy-square-footage"]').val() === "") {
-                            $('#buy-square-footage-question').addClass('alert alert-danger');
+                            const buySquareFootageQuestion = $('#buy-square-footage-question');
+                            buySquareFootageQuestion.addClass('alert alert-danger');
                             valid = false;
                             message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
                                 '    <strong>Error!</strong> Please enter desired square footage\n' +
-                                '</div>')
-                            $('#submit-button').after(message)
+                                '</div>');
+                            buySquareFootageQuestion.before(message);
+                            errorScroll();
                         } else if ($('input[name="down-payment"]').val() === "") {
-                            $('#down-payment-question').addClass('alert alert-danger');
+                            const downPaymentQuestion = $('#down-payment-question');
+                            downPaymentQuestion.addClass('alert alert-danger');
                             valid = false;
                             message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
                                 '    <strong>Error!</strong> Please enter desired down payment\n' +
-                                '</div>')
-                            $('#submit-button').after(message)
+                                '</div>');
+                            downPaymentQuestion.before(message);
+                            errorScroll();
                         }
                     }
                 }
             }
+            // if we have passed all checks without valid being set to false, we are ready to submit
             if (valid) {
+                // accept 0 as a valid driving-distance value if user did not submit their own
+                const drivingDistance = $('input[name="driving-distance"]')
+                if (drivingDistance.val() === "") {
+                    drivingDistance.val(0);
+                }
+                // submit form
                 document.getElementById('cost-of-living-quiz').submit();
-                console.log("submitted cost of living quiz")
             }
         }
     }
