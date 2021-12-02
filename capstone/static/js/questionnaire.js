@@ -1,5 +1,8 @@
 $(document).ready(function () {
-    const driveDistance = document.getElementById('when-driving')
+    const atLeastOne = document.getElementById('at-least-one');
+    const maximumThree = document.getElementById('maximum-three');
+
+    const driveDistance = document.getElementById('when-driving');
 
     const monthlyOptions = document.getElementById('when-public-monthly');
     const onDemandOptions = document.getElementById('when-public-on-demand');
@@ -9,6 +12,18 @@ $(document).ready(function () {
     const buyQuestions = document.getElementById('buy-questions')
 
     const childcareOptions = document.getElementById('childcare-options')
+
+    processCitiesCheckboxes = function() {
+        var $cs = $('#cities-checkboxes').find(':checkbox:checked');
+        $(atLeastOne).removeClass('fw-bold text-danger');
+        $(maximumThree).removeClass('fw-bold text-success');
+        if ($cs.length === 0) {
+            $(atLeastOne).addClass('fw-bold text-danger');
+        } else if ($cs.length >= 3) {
+            $(maximumThree).addClass('fw-bold text-success');
+        }
+        return $cs.length > 3;
+    }
 
     toggleDrivingOptions = function() {
         if ($('#driving-options').val() === '0') {
@@ -60,6 +75,13 @@ $(document).ready(function () {
         }
     }
 
+    removeError = function() {
+        $(".alert-danger").removeClass("alert-danger");
+        $(".alert").removeClass("alert");
+        $(".alert-dismissible").remove();
+    }
+
+    processCitiesCheckboxes();
     toggleDrivingOptions();
     togglePublicTransport();
     toggleProperty();
@@ -67,8 +89,7 @@ $(document).ready(function () {
     toggleChildcare();
 
     $('#cities-checkboxes :checkbox').change(function () {
-        var $cs = $(this).closest('#cities-checkboxes').find(':checkbox:checked');
-        if ($cs.length > 3) {
+        if (processCitiesCheckboxes()) {
             this.checked = false;
         }
     });
@@ -105,12 +126,14 @@ $(document).ready(function () {
         toggleChildcare();
     })
 
+    $('#cost-of-living-quiz').on ("click", ".alert-danger", function () {
+        removeError();
+    });
+
     submitForms = function() {
         let valid = true;
         console.log("submit clicked")
-        $(".alert-danger").removeClass("alert-danger");
-        $(".alert").removeClass("alert");
-        $(".alert-dismissible").remove();
+        removeError();
 
         // cost of living quiz validation
         cities_checkboxes=document.getElementsByClassName("cities-checkbox");

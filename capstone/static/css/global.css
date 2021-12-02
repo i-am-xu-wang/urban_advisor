@@ -59,25 +59,6 @@ main {
 margin: 0 30px;
 }
 
-#cost-of-living-quiz > div,
-#transit-options > div,
-#property-price-options > div,
-#city-proximity-options > div,
-#rent-or-buy-options > div,
-#rent-questions > div,
-#buy-questions > div,
-#childcare-options > div {
-    margin: 10px 0 10px 0;
-}
-
-.error-num {
-    border: 2px solid red;
-}
-
-.error-select {
-    color: red;
-}
-
 footer {
     height: 150px;
     background: white;

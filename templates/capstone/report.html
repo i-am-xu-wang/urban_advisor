@@ -451,7 +451,7 @@
                 </td>
             </tr>
             <tr>
-                <td>Crime Index</td>
+                <td>Crime Level</td>
                 {% for city_crime in cities_crime_rate %}
                     <td>
                         {{ city_crime.crime_level |floatformat:2 }}<br/>{{ city_crime.crime_level|rating }}
@@ -615,16 +615,6 @@
                 {% for city_food in cities_food_option %}
                     <td>
                         {{ city_food.dine_out_money|floatformat:2 }}
-                    </td>
-                {% endfor %}
-            </tr>
-            <tr>
-                <td>
-                    <strong>Final Index (0-100):</strong>
-                </td>
-                {% for city_food in cities_food_option %}
-                    <td>
-                        {{ city_food.final_index|floatformat:2 }}
                     </td>
                 {% endfor %}
             </tr>

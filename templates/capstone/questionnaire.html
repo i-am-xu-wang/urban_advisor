@@ -3,6 +3,8 @@
 {% load static %}
 
 {% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/questionnaire.css" %}?{% now "U" %}">
+    <script src="{% static "js/questionnaire.js" %}"></script>
     <h2>Welcome to Powerful Financial</h2>
     <h4>Please answer the following questions for us to better evaluate your needs!</h4>
     <strong>* = required</strong>
@@ -10,7 +12,7 @@
         {% csrf_token %}
         <!-- Cities options -->
         <div id="cities-checkboxes">
-            Cities to evaluate (at least one, maximum three)*:
+            Cities to evaluate (<span id="at-least-one">at least one</span>, <span id="maximum-three">maximum three</span>)*:
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6 col-md-4 p-1">
