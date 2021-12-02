@@ -28,8 +28,8 @@ def generate_rating_qualifier(city):
 
 
 @register.filter(name='zip')
-def zip_lists(a, b):
-    return zip(a, b)
+def zip_lists(a, b, c):
+    return zip(a, b, c)
 
 
 @register.filter(name='salary_percentage')

@@ -15,6 +15,7 @@ class UserInfo:
     healthcare: bool
     childcare: bool
     food_option: bool
+    remain_money: List[int]
 
 
 @dataclass
@@ -116,10 +117,13 @@ def register_user(cities, salary, feature_options: List[str]):
     childcare = 'childcare' in feature_options
     food_option = 'food' in feature_options
     # todo:add salary comparison of each city into the comparison list
+    # todo:add remain_money (per month) into the comparison list
     # for the lower than the average salary, store negative percentage number, for the higher than the average salary
     # store positive percentage number
     salary_comparison = [40, -50, 60]  # dummy data
-    return UserInfo(cities, salary, salary_comparison, property_option, crime_rate, healthcare, childcare, food_option)
+    remain_money = [200, 200, 200]
+    return UserInfo(cities, salary, salary_comparison, property_option, crime_rate, healthcare, childcare, food_option,
+                    remain_money)
 
 
 # todo: return a list of overall quality_of_life_result

@@ -8,15 +8,12 @@ def index_page(request):
 
 
 def register_form(request):
-    # TODO: change 'end city' to city list selected from checkboxes. pass city_list to output page
-    # TODO: pass checkbox_selections and additional property questions to calculator
-
     # for registering user info
     feature_options = request.POST.getlist('feature-option')
     salary = request.POST.get('salary')
-
     cities = request.POST.getlist('cities-checkbox')
-
+    user_info = calculator.register_user(cities, salary, feature_options)
+    salary_section_list = zip(user_info.cities, user_info.salary_comparison, user_info.remain_money)
     # for cost of living option
     household_member = request.POST["household-options"]
     eating_options = request.POST["eating-out-options"]
@@ -40,7 +37,6 @@ def register_form(request):
     gym_options = request.POST["gym-options"]
     vacation_spending = request.POST["vacation-spending"]
     clothing_options = request.POST["clothing-options"]
-    user_info = calculator.register_user(cities, salary, feature_options)
     living_expense = calculator.cost_of_living_calculation(
         household_member, eating_options, inexpensive_restaurant_options, coffee_option, going_out_options,
         smoking_option, drinking_options, driving_options, rideshare_options, public_transit_options,
@@ -79,7 +75,8 @@ def register_form(request):
     cities_food_option = calculator.food_option_calculation()
 
     return render(request, "capstone/report.html",
-                  {"cities_living_expense": living_expense, "user_info": user_info, "overall_quality": overall_quality,
+                  {"cities_living_expense": living_expense, "user_info": user_info,
+                   "salary_section_list": salary_section_list, "overall_quality": overall_quality,
                    "cities_property_expense": property_expense, "child_care": child_care_expense,
                    "cities_health_care": cities_health_care, "cities_crime_rate": cities_crime_rate,
                    "cities_food_option": cities_food_option})
