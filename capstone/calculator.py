@@ -57,6 +57,7 @@ class CostPropertyResult:
 class ChildCareResult:
     daycare_cost: float
     private_school_cost: float
+    total: float
 
 
 @dataclass
@@ -127,9 +128,12 @@ def register_user(cities, salary, feature_options: List[str]):
 
 
 # todo: return a list of overall quality_of_life_result
-def overall_quality_of_life(userInfo: UserInfo, living_expense: CostLivingResult, property_expense: CostPropertyResult):
+def overall_quality_of_life(userInfo: UserInfo, living_expense: CostLivingResult, property_expense: CostPropertyResult,
+                            child_care_expense: ChildCareResult):
     overall_quality_results = []
     for i, city in enumerate(selected_cities):
+        # cost_of_living_radio = (int(living_expense[i].total) + child_care_expense[i].total) / userInfo.salary * 100
+        # print(cost_of_living_radio)
         overall_quality_results.append(
             OverallQualityResult(int(living_expense[i].total) / int(userInfo.salary),
                                  int(property_expense[i].monthly_payment) / int(userInfo.salary),
@@ -238,7 +242,7 @@ def cost_of_child_care(daycare_number, private_school_number):
     for city in selected_cities:
         child_care_city.append(ChildCareResult(int(getattr(Expense.objects.get(id=54), city)) * int(daycare_number),
                                                int(getattr(Expense.objects.get(id=55), city)) / 12.0 * int(
-                                                   private_school_number)))
+                                                   private_school_number), 2000))
     return child_care_city
 
 

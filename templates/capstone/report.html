@@ -308,6 +308,21 @@
                     </td>
                 {% endfor %}
             </tr>
+         <tr>
+            <td colspan="4">
+                <div class="title">Total:</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Total Childcare Estimated Spending:
+            </td>
+            {% for city_child_care in child_care %}
+                <td>
+                    ${{ city_child_care.total |floatformat:2|intcomma }}
+                </td>
+            {% endfor %}
+        </tr>
 
         </table>
     {% endif %}
