@@ -28,7 +28,7 @@ th {
 }
 
 #index-table th {
-    background-color: orchid;
+    background-color: seagreen;
     color: white;
 }
 
@@ -77,4 +77,10 @@ tr {
 
 td:not(:first-child) {
     text-align: center;
+}
+
+.summary{
+    font-weight:bold;
+    height: 25px;
+    font-size: 17px;
 }

@@ -26,7 +26,7 @@
             </thead>
             <tbody>
             <tr>
-                <td>Cost of Living to Income Ratio:</td>
+                <td>Cost of Living to Income Ratio (%):</td>
                 {% for city_quality in overall_quality %}
                     <td>
                         {{ city_quality.cost_of_living_ratio |floatformat:2 }}
@@ -35,7 +35,7 @@
             </tr>
             {% if user_info.property_option %}
                 <tr>
-                    <td>Housing Expense to Income Ratio:</td>
+                    <td>Housing Expense to Income Ratio (%):</td>
                     {% for city_quality in overall_quality %}
                         <td>
                             {{ city_quality.housing_expense_ratio |floatformat:2 }}
@@ -81,8 +81,8 @@
                     {% endfor %}
                 </tr>
             {% endif %}
-            <tr>
-                <td>Overall Quality Index:</td>
+            <tr class = "summary">
+                <td>Life Quality Score:</td>
                 {% for city_quality in overall_quality %}
                     <td>
                         {{ city_quality.overall_index |floatformat:2 }}
