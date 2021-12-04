@@ -46,3 +46,31 @@ def salary_percentage_modifier(salary_compare):
         return "higher"
     else:
         return "lower"
+
+
+@register.filter(name='income_ratio_rating')
+def income_ratio_rating(ratio):
+    if 0 <= ratio < 15:
+        return "Very Low"
+    elif 15 <= ratio < 25:
+        return "Low"
+    elif 25 <= ratio < 35:
+        return "Moderate"
+    elif 35 <= ratio < 45:
+        return "High"
+    else:
+        return "Very High"
+
+
+@register.filter(name='housing_ratio_rating')
+def housing_ratio_rating(ratio):
+    if 0 <= ratio < 5:
+        return "Very Low"
+    elif 5 <= ratio < 15:
+        return "Low"
+    elif 15 <= ratio < 30:
+        return "Moderate"
+    elif 30 <= ratio < 40:
+        return "High"
+    else:
+        return "Very High"

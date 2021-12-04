@@ -5,12 +5,12 @@
 {% load filter_extras %}
 {% block content %}
     <link rel="stylesheet" type="text/css" href="{% static "css/report.css" %}?{% now "U" %}">
+    <script src="{% static "js/graph.js" %}"></script>
     <h1>Here is your customized financial report:</h1>
     <div id="summary">
         <p>Currently you earn ${{ user_info.salary |intcomma }} per year.</p>
-
         {% for city_result, salary_compare, remain_money in salary_section_list %}
-            <p>To Live in <strong>{{ city_result|city_name}}</strong>:</p>
+            <p>To Live in <strong>{{ city_result|city_name }}</strong>:</p>
             <p> Your salary is {{ salary_compare | salary_percentage|floatformat:2 }}% {{ salary_compare|modifier }}
                 than the average salary. You can save approximately ${{ remain_money |floatformat:2 }} per month.</p>
         {% endfor %}
@@ -30,6 +30,7 @@
                 {% for city_quality in overall_quality %}
                     <td>
                         {{ city_quality.cost_of_living_ratio |floatformat:2 }}
+                        <span class = "rating"> <br/>{{ city_quality.cost_of_living_ratio|income_ratio_rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -39,6 +40,7 @@
                     {% for city_quality in overall_quality %}
                         <td>
                             {{ city_quality.housing_expense_ratio |floatformat:2 }}
+                        <br/>{{ city_quality.housing_expense_ratio|housing_ratio_rating }}
                         </td>
                     {% endfor %}
                 </tr>
@@ -49,6 +51,7 @@
                     {% for city_quality in overall_quality %}
                         <td>
                             {{ city_quality.health_care_ratio |floatformat:2 }}
+                        <br/>{{ city_quality.health_care_ratio|rating }}
                         </td>
                     {% endfor %}
                 </tr>
@@ -59,6 +62,7 @@
                     {% for city_quality in overall_quality %}
                         <td>
                             {{ city_quality.crime_index |floatformat:2 }}
+                          <br/>{{ city_quality.crime_index|rating }}
                         </td>
                     {% endfor %}
                 </tr>
@@ -67,6 +71,7 @@
                     {% for city_quality in overall_quality %}
                         <td>
                             {{ city_quality.safety_index |floatformat:2 }}
+                         <br/>{{ city_quality.safety_index|rating }}
                         </td>
                     {% endfor %}
                 </tr>
@@ -77,15 +82,17 @@
                     {% for city_quality in overall_quality %}
                         <td>
                             {{ city_quality.food_option |floatformat:2 }}
+                         <br/>{{ city_quality.food_option|rating }}
                         </td>
                     {% endfor %}
                 </tr>
             {% endif %}
-            <tr class = "summary">
+            <tr class="summary">
                 <td>Life Quality Score:</td>
                 {% for city_quality in overall_quality %}
                     <td>
                         {{ city_quality.overall_index |floatformat:2 }}
+                     <br/>{{ city_quality.overall_index|rating }}
                     </td>
                 {% endfor %}
             </tr>
@@ -308,21 +315,21 @@
                     </td>
                 {% endfor %}
             </tr>
-         <tr>
-            <td colspan="4">
-                <div class="title">Total:</div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Total Childcare Estimated Spending:
-            </td>
-            {% for city_child_care in child_care %}
-                <td>
-                    ${{ city_child_care.total |floatformat:2|intcomma }}
+            <tr>
+                <td colspan="4">
+                    <div class="title">Total:</div>
                 </td>
-            {% endfor %}
-        </tr>
+            </tr>
+            <tr>
+                <td>
+                    Total Childcare Estimated Spending:
+                </td>
+                {% for city_child_care in child_care %}
+                    <td>
+                        ${{ city_child_care.total |floatformat:2|intcomma }}
+                    </td>
+                {% endfor %}
+            </tr>
 
         </table>
     {% endif %}
