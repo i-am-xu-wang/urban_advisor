@@ -16,12 +16,11 @@ def methodology_page(request):
 
 
 def register_form(request):
+
     # for registering user info
     feature_options = request.POST.getlist('feature-option')
     salary = request.POST.get('salary')
     cities = request.POST.getlist('cities-checkbox')
-    user_info = calculator.register_user(cities, salary, feature_options)
-    salary_section_list = zip(user_info.cities, user_info.salary_comparison, user_info.remain_money)
     # for cost of living option
     household_member = request.POST["household-options"]
     eating_options = request.POST["eating-out-options"]
@@ -50,7 +49,6 @@ def register_form(request):
         smoking_option, drinking_options, driving_options, rideshare_options, public_transit_options,
         public_transit_members, public_transit_trips, gym_options, vacation_spending, clothing_options,
     )
-
     # for property option
     proximity = request.POST.get('city-proximity-options')
     rent_or_buy = request.POST.get('rent-or-buy-options')
@@ -70,6 +68,11 @@ def register_form(request):
     private_school_number = request.POST.get('private-school-numbers')
     print(private_school_number)
     child_care_expense = calculator.cost_of_child_care(daycare_number, private_school_number)
+
+    user_info = calculator.register_user(cities, salary, feature_options,living_expense, property_expense,child_care_expense)
+    salary_section_list = zip(user_info.cities, user_info.salary_comparison, user_info.remain_money)
+
+
 
     # for overall quality of life option
     overall_quality = calculator.overall_quality_of_life(user_info, living_expense, property_expense, child_care_expense)

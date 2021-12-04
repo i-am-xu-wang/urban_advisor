@@ -108,7 +108,8 @@ class FoodResult:
 selected_cities = []
 
 
-def register_user(cities, salary, feature_options: List[str]):
+def register_user(cities, salary, feature_options: List[str],living_expense: CostLivingResult, property_expense: CostPropertyResult,
+                            child_care_expense: ChildCareResult):
     selected_cities.clear()
     for city in cities:
         selected_cities.append(city)
@@ -121,8 +122,13 @@ def register_user(cities, salary, feature_options: List[str]):
     # todo:add remain_money (per month) into the comparison list
     # for the lower than the average salary, store negative percentage number, for the higher than the average salary
     # store positive percentage number
-    salary_comparison = [40, -50, 60]  # dummy data
-    remain_money = [200, 200, 200]
+
+    salary_comparison = []
+    remain_money = []
+    for i, city in enumerate(selected_cities):
+        salary_comparison.append(((float(salary) - float(getattr(Expense.objects.get(id=77), city)))/float(salary))*100)
+        remain_money.append((float(salary) - ((float(living_expense[i].total)+child_care_expense[i].total) +
+                                             float(property_expense[i].monthly_payment))))
     return UserInfo(cities, salary, salary_comparison, property_option, crime_rate, healthcare, childcare, food_option,
                     remain_money)
 
@@ -132,11 +138,9 @@ def overall_quality_of_life(userInfo: UserInfo, living_expense: CostLivingResult
                             child_care_expense: ChildCareResult):
     overall_quality_results = []
     for i, city in enumerate(selected_cities):
-        # cost_of_living_radio = (int(living_expense[i].total) + child_care_expense[i].total) / userInfo.salary * 100
-        # print(cost_of_living_radio)
         overall_quality_results.append(
-            OverallQualityResult(int(living_expense[i].total) / int(userInfo.salary),
-                                 int(property_expense[i].monthly_payment) / int(userInfo.salary),
+            OverallQualityResult(((int(living_expense[i].total)+child_care_expense[i].total) / int(userInfo.salary))*100,
+                                 (int(property_expense[i].monthly_payment) / int(userInfo.salary))*100,
                                  (getattr(Expense.objects.get(id=72), city)),
                                  (getattr(Expense.objects.get(id=70), city)),
                                  (getattr(Expense.objects.get(id=71), city)),
@@ -241,8 +245,9 @@ def cost_of_child_care(daycare_number, private_school_number):
     child_care_city = []
     for city in selected_cities:
         child_care_city.append(ChildCareResult(int(getattr(Expense.objects.get(id=54), city)) * int(daycare_number),
-                                               int(getattr(Expense.objects.get(id=55), city)) / 12.0 * int(
-                                                   private_school_number), 2000))
+                                               int(getattr(Expense.objects.get(id=55), city)) / 12.0 * int(private_school_number),
+                                               int(getattr(Expense.objects.get(id=54), city)) * int(daycare_number) +
+                                               int(getattr(Expense.objects.get(id=55), city)) / 12.0 * int(private_school_number)))
     return child_care_city
 
 
