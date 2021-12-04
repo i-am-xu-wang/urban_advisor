@@ -2,12 +2,46 @@
 {% block page-title %}Methodology Page{% endblock %}
 {% load static %}
 {% block content %}
-    <h4>Methodology used in Calculating Life Quality Score </h4>
+     <link rel="stylesheet" type="text/css" href="{% static "css/methodology.css" %}?{% now "U" %}">
+    <h4>Methodology of Calculation </h4>
+    <h5>Life Quality Score</h5>
     <p>Life Quality Score (higher is better) is an estimated measurement of the overall life quality in a specific city.
         In the calculation of the score, we take into account Cost of Living to Income Ratio (lower is better),
-        Housing Expense to Income Ratio (lower is better), Health Care Index (higher is better), Crime Index ( higher is better),
-        Safety Index ( higher is better), and Food Option Index (higher is better).</p>
+        Housing Expense to Income Ratio (lower is better), Health Care Index (higher is better), Crime Index (higher is
+        better), Safety Index (higher is better), and Food Option Index (higher is better).</p>
+    <p>The current formula:</p>
+    <p>Sum of scores from user selected options / Number of selected options</p>
+    <p>Sum of scores from users options <span class = "annotation">*</span> = (100 - cost of living to Income ration) + (100 - housing expense to income radio)
+    + healthcare index + crime index + safety index + food option</p>
+    <div class = "annotation">*Note: only include user selected options</div>
 
-    The current formula:
+    <h5>Cost of Living to Income Ratio</h5>
+    <p>The Cost of Living to Income Ratio reflects the percentage of living expense in a user's total monthly
+        income.</p>
+    <p>Cost of Living to Income Ratio = Total expense<span class = "annotation">*</span> / monthly income</p>
+    <div class = "annotation">*Note: Total expense including cost of living expense and/or child care expense(per user's selection)</div>
+
+    <h5>Housing Expense to Income Ratio</h5>
+    <p>The Housing Expense (lower is better) to Income Radio reflects the percentage of housing expense in a user's
+        total monthly income.</p>
+    <p>Housing Expense to Income Ratio = Housing expense<span class = "annotation">*</span> / monthly income</p>
+    <div class = "annotation">*Note: Monthly rent expense or monthly mortgage payment</div>
+
+    <h5>Health Care Index</h5>
+    <p>Health Care Index (higher is better) is an estimation of the overall health care and medical resources for a
+        specific city.</p>
+    <p>This index along with other data in the health care report are cited from survey results in <a href = "https://www.numbeo.com/health-care/indices_explained.jsp">Numbeo.com</a></p>
+
+    <h5>Crime Index</h5>
+    <p>Crime Index is an estimation of overall crime level in a specific city. </p>
+    <p>This index along with other data in the crime report are cited from survey results in <a href="https://www.numbeo.com/crime/indices_explained.jsp">Numbeo.com</a></p>
+
+    <h5>Safety Index</h5>
+    <p>Safety Index is an estimation of overall safety level in a specific city. </p>
+    <p>This index along with other data in the safety report are cited from survey results in <a href="https://www.numbeo.com/crime/indices_explained.jsp">Numbeo.com</a></p>
+
+    <h5>Food Option Index</h5>
+    <p>Food Option Index reflects the culinary diversity ranking in a specific city.</p>
+    <p>This index along with other data in the food option report are cited from <a href="https://www.trulia.com/research/diverse-dining/">Trulia.com</a></p>
 
 {% endblock %}
