@@ -127,6 +127,11 @@ def register_user(cities, salary, feature_options: List[str],living_expense: Cos
     remain_money = []
     for i, city in enumerate(selected_cities):
         salary_comparison.append(((float(salary) - float(getattr(Expense.objects.get(id=77), city)))/float(salary))*100)
+        if len(child_care_expense) == 0:
+            child_care_expense = 0*len(selected_cities)
+        if len(property_expense) == 0:
+            property_expense = 0*len(selected_cities)
+
         remain_money.append((float(salary) - ((float(living_expense[i].total)+child_care_expense[i].total) +
                                              float(property_expense[i].monthly_payment))))
     return UserInfo(cities, salary, salary_comparison, property_option, crime_rate, healthcare, childcare, food_option,

@@ -69,7 +69,8 @@ def register_form(request):
     print(private_school_number)
     child_care_expense = calculator.cost_of_child_care(daycare_number, private_school_number)
 
-    user_info = calculator.register_user(cities, salary, feature_options,living_expense, property_expense,child_care_expense)
+    user_info = calculator.register_user(cities, salary, feature_options,living_expense, property_expense,
+                                         child_care_expense)
     salary_section_list = zip(user_info.cities, user_info.salary_comparison, user_info.remain_money)
 
 
