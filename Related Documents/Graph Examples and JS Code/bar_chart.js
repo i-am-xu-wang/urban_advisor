@@ -5,13 +5,7 @@ const stackedBarChart = {
     options: {
         indexAxis: 'y', // convert to horizontal bar chart
         scales: {
-            x: {
-                stacked: true
-            },
-            y: {
-                stacked: true
-            }
-            // y: {beginAtZero: true} // convert to non-stacked bar chart
+            y: {beginAtZero: true} // convert to non-stacked bar chart
         }
     },
 };

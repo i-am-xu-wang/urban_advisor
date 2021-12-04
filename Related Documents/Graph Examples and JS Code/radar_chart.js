@@ -14,7 +14,7 @@ const radarChart = {
 //setup................................................................
 const data = {
     labels: [
-      'Cost of Living to Income Ratio',
+      'Cost of Living to Income Ratio', // replace with 'expenses' variable
       'Housing Expense to Income Ratio',
       'Health Care Index',
       'Crime Index',
@@ -23,8 +23,8 @@ const data = {
       'Overall Quality Index'
     ],
     datasets: [{
-      label: 'Roanoke',
-      data: [65, 59, 90, 81, 56, 55, 40],
+      label: 'Roanoke', // replace with selected city 1
+      data: [65, 59, 90, 81, 56, 55, 40], // replace with 'id' of matching 'expense' variable
       fill: true,
       backgroundColor: 'rgba(255, 99, 132, 0.2)',
       borderColor: 'rgb(255, 99, 132)',
@@ -33,7 +33,7 @@ const data = {
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgb(255, 99, 132)'
     }, {
-      label: 'Washington D.C.',
+      label: 'Washington D.C.', // replace with selected city 2
       data: [40, 55, 56, 88, 90, 59, 65],
       fill: true,
       backgroundColor: 'rgba(54, 162, 235, 0.2)',
@@ -43,7 +43,7 @@ const data = {
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgb(54, 162, 235)'
       }, {
-      label: 'Philadelphia',
+      label: 'Philadelphia', // replace with selected city 3
       data: [88, 56, 59, 90, 65, 40, 56],
       fill: true,
       backgroundColor: 'rgba(75, 192, 192, 0.2)',
