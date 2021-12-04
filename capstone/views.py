@@ -16,11 +16,12 @@ def methodology_page(request):
 
 
 def register_form(request):
-
     # for registering user info
     feature_options = request.POST.getlist('feature-option')
     salary = request.POST.get('salary')
     cities = request.POST.getlist('cities-checkbox')
+    user_info = calculator.register_user(cities, salary, feature_options)
+    salary_section_list = zip(user_info.cities, user_info.salary_comparison, user_info.remain_money)
     # for cost of living option
     household_member = request.POST["household-options"]
     eating_options = request.POST["eating-out-options"]
@@ -64,15 +65,8 @@ def register_form(request):
 
     # for child care questions
     daycare_number = request.POST.get('daycare-numbers')
-    print(daycare_number)
     private_school_number = request.POST.get('private-school-numbers')
-    print(private_school_number)
     child_care_expense = calculator.cost_of_child_care(daycare_number, private_school_number)
-
-    user_info = calculator.register_user(cities, salary, feature_options,living_expense, property_expense,
-                                         child_care_expense)
-    salary_section_list = zip(user_info.cities, user_info.salary_comparison, user_info.remain_money)
-
 
 
     # for overall quality of life option

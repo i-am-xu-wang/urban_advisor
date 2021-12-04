@@ -108,8 +108,7 @@ class FoodResult:
 selected_cities = []
 
 
-def register_user(cities, salary, feature_options: List[str],living_expense: CostLivingResult, property_expense: CostPropertyResult,
-                            child_care_expense: ChildCareResult):
+def register_user(cities, salary, feature_options: List[str]):
     selected_cities.clear()
     for city in cities:
         selected_cities.append(city)
@@ -125,7 +124,6 @@ def register_user(cities, salary, feature_options: List[str],living_expense: Cos
 
     salary_comparison = []
     remain_money = []
-    print(living_expense)
     for i, city in enumerate(selected_cities):
         salary_comparison.append(200)
         remain_money.append(300)
