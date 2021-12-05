@@ -1,19 +1,7 @@
 {% extends "capstone/base.html" %}
 {% block page-title %}Questionnaire Page{% endblock %}
 {% load static %}
-{#<style>#}
-{#    /* Chrome, Safari, Edge, Opera */#}
-{#    input::-webkit-outer-spin-button,#}
-{#    input::-webkit-inner-spin-button {#}
-{#        -webkit-appearance: none;#}
-{#        margin: 0;#}
-{#    }#}
-{##}
-{#    /* Firefox */#}
-{#    input[type=number] {#}
-{#        -moz-appearance: textfield;#}
-{#    }#}
-{#</style>#}
+
 {% block content %}
     <link rel="stylesheet" type="text/css" href="{% static "css/questionnaire.css" %}?{% now "U" %}">
     <script src="{% static "js/questionnaire.js" %}"></script>
@@ -426,7 +414,7 @@
                         <input class="form-control" type="tel" id="down-payment" name="down-payment"
                                 {#                               placeholder="10"#}
                         >
-                        {#                        <span class="input-group-text">% (numerals only)</span>#}
+                        <span class="input-group-text">%</span>
                     </div>
                 </div>
             </div>

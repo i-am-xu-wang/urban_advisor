@@ -1,5 +1,6 @@
 $(document).ready(function () {
-    const atLeastOne = document.getElementById('at-least-one');
+    const moneyRegExp = /^[$0-9,]+([.][0-9]{0,2})?$/;
+
     const maximumThree = document.getElementById('maximum-three');
 
     const driveDistance = document.getElementById('when-driving');
@@ -170,12 +171,30 @@ $(document).ready(function () {
                 '</div>');
             salaryQuestion.before(message);
             errorScroll();
+        } else if (!moneyRegExp.test($('input[name="salary"]').val())) {
+            const salaryQuestion = $('#salary-question');
+            salaryQuestion.addClass('alert alert-danger');
+            valid = false;
+            message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
+                '    <strong>Error!</strong> Please only submit a dollar amount for this field.\n' +
+                '</div>');
+            salaryQuestion.before(message);
+            errorScroll();
         } else if ($('input[name="vacation-spending"]').val() === "") {
             const vacationSpending = $('#vacation-spending-question');
             vacationSpending.addClass('alert alert-danger');
             valid = false;
             message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
                 '    <strong>Error!</strong> Please enter vacation spending.\n' +
+                '</div>');
+            vacationSpending.before(message);
+            errorScroll();
+        } else if (!moneyRegExp.test($('input[name="vacation-spending"]').val())) {
+            const vacationSpending = $('#vacation-spending-question');
+            vacationSpending.addClass('alert alert-danger');
+            valid = false;
+            message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
+                '    <strong>Error!</strong> Please only submit a dollar amount for this field.\n' +
                 '</div>');
             vacationSpending.before(message);
             errorScroll();
