@@ -153,12 +153,19 @@ def overall_quality_of_life(userInfo: UserInfo, living_expense: CostLivingResult
     for i, city in enumerate(selected_cities):
         count = 1
         total = 0
-        if userInfo.property_option:
-            count += 1
-            total += 100 - (int(property_expense[i].monthly_payment) / int(userInfo.salary)) * 100
+        k = 0
+        l = 0
         if userInfo.childcare:
             count += 1
-            total += (100 - (child_care_expense[i].total / int(userInfo.salary)) * 100)
+            k = (((living_expense[i].total + child_care_expense[i].total)/ int(userInfo.salary)) * 100)
+            total += (100 - k)
+        else:
+            k = ((living_expense[i].total / int(userInfo.salary)) * 100)
+            total += (100 - k)
+        if userInfo.property_option:
+            count += 1
+            l = (int(property_expense[i].monthly_payment) / int(userInfo.salary)) * 100
+            total += 100 - l
         if userInfo.healthcare:
             count += 1
             total += int((getattr(Expense.objects.get(id=72), city)))
@@ -172,9 +179,8 @@ def overall_quality_of_life(userInfo: UserInfo, living_expense: CostLivingResult
         total += (100 - ((int(living_expense[i].total) / int(userInfo.salary)) * 100))
 
         overall_quality_results.append(
-            OverallQualityResult(
-                ((int(living_expense[i].total) + child_care_expense[i].total) / int(userInfo.salary)) * 100,
-                (int(property_expense[i].monthly_payment) / int(userInfo.salary)) * 100,
+            OverallQualityResult( k,
+                l,
                 (getattr(Expense.objects.get(id=72), city)),
                 (getattr(Expense.objects.get(id=70), city)),
                 (getattr(Expense.objects.get(id=71), city)),
@@ -222,7 +228,7 @@ def cost_of_living_calculation(household_member, eating_options, inexpensive_res
             (int(driving_options) * int(driving_distance) / avg_mpg) * int(getattr(Expense.objects.get(id=61), v)))
         total.append(
             int(food[i]) + int(grocery[i]) + int(entertainment[i]) + float(gym[i]) + int(vacation_spending) / 12.0 + int(
-                cigarettes[i]) + float(drinks[i]) + float(public_transport[i]) + clothing[i] + gas[i] + taxi[i])
+                cigarettes[i]) + float (drinks[i]) + float(public_transport[i]) + clothing[i] + gas[i] + taxi[i])
 
     cost_of_living_result = []
     for i in range(len(selected_cities)):
