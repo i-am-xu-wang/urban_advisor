@@ -98,7 +98,3 @@ td:not(:first-child) {
     display: flex;
     flex-direction: row;
 }
-a img{
-    margin-top: 47px;
-    margin-left:15px;
-}
