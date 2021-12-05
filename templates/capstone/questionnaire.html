@@ -1,19 +1,19 @@
 {% extends "capstone/base.html" %}
 {% block page-title %}Questionnaire Page{% endblock %}
 {% load static %}
-<style>
-    /* Chrome, Safari, Edge, Opera */
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-
-    /* Firefox */
-    input[type=number] {
-        -moz-appearance: textfield;
-    }
-</style>
+{#<style>#}
+{#    /* Chrome, Safari, Edge, Opera */#}
+{#    input::-webkit-outer-spin-button,#}
+{#    input::-webkit-inner-spin-button {#}
+{#        -webkit-appearance: none;#}
+{#        margin: 0;#}
+{#    }#}
+{##}
+{#    /* Firefox */#}
+{#    input[type=number] {#}
+{#        -moz-appearance: textfield;#}
+{#    }#}
+{#</style>#}
 {% block content %}
     <link rel="stylesheet" type="text/css" href="{% static "css/questionnaire.css" %}?{% now "U" %}">
     <script src="{% static "js/questionnaire.js" %}"></script>
@@ -200,18 +200,18 @@
         </div>
         <!-- Smoking options -->
         <!-- maybe take this one out since most people don't smoke? or change to 1, 2, 3 packs per week, 1 every two weeks or 1 every month like clothing question-->
-{#        <div>#}
-{#            <label class="form-label" for="smoking-options">How many packs of cigarettes does your household#}
-{#                smoke?</label>#}
-{#            <select class="form-select" id="smoking-options" name="smoking-options">#}
-{#                <option value="0">None</option>#}
-{#                <option value="1">1 pack per week</option>#}
-{#                <option value="2">2 packs per week</option>#}
-{#                <option value="3">3 packs per week</option>#}
-{#                <option value="4">4 packs per week</option>#}
-{#                <option value="5">5+ packs per week</option>#}
-{#            </select>#}
-{#        </div>#}
+        <div>
+            <label class="form-label" for="smoking-options">How many packs of cigarettes does your household
+                smoke?</label>
+            <select class="form-select" id="smoking-options" name="smoking-options">
+                <option value="0">None</option>
+                <option value="1">1 pack per week</option>
+                <option value="2">2 packs per week</option>
+                <option value="3">3 packs per week</option>
+                <option value="4">4 packs per week</option>
+                <option value="5">5+ packs per week</option>
+            </select>
+        </div>
         <!-- Drinking options -->
         <div>
             <label class="form-label" for="drinking-options">How often does your household drink alcohol?</label>
