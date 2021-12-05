@@ -294,3 +294,17 @@ def food_option_calculation():
                        (getattr(Expense.objects.get(id=77), city)))
         )
     return food_city
+
+
+def get_selected_city_salary():
+    salaries = []
+    for city in selected_cities:
+        salaries.append(getattr(Expense.objects.get(id=67), city))
+    return salaries
+
+
+def get_salary_labels():
+    salary_labels = ["Your Average Salary"]
+    for city in selected_cities:
+        salary_labels.append(city)
+    return salary_labels

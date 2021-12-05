@@ -23,6 +23,10 @@ def register_form(request):
     cities = request.POST.getlist('cities-checkbox')
     user_info = calculator.register_user(cities, salary, feature_options)
     salary_section_list = zip(user_info.cities, user_info.salary_comparison, user_info.remain_money)
+    salary_list = calculator.get_selected_city_salary()
+    salary_list.insert(0, user_info.salary)
+    labels_for_salary = calculator.get_salary_labels()
+
     # for cost of living option
     household_member = request.POST["household-options"]
     eating_options = request.POST["eating-out-options"]
@@ -83,6 +87,7 @@ def register_form(request):
 
     return render(request, "capstone/report.html",
                   {"cities_living_expense": living_expense, "user_info": user_info,
+                   "labels_for_salary": labels_for_salary, "salary_list": salary_list,
                    "salary_section_list": salary_section_list, "overall_quality": overall_quality,
                    "cities_property_expense": property_expense, "child_care": child_care_expense,
                    "cities_health_care": cities_health_care, "cities_crime_rate": cities_crime_rate,
