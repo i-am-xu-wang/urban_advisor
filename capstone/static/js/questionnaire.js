@@ -1,5 +1,6 @@
 $(document).ready(function () {
     const moneyRegExp = /^[$0-9,]+([.][0-9]{0,2})?$/;
+    const percentRegExp = /^([0-9]{1,2}){1}(\.[0-9]{1,2})?$/;
 
     const maximumThree = document.getElementById('maximum-three');
 
@@ -248,6 +249,15 @@ $(document).ready(function () {
                             valid = false;
                             message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
                                 '    <strong>Error!</strong> Please enter desired down payment.\n' +
+                                '</div>');
+                            downPaymentQuestion.before(message);
+                            errorScroll();
+                        } else if (!percentRegExp.test($('input[name="down-payment"]').val())) {
+                            const downPaymentQuestion = $('#down-payment-question');
+                            downPaymentQuestion.addClass('alert alert-danger');
+                            valid = false;
+                            message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
+                                '    <strong>Error!</strong> Please only submit a percentage between 0-99.99.\n' +
                                 '</div>');
                             downPaymentQuestion.before(message);
                             errorScroll();
