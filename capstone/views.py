@@ -31,6 +31,7 @@ def register_form(request):
     smoking_option = request.POST["smoking-options"]
     drinking_options = request.POST["drinking-options"]
     driving_options = request.POST["driving-options"]
+    driving_distance = request.POST["driving-distance"]
     rideshare_options = request.POST["rideshare-options"]
     public_transit_options = request.POST["public-transit-options"]
     if public_transit_options == "No":
@@ -47,7 +48,7 @@ def register_form(request):
     clothing_options = request.POST["clothing-options"]
     living_expense = calculator.cost_of_living_calculation(
         household_member, eating_options, inexpensive_restaurant_options, coffee_option, going_out_options,
-        smoking_option, drinking_options, driving_options, rideshare_options, public_transit_options,
+        smoking_option, drinking_options, driving_options,driving_distance, rideshare_options, public_transit_options,
         public_transit_members, public_transit_trips, gym_options, vacation_spending, clothing_options,
     )
     # for property option
@@ -79,6 +80,7 @@ def register_form(request):
 
     # for food option
     cities_food_option = calculator.food_option_calculation()
+    #remaining_salary = calculator.remaining(calculator.UserInfo,calculator.CostLivingResult,calculator.CostPropertyResult, calculator.ChildCareResult,salary)
 
     return render(request, "capstone/report.html",
                   {"cities_living_expense": living_expense, "user_info": user_info,
