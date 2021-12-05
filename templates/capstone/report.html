@@ -13,7 +13,7 @@
         {% for city_result, salary_compare, remain_money in salary_section_list %}
             <p>To Live in <strong>{{ city_result|city_name }}</strong>:</p>
             <p> Your salary is {{ salary_compare | salary_percentage|floatformat:2 }}% {{ salary_compare|modifier }}
-                than the average salary. You have approximately ${{ remain_money |floatformat:2 }} left per month.</p>
+                than the average salary. You have approximately ${{ remain_money | floatformat:2 | intcomma }} left per month.</p>
         {% endfor %}
         <div class="container" style="width: 75%;">
             <canvas id="salary-chart"></canvas>
