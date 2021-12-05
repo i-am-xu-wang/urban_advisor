@@ -5,15 +5,64 @@
 {% load filter_extras %}
 {% block content %}
     <link rel="stylesheet" type="text/css" href="{% static "css/report.css" %}?{% now "U" %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="{% static "js/graph.js" %}"></script>
+
     <h1>Here is your customized financial report:</h1>
     <div id="summary">
         <p>Currently you earn ${{ user_info.salary |intcomma }} per year.</p>
-
         {% for city_result, salary_compare, remain_money in salary_section_list %}
-            <p>To Live in <strong>{{ city_result|city_name}}</strong>:</p>
+            <p>To Live in <strong>{{ city_result|city_name }}</strong>:</p>
             <p> Your salary is {{ salary_compare | salary_percentage|floatformat:2 }}% {{ salary_compare|modifier }}
                 than the average salary. You can save approximately ${{ remain_money |floatformat:2 }} per month.</p>
         {% endfor %}
+        {#    Salary Graph#}
+        <div id="container" style="width: 75%;">
+            <canvas id="salary-chart"></canvas>
+        </div>
+        <script>
+            var salaryChart = {
+                type: 'bar',
+                data: {
+                    labels: [{%for label in labels_for_salary %}'{{label|city_name}}',{%endfor%}],
+                    datasets: [{
+                        label: "$USD",
+                        data: {{ salary_list|safe }},
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(255, 159, 64, 0.2)',
+                            'rgba(255, 205, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(201, 203, 207, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgb(255, 99, 132)',
+                            'rgb(255, 159, 64)',
+                            'rgb(255, 205, 86)',
+                            'rgb(75, 192, 192)',
+                            'rgb(54, 162, 235)',
+                            'rgb(153, 102, 255)',
+                            'rgb(201, 203, 207)'
+                        ],
+                        borderWidth: 1
+                    }],
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                },
+            };
+            window.onload = function () {
+                var ctx = document.getElementById('salary-chart').getContext('2d');
+                window.myPie = new Chart(ctx, salaryChart);
+            };
+
+        </script>
         <h2 class="report">Overall Quality of Life</h2>
         <table id="index-table" class="table table-hover table-responsive">
             <thead>
@@ -30,6 +79,7 @@
                 {% for city_quality in overall_quality %}
                     <td>
                         {{ city_quality.cost_of_living_ratio |floatformat:2 }}
+                        <span class="rating"> <br/>{{ city_quality.cost_of_living_ratio|income_ratio_rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -39,6 +89,7 @@
                     {% for city_quality in overall_quality %}
                         <td>
                             {{ city_quality.housing_expense_ratio |floatformat:2 }}
+                            <br/>{{ city_quality.housing_expense_ratio|housing_ratio_rating }}
                         </td>
                     {% endfor %}
                 </tr>
@@ -49,6 +100,7 @@
                     {% for city_quality in overall_quality %}
                         <td>
                             {{ city_quality.health_care_ratio |floatformat:2 }}
+                            <br/>{{ city_quality.health_care_ratio|rating }}
                         </td>
                     {% endfor %}
                 </tr>
@@ -59,6 +111,7 @@
                     {% for city_quality in overall_quality %}
                         <td>
                             {{ city_quality.crime_index |floatformat:2 }}
+                            <br/>{{ city_quality.crime_index|rating }}
                         </td>
                     {% endfor %}
                 </tr>
@@ -67,6 +120,7 @@
                     {% for city_quality in overall_quality %}
                         <td>
                             {{ city_quality.safety_index |floatformat:2 }}
+                            <br/>{{ city_quality.safety_index|rating }}
                         </td>
                     {% endfor %}
                 </tr>
@@ -77,15 +131,17 @@
                     {% for city_quality in overall_quality %}
                         <td>
                             {{ city_quality.food_option |floatformat:2 }}
+                            <br/>{{ city_quality.food_option|rating }}
                         </td>
                     {% endfor %}
                 </tr>
             {% endif %}
-            <tr class = "summary">
+            <tr class="summary">
                 <td>Life Quality Score:</td>
                 {% for city_quality in overall_quality %}
                     <td>
                         {{ city_quality.overall_index |floatformat:2 }}
+                        <br/>{{ city_quality.overall_index|rating }}
                     </td>
                 {% endfor %}
             </tr>
@@ -308,21 +364,21 @@
                     </td>
                 {% endfor %}
             </tr>
-         <tr>
-            <td colspan="4">
-                <div class="title">Total:</div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Total Childcare Estimated Spending:
-            </td>
-            {% for city_child_care in child_care %}
-                <td>
-                    ${{ city_child_care.total |floatformat:2|intcomma }}
+            <tr>
+                <td colspan="4">
+                    <div class="title">Total:</div>
                 </td>
-            {% endfor %}
-        </tr>
+            </tr>
+            <tr>
+                <td>
+                    Total Childcare Estimated Spending:
+                </td>
+                {% for city_child_care in child_care %}
+                    <td>
+                        ${{ city_child_care.total |floatformat:2|intcomma }}
+                    </td>
+                {% endfor %}
+            </tr>
 
         </table>
     {% endif %}

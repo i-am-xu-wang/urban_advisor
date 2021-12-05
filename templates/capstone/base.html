@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>The home Page of Powerful Financial | {% block page-title %} {% endblock %} </title>
+    <title>Urban Advisor | {% block page-title %} {% endblock %} </title>
     <link rel="stylesheet" type="text/css" href="{% static "css/global.css" %}?{% now "U" %}">
     <link rel="stylesheet" type="text/css" href="{% static "css/sb-admin-styles.css" %}?{% now "U" %}">
     <script src="{% static "js/jquery-3.6.0.min.js" %}"></script>
@@ -13,37 +13,39 @@
 
 <body class="page">
 <div class="page-content">
-<header>
-    <div id="left-header">
-        <a href="{% url "index" %}">
-            <img id="header-logo" alt="Website Logo" src="{% static "images/logo.png" %}"/>
-        </a>
-    </div>
-    <div id="mid-header">
-        <h1 id="header-text"><a href="{% url "index" %}">Powerful Financial</a></h1>
-        <h3 id="header-subhead">Your smart financial calculator</h3>
-    </div>
-    <div id = "right-footer"></div>
-</header>
-
-<main>
-    {% block content %}{% endblock %}
-</main>
-
-<footer>
-    <div id="mid-footer">
-        <ul>
-            <li><a href={% url "about-us" %}>About Us</a></li>
-            <li><a href={% url "methodology" %}>Methodology</a></li>
-            <li><a href="https://code.vt.edu/cost-of-living-app/cost-of-living">GitLab Link</a></li>
-        </ul>
-    </div>
-    <div id="right-footer">
-        <div class="flexItem">
-            &copy; 2021 Powerful Financial
+    <header>
+        <div id="mid-header">
+            {#    <div id="left-header">#}
+            <a href="{% url "index" %}">
+                <img id="header-logo" alt="Website Logo" src="{% static "images/new_logo.png" %}"/>
+            </a>
         </div>
-    </div>
-</footer>
+        {#    <div id="mid-header">#}
+        {#        <h1 id="header-text"><a href="{% url "index" %}">Powerful Financial</a></h1>#}
+        {#        <h3 id="header-subhead">Your smart financial calculator</h3>#}
+        {#    </div>#}
+        <div id="right-footer"></div>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <div id="mid-footer">
+            <ul>
+                <li><a href={% url "about-us" %}>About Us</a></li>
+                <li><a href={% url "methodology" %}>Methodology</a></li>
+                <li><a href="https://code.vt.edu/cost-of-living-app/cost-of-living">GitLab Link</a></li>
+            </ul>
+        </div>
+        <div id="right-footer">
+            <div class="flexItem">
+                {#                &copy; 2021 Powerful Financial#}
+                &copy; 2021 Urban Advisor
+            </div>
+        </div>
+    </footer>
 </div>
 </body>
 </html>

@@ -1,9 +1,9 @@
 body {
-    font-family: "Roboto", sans-serif;
+    font-family: "Arial", sans-serif;
 }
 
 .page {
-    background-color: #0275d8 !important;
+    background-color: #D3D7D2 !important;
 }
 
 .page-content {
@@ -16,7 +16,9 @@ body {
 }
 
 header {
-    margin-left: 20px;
+    /*margin-left: 50%;*/
+    /*display: block;*/
+    /*margin--l: 10%;*/
     display: flex;
     flex-direction: row;
     gap: 1em;
@@ -36,12 +38,13 @@ select {
 }
 
 #header-logo {
-    max-width: 100%;
+    margin-inline: 43%;
+    max-width: 90%;
 }
 
 #mid-header {
     text-align: center;
-    align-self: center;
+    align-self: auto;
 }
 
 #header-text a {
@@ -58,7 +61,7 @@ select {
 }
 
 main {
-margin: 0 30px;
+    margin: 0 30px;
 }
 
 footer {

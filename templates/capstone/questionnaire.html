@@ -1,51 +1,89 @@
 {% extends "capstone/base.html" %}
 {% block page-title %}Questionnaire Page{% endblock %}
 {% load static %}
+<style>
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
 
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+</style>
 {% block content %}
     <link rel="stylesheet" type="text/css" href="{% static "css/questionnaire.css" %}?{% now "U" %}">
     <script src="{% static "js/questionnaire.js" %}"></script>
-    <h4>Please answer the following questions for us to better evaluate your needs!</h4>
+    <h4>Please answer the following questions for us to better evaluate your needs</h4>
     <form id="cost-of-living-quiz" action="{% url "report" %}" method="post">
         {% csrf_token %}
         <!-- Cities options -->
         <div id="cities-checkboxes">
-            Cities to evaluate (<span id="at-least-one">at least one</span>, <span id="maximum-three">maximum three</span>)*:  <span class = "note">* = required</span>
+            Choose cities to compare (Max 3)
+            {#            <span id="at-least-one">at least one</span>, #}
+            {#            <span id="maximum-three">maximum three</span>):#}
+            {#            <span class = "note">* = required</span>#}
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6 col-md-4 p-1">
-                        <label class="card text-white bg-success pt-0" for="washington-dc-checkbox"><img class="card-img-top" src="{% static "images/washington-dc.jpeg" %}" alt="Washington DC"/>
-                            <div class="card-body"><input type="checkbox" id="washington-dc-checkbox" name="cities-checkbox" value="dc"
-                                                      class="cities-checkbox"/> Washington DC</div>
-                    </label>
-                    </div>
-                    <div class="col-sm-6 col-md-4 p-1">
-                        <label class="card text-white bg-success pt-0" for="philadelphia-checkbox"><img class="card-img-top" src="{% static "images/philadelphia.jpeg" %}" alt="Philadelphia"/>
-                            <div class="card-body"><input type="checkbox" id="philadelphia-checkbox" name="cities-checkbox" value="Philadelphia"
-                                                          class="cities-checkbox"/> Philadelphia</div>
+                        <label class="card text-white bg-success pt-0" for="washington-dc-checkbox"><img
+                                class="card-img-top" src="{% static "images/washington-dc.jpeg" %}"
+                                alt="Washington DC"/>
+                            <div class="card-body"><input type="checkbox" id="washington-dc-checkbox"
+                                                          name="cities-checkbox" value="dc"
+                                                          class="cities-checkbox"/> Washington DC
+                            </div>
                         </label>
                     </div>
                     <div class="col-sm-6 col-md-4 p-1">
-                        <label class="card text-white bg-success pt-0" for="boston-checkbox"><img class="card-img-top" src="{% static "images/boston.jpeg" %}" alt="Boston"/>
-                            <div class="card-body"><input type="checkbox" id="boston-checkbox" name="cities-checkbox" value="Boston" class="cities-checkbox"/> Boston</div>
+                        <label class="card text-white bg-success pt-0" for="philadelphia-checkbox"><img
+                                class="card-img-top" src="{% static "images/philadelphia.jpeg" %}" alt="Philadelphia"/>
+                            <div class="card-body"><input type="checkbox" id="philadelphia-checkbox"
+                                                          name="cities-checkbox" value="Philadelphia"
+                                                          class="cities-checkbox"/> Philadelphia
+                            </div>
                         </label>
                     </div>
                     <div class="col-sm-6 col-md-4 p-1">
-                        <label class="card text-white bg-success pt-0" for="seattle-checkbox"><img class="card-img-top" src="{% static "images/seattle.jpeg" %}" alt="Seattle"/>
-                            <div class="card-body"><input type="checkbox" id="seattle-checkbox" name="cities-checkbox" value="Seattle"
-                                                          class="cities-checkbox"/> Seattle</div>
+                        <label class="card text-white bg-success pt-0" for="boston-checkbox"><img class="card-img-top"
+                                                                                                  src="{% static "images/boston.jpeg" %}"
+                                                                                                  alt="Boston"/>
+                            <div class="card-body"><input type="checkbox" id="boston-checkbox" name="cities-checkbox"
+                                                          value="Boston" class="cities-checkbox"/> Boston
+                            </div>
                         </label>
                     </div>
                     <div class="col-sm-6 col-md-4 p-1">
-                        <label class="card text-white bg-success pt-0" for="silicon-valley-checkbox"><img class="card-img-top" src="{% static "images/silicon-valley.jpeg" %}" alt="Silicon Valley"/>
-                            <div class="card-body"><input type="checkbox" id="silicon-valley-checkbox" name="cities-checkbox" value="sf"
-                                                          class="cities-checkbox"/> Silicon Valley</div>
+                        <label class="card text-white bg-success pt-0" for="seattle-checkbox"><img class="card-img-top"
+                                                                                                   src="{% static "images/seattle.jpeg" %}"
+                                                                                                   alt="Seattle"/>
+                            <div class="card-body"><input type="checkbox" id="seattle-checkbox" name="cities-checkbox"
+                                                          value="Seattle"
+                                                          class="cities-checkbox"/> Seattle
+                            </div>
                         </label>
                     </div>
                     <div class="col-sm-6 col-md-4 p-1">
-                        <label class="card text-white bg-success pt-0" for="roanoke-checkbox"><img class="card-img-top" src="{% static "images/roanoke.jpeg" %}" alt="Roanoke"/>
-                            <div class="card-body"><input type="checkbox" id="roanoke-checkbox" name="cities-checkbox" value="Roanoke"
-                                                          class="cities-checkbox"/> Roanoke</div>
+                        <label class="card text-white bg-success pt-0" for="silicon-valley-checkbox"><img
+                                class="card-img-top" src="{% static "images/sf.jpg" %}"
+                                alt="Silicon Valley"/>
+                            <div class="card-body"><input type="checkbox" id="silicon-valley-checkbox"
+                                                          name="cities-checkbox" value="sf"
+                                                          class="cities-checkbox"/> San Francisco
+                            </div>
+                        </label>
+                    </div>
+                    <div class="col-sm-6 col-md-4 p-1">
+                        <label class="card text-white bg-success pt-0" for="roanoke-checkbox"><img class="card-img-top"
+                                                                                                   src="{% static "images/roanoke.jpeg" %}"
+                                                                                                   alt="Roanoke"/>
+                            <div class="card-body"><input type="checkbox" id="roanoke-checkbox" name="cities-checkbox"
+                                                          value="Roanoke"
+                                                          class="cities-checkbox"/> Roanoke
+                            </div>
                         </label>
                     </div>
                 </div>
@@ -53,12 +91,13 @@
         </div>
         <!-- Checkbox options -->
         <div>
-           <h4>What are you looking for?</h4>
-{#            <input type="checkbox" id="cost-of-living-checkbox" name="feature-option" value="cost-living" checked disabled />#}
+            <h4>What are you looking for?</h4>
+            {#            <input type="checkbox" id="cost-of-living-checkbox" name="feature-option" value="cost-living" checked disabled />#}
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6 col-md-4 col-lg-3">
-                        <input type="checkbox" id="cost-of-living-checkbox" name="feature-option" value="cost-living" checked disabled/>
+                        <input type="checkbox" id="cost-of-living-checkbox" name="feature-option" value="cost-living"
+                               checked disabled/>
                         <label for="cost-of-living-checkbox">Cost of Living</label>
                     </div>
                     <div class="col-sm-6 col-md-4 col-lg-3">
@@ -91,8 +130,10 @@
             <label class="form-label" for="salary">Anticipated annual income (USD)*:</label>
             <div class="input-group-text">
                 <span class="input-group-text">$</span>
-                <input class="form-control" type="number" id="salary" name="salary" placeholder="50000"/>
-                <span class="input-group-text" id="salary-help">Numerals only</span>
+                <input class="form-control" type="tel" id="salary" name="salary"
+                        {#                       placeholder="50000"#}
+                />
+                {#                <span class="input-group-text" id="salary-help">Numerals only</span>#}
             </div>
         </div>
         <!-- Members of household options -->
@@ -108,7 +149,8 @@
         </div>
         <!-- Eating out options -->
         <div>
-            <label class="form-label" for="eating-out-options">How often do you eat meals at restaurants or get food delivered?</label>
+            <label class="form-label" for="eating-out-options">How often do you eat meals at restaurants or get food
+                delivered?</label>
             <select class="form-select" id="eating-out-options" name="eating-out-options">
                 <option value="0">Never</option>
                 <option value="1">1 time per week</option>
@@ -120,7 +162,8 @@
         </div>
         <!-- Inexpensive restaurant options -->
         <div>
-            <label class="form-label" for="inexpensive-restaurant-options">How often do you choose expensive restaurants?</label>
+            <label class="form-label" for="inexpensive-restaurant-options">How often do you choose expensive
+                restaurants?</label>
             <select class="form-select" id="inexpensive-restaurant-options" name="inexpensive-restaurant-options">
                 <option value="0">Never</option>
                 <option value="1">1 time per week</option>
@@ -144,7 +187,8 @@
         </div>
         <!-- Going out options -->
         <div>
-            <label class="form-label" for="going-out-options">How often do you pay for entertainment (movies/nightlife/etc)?</label>
+            <label class="form-label" for="going-out-options">How often do you pay for entertainment
+                (movies/nightlife/etc)?</label>
             <select class="form-select" id="going-out-options" name="going-out-options">
                 <option value="0">Never</option>
                 <option value="1">1 time per week</option>
@@ -156,17 +200,18 @@
         </div>
         <!-- Smoking options -->
         <!-- maybe take this one out since most people don't smoke? or change to 1, 2, 3 packs per week, 1 every two weeks or 1 every month like clothing question-->
-        <div>
-            <label class="form-label" for="smoking-options">How many packs of cigarettes does your household smoke?</label>
-            <select class="form-select" id="smoking-options" name="smoking-options">
-                <option value="0">None</option>
-                <option value="1">1 pack per week</option>
-                <option value="2">2 packs per week</option>
-                <option value="3">3 packs per week</option>
-                <option value="4">4 packs per week</option>
-                <option value="5">5+ packs per week</option>
-            </select>
-        </div>
+{#        <div>#}
+{#            <label class="form-label" for="smoking-options">How many packs of cigarettes does your household#}
+{#                smoke?</label>#}
+{#            <select class="form-select" id="smoking-options" name="smoking-options">#}
+{#                <option value="0">None</option>#}
+{#                <option value="1">1 pack per week</option>#}
+{#                <option value="2">2 packs per week</option>#}
+{#                <option value="3">3 packs per week</option>#}
+{#                <option value="4">4 packs per week</option>#}
+{#                <option value="5">5+ packs per week</option>#}
+{#            </select>#}
+{#        </div>#}
         <!-- Drinking options -->
         <div>
             <label class="form-label" for="drinking-options">How often does your household drink alcohol?</label>
@@ -194,8 +239,10 @@
         <div id="when-driving">
             <label class="form-label" for="driving-distance">How many miles do you drive per day?</label>
             <div class="input-group-text">
-                <input class="form-control" type="number" id="driving-distance" name="driving-distance" placeholder="0"/>
-                <span class="input-group-text">miles (numerals only)</span>
+                <input class="form-control" type="tel" id="driving-distance" name="driving-distance"
+                        {#                       placeholder="0"#}
+                />
+                {#                <span class="input-group-text">miles (numerals only)</span>#}
             </div>
         </div>
         <!-- Rideshare options -->
@@ -216,15 +263,18 @@
             <div class="container">
                 <div class="row">
                     <div class="col-auto form-check">
-                        <input type="radio" class="btn-check" name="public-transit-options" id="public-monthly" value="Monthly" autocomplete="off">
+                        <input type="radio" class="btn-check" name="public-transit-options" id="public-monthly"
+                               value="Monthly" autocomplete="off">
                         <label class="btn btn-outline-success" for="public-monthly">Monthly Pass</label>
                     </div>
                     <div class="col-auto form-check">
-                        <input type="radio" class="btn-check" name="public-transit-options" id="public-on-demand" value="On Demand Tickets" autocomplete="off">
+                        <input type="radio" class="btn-check" name="public-transit-options" id="public-on-demand"
+                               value="On Demand Tickets" autocomplete="off">
                         <label class="btn btn-outline-success" for="public-on-demand">On Demand Tickets</label>
                     </div>
                     <div class="col-auto form-check">
-                        <input type="radio" class="btn-check" name="public-transit-options" id="public-no" value="No" autocomplete="off" checked>
+                        <input type="radio" class="btn-check" name="public-transit-options" id="public-no" value="No"
+                               autocomplete="off" checked>
                         <label class="btn btn-outline-success" for="public-no">No</label>
                     </div>
                 </div>
@@ -234,7 +284,8 @@
         <!-- Display the following two options dynamically
         depending on which radio button the user selects above -->
         <div id="when-public-monthly">
-            <label class="form-label" for="public-transit-members">How many members of your household use a monthly public transportation
+            <label class="form-label" for="public-transit-members">How many members of your household use a monthly
+                public transportation
                 pass?</label>
             <select class="form-select" id="public-transit-members" name="public-transit-members">
                 <option value="1">1 member</option>
@@ -245,7 +296,8 @@
             </select>
         </div>
         <div id="when-public-on-demand">
-            <label class="form-label" for="public-transit-trips">How many times per week does someone in your household take public
+            <label class="form-label" for="public-transit-trips">How many times per week does someone in your household
+                take public
                 transportation?</label>
             <select class="form-select" id="public-transit-trips" name="public-transit-trips">
                 <option value="1">1 time per week</option>
@@ -258,7 +310,8 @@
 
         <!-- Gym options -->
         <div>
-            <label class="form-label" for="gym-options">How many members of your household have a gym membership?</label>
+            <label class="form-label" for="gym-options">How many members of your household have a gym
+                membership?</label>
             <select class="form-select" id="gym-options" name="gym-options">
                 <option value="0">None</option>
                 <option value="1">1 member</option>
@@ -270,11 +323,14 @@
         </div>
         <!-- Vacation spending -->
         <div id="vacation-spending-question">
-            <label class="form-label" for="vacation-spending">How much money do you spend on vacations per year?*</label>
+            <label class="form-label" for="vacation-spending">How much money do you spend on vacations per year?</label>
             <div class="input-group-text">
                 <span class="input-group-text">$</span>
-                <input class="form-control" aria-describedby="vacation-spending-help" type="number" id="vacation-spending" name="vacation-spending" placeholder="2000"/>
-                <span class="input-group-text" id="vacaation-spending-help">Numerals only</span>
+                <input class="form-control" aria-describedby="vacation-spending-help" type="tel" id="vacation-spending"
+                       name="vacation-spending"
+                        {#                       placeholder="2000"#}
+                />
+                {#                <span class="input-group-text" id="vacaation-spending-help">Numerals only</span>#}
             </div>
         </div>
         <!-- Clothing options -->
@@ -296,15 +352,17 @@
             <h4>Property Price Options</h4>
             <!-- City proximity options -->
             <div id="city-proximity-options">
-                Where are you looking to live?*
+                Where are you looking to live?
                 <div class="container">
                     <div class="row">
                         <div class="col-auto form-check">
-                            <input type="radio" class="btn-check" id="city-center" name="city-proximity-options" value="City Center" >
+                            <input type="radio" class="btn-check" id="city-center" name="city-proximity-options"
+                                   value="City Center">
                             <label class="btn btn-outline-success" for="city-center">Inside City Center</label>
                         </div>
                         <div class="col-auto form-check">
-                            <input type="radio" class="btn-check" id="suburb" name="city-proximity-options" value="Suburb">
+                            <input type="radio" class="btn-check" id="suburb" name="city-proximity-options"
+                                   value="Suburb">
                             <label class="btn btn-outline-success" for="suburb">Outside of City Center</label>
                         </div>
                     </div>
@@ -317,7 +375,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-auto form-check">
-                            <input type="radio" class="btn-check" id="rent" name="rent-or-buy-options" value="Rent" >
+                            <input type="radio" class="btn-check" id="rent" name="rent-or-buy-options" value="Rent">
                             <label class="btn btn-outline-success" for="rent">Rent</label>
                         </div>
                         <div class="col-auto form-check">
@@ -334,15 +392,18 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-auto">
-                            <input type="radio" class="btn-check" id="one-bedroom" name="rental-bedroom-options" value="One Bedroom" >
+                            <input type="radio" class="btn-check" id="one-bedroom" name="rental-bedroom-options"
+                                   value="One Bedroom">
                             <label class="btn btn-outline-success" for="one-bedroom">1 bedroom</label>
                         </div>
                         <div class="col-auto">
-                            <input type="radio" class="btn-check" id="two-bedrooms" name="rental-bedroom-options" value="Two Bedrooms">
+                            <input type="radio" class="btn-check" id="two-bedrooms" name="rental-bedroom-options"
+                                   value="Two Bedrooms">
                             <label class="btn btn-outline-success" for="two-bedrooms">2 bedrooms</label>
                         </div>
                         <div class="col-auto">
-                            <input type="radio" class="btn-check" id="three-bedrooms" name="rental-bedroom-options" value="Three Bedrooms">
+                            <input type="radio" class="btn-check" id="three-bedrooms" name="rental-bedroom-options"
+                                   value="Three Bedrooms">
                             <label class="btn btn-outline-success" for="three-bedrooms">3+ bedrooms</label>
                         </div>
                     </div>
@@ -352,17 +413,23 @@
             <!-- Buy questions -->
             <div id="buy-questions">
                 <div id="buy-square-footage-question">
-                    <label class="form-label" for="buy-square-footage">How many square feet are you looking to buy?*</label>
+                    <label class="form-label" for="buy-square-footage">How many square feet are you looking to
+                        buy?*</label>
                     <div class="input-group-text">
-                        <input class="form-control" type="number" id="buy-square-footage" name="buy-square-footage" placeholder="2,000">
-                        <span class="input-group-text">sq ft. (numerals only)</span>
+                        <input class="form-control" type="tel" id="buy-square-footage" name="buy-square-footage"
+                                {#                               placeholder="2,000"#}
+                        >
+                        {#                        <span class="input-group-text">sq ft. (numerals only)</span>#}
                     </div>
                 </div>
                 <div id="down-payment-question">
-                    <label class="form-label" for="down-payment">How much are you prepared to pay as a down payment?*</label>
+                    <label class="form-label" for="down-payment">How much are you prepared to pay as a down
+                        payment?*</label>
                     <div class="input-group-text">
-                        <input class="form-control" type="number" id="down-payment" name="down-payment" placeholder="10" >
-                        <span class="input-group-text">% (numerals only)</span>
+                        <input class="form-control" type="tel" id="down-payment" name="down-payment"
+                                {#                               placeholder="10"#}
+                        >
+                        {#                        <span class="input-group-text">% (numerals only)</span>#}
                     </div>
                 </div>
             </div>
@@ -383,7 +450,8 @@
                 </select>
             </div>
             <div id="private-school-question">
-                <label class="form-label" for="private-school-numbers">Number of children going to private school:</label>
+                <label class="form-label" for="private-school-numbers">Number of children going to private
+                    school:</label>
                 <select class="form-select" id="private-school-numbers" name="private-school-numbers">
                     <option value="0">0 children</option>
                     <option value="1">1 child</option>
@@ -394,6 +462,7 @@
                 </select>
             </div>
         </div>
-     <input class="btn btn-success" type="button" onClick="submitForms()" id="submit-button" name="submit-button" value="Submit">
+        <input class="btn btn-success" type="button" onClick="submitForms()" id="submit-button" name="submit-button"
+               value="Submit">
     </form>
 {% endblock %}
