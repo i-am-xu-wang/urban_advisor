@@ -137,13 +137,14 @@ def overall_quality_of_life(userInfo: UserInfo, living_expense: CostLivingResult
     overall_quality_results = []
     for i, city in enumerate(selected_cities):
         overall_quality_results.append(
-            OverallQualityResult(((int(living_expense[i].total)+child_care_expense[i].total) / int(userInfo.salary))*100,
-                                 (int(property_expense[i].monthly_payment) / int(userInfo.salary))*100,
-                                 (getattr(Expense.objects.get(id=72), city)),
-                                 (getattr(Expense.objects.get(id=70), city)),
-                                 (getattr(Expense.objects.get(id=71), city)),
-                                 (getattr(Expense.objects.get(id=77), city)),
-                                 82)  # dummy data
+            OverallQualityResult(
+                ((int(living_expense[i].total) + child_care_expense[i].total) / int(userInfo.salary)) * 100,
+                (int(property_expense[i].monthly_payment) / int(userInfo.salary)) * 100,
+                (getattr(Expense.objects.get(id=72), city)),
+                (getattr(Expense.objects.get(id=70), city)),
+                (getattr(Expense.objects.get(id=71), city)),
+                (getattr(Expense.objects.get(id=77), city)),
+                82)  # dummy data
         )
     return overall_quality_results
 
@@ -243,9 +244,11 @@ def cost_of_child_care(daycare_number, private_school_number):
     child_care_city = []
     for city in selected_cities:
         child_care_city.append(ChildCareResult(int(getattr(Expense.objects.get(id=54), city)) * int(daycare_number),
-                                               int(getattr(Expense.objects.get(id=55), city)) / 12.0 * int(private_school_number),
+                                               int(getattr(Expense.objects.get(id=55), city)) / 12.0 * int(
+                                                   private_school_number),
                                                int(getattr(Expense.objects.get(id=54), city)) * int(daycare_number) +
-                                               int(getattr(Expense.objects.get(id=55), city)) / 12.0 * int(private_school_number)))
+                                               int(getattr(Expense.objects.get(id=55), city)) / 12.0 * int(
+                                                   private_school_number)))
     return child_care_city
 
 
@@ -291,3 +294,17 @@ def food_option_calculation():
                        (getattr(Expense.objects.get(id=77), city)))
         )
     return food_city
+
+
+def get_selected_city_salary():
+    salaries = []
+    for city in selected_cities:
+        salaries.append(getattr(Expense.objects.get(id=67), city))
+    return salaries
+
+
+def get_salary_labels():
+    salary_labels = ["Your Average Salary"]
+    for city in selected_cities:
+        salary_labels.append(city)
+    return salary_labels
