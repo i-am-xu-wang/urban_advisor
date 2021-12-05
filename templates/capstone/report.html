@@ -51,13 +51,15 @@
                 },
                 options: {
                     scales: {
-                        y: {
-                            beginAtZero: true
-                        }
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
                     }
-                },
+                }
             };
-             let indexChart = {
+            let indexChart = {
                 type: 'bar',
                 data: {
                     labels: [{%for label in index_labels %}'{{label}}',{%endfor%}],
@@ -84,55 +86,55 @@
                         ],
                         borderWidth: 1
                     },
-                      {% if user_info.cities.1 %}
-                        {
-                            label:'{{ user_info.cities.1|city_name }}',
-                            data: {{ index_data.1|safe }},
-                            backgroundColor: [
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(54, 162, 235, 0.2)'
-                            ],
-                            borderColor: [
-                                'rgb(54, 162, 235)',
-                                'rgb(54, 162, 235)',
-                                'rgb(54, 162, 235)',
-                                'rgb(54, 162, 235)',
-                                'rgb(54, 162, 235)',
-                                'rgb(54, 162, 235)',
-                                'rgb(54, 162, 235)'
-                            ],
-                            borderWidth: 1
-                        },
+                        {% if user_info.cities.1 %}
+                            {
+                                label: '{{ user_info.cities.1|city_name }}',
+                                data: {{ index_data.1|safe }},
+                                backgroundColor: [
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgb(54, 162, 235)',
+                                    'rgb(54, 162, 235)',
+                                    'rgb(54, 162, 235)',
+                                    'rgb(54, 162, 235)',
+                                    'rgb(54, 162, 235)',
+                                    'rgb(54, 162, 235)',
+                                    'rgb(54, 162, 235)'
+                                ],
+                                borderWidth: 1
+                            },
                         {% endif %}
-                    {% if user_info.cities.2 %}
-                        {
-                            label:'{{ user_info.cities.2|city_name }}',
-                            data: {{ index_data.2|safe }},
-                            backgroundColor: [
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(75, 192, 192, 0.2)'
-                            ],
-                            borderColor: [
-                                'rgb(75, 192, 192)',
-                                'rgb(75, 192, 192)',
-                                'rgb(75, 192, 192)',
-                                'rgb(75, 192, 192)',
-                                'rgb(75, 192, 192)',
-                                'rgb(75, 192, 192)',
-                                'rgb(75, 192, 192)'
-                            ],
-                            borderWidth: 1
-                        }
+                        {% if user_info.cities.2 %}
+                            {
+                                label: '{{ user_info.cities.2|city_name }}',
+                                data: {{ index_data.2|safe }},
+                                backgroundColor: [
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgb(75, 192, 192)',
+                                    'rgb(75, 192, 192)',
+                                    'rgb(75, 192, 192)',
+                                    'rgb(75, 192, 192)',
+                                    'rgb(75, 192, 192)',
+                                    'rgb(75, 192, 192)',
+                                    'rgb(75, 192, 192)'
+                                ],
+                                borderWidth: 1
+                            }
                         {% endif %}
                     ],
 
