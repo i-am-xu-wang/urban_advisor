@@ -13,7 +13,7 @@ $(document).ready(function () {
 
     const childcareOptions = document.getElementById('childcare-options')
 
-    processCitiesCheckboxes = function() {
+    processCitiesCheckboxes = function () {
         var $cs = $('#cities-checkboxes').find(':checkbox:checked');
         $(atLeastOne).removeClass('fw-bold text-danger');
         $(maximumThree).removeClass('fw-bold text-success');
@@ -25,15 +25,15 @@ $(document).ready(function () {
         return $cs.length > 3;
     }
 
-    toggleDrivingOptions = function() {
+    toggleDrivingOptions = function () {
         if ($('#driving-options').val() === '0') {
             driveDistance.style.display = 'none';
-        } else{
+        } else {
             driveDistance.style.display = 'block';
         }
     }
 
-    togglePublicTransport = function() {
+    togglePublicTransport = function () {
         if ($('#public-monthly').is(":checked")) {
             monthlyOptions.style.display = 'block';
             onDemandOptions.style.display = 'none';
@@ -46,15 +46,15 @@ $(document).ready(function () {
         }
     }
 
-    toggleProperty = function() {
+    toggleProperty = function () {
         if ($('#property-price-checkbox').is(":checked")) {
             propertyPriceOptions.style.display = 'block'
-        } else{
+        } else {
             propertyPriceOptions.style.display = 'none'
         }
     }
 
-    toggleRentOrBuy = function() {
+    toggleRentOrBuy = function () {
         if ($('#rent').is(":checked")) {
             rentQuestions.style.display = 'block';
             buyQuestions.style.display = 'none';
@@ -67,24 +67,24 @@ $(document).ready(function () {
         }
     }
 
-    toggleChildcare = function() {
+    toggleChildcare = function () {
         if ($('#childcare-checkbox').is(":checked")) {
             childcareOptions.style.display = 'block'
-        } else{
+        } else {
             childcareOptions.style.display = 'none'
         }
     }
 
-    removeError = function() {
+    removeError = function () {
         $(".alert-danger").removeClass("alert-danger");
         $(".alert").removeClass("alert");
         $(".alert-dismissible").remove();
     }
 
-    errorScroll = function() {
+    errorScroll = function () {
         $([document.documentElement, document.body]).animate({
-                scrollTop: $(".alert-dismissible").offset().top
-            }, 'fast');
+            scrollTop: $(".alert-dismissible").offset().top
+        }, 'fast');
     }
 
     processCitiesCheckboxes();
@@ -134,11 +134,11 @@ $(document).ready(function () {
         toggleChildcare();
     })
 
-    $('#cost-of-living-quiz').on ("click", ".alert-danger", function () {
+    $('#cost-of-living-quiz').on("click", ".alert-danger", function () {
         removeError();
     });
 
-    submitForms = function() {
+    submitForms = function () {
         // valid will be set to false if form fails any validation check
         let valid = true;
 
@@ -146,7 +146,7 @@ $(document).ready(function () {
         removeError();
 
         // cost of living quiz validation
-        cities_checkboxes=document.getElementsByClassName("cities-checkbox");
+        cities_checkboxes = document.getElementsByClassName("cities-checkbox");
         var cities_checked = false;
 
         for (i = 0; i < cities_checkboxes.length; i++) {
