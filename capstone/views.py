@@ -1,4 +1,5 @@
 from django.shortcuts import render
+
 from . import calculator
 
 
@@ -68,9 +69,9 @@ def register_form(request):
     private_school_number = request.POST.get('private-school-numbers')
     child_care_expense = calculator.cost_of_child_care(daycare_number, private_school_number)
 
-
     # for overall quality of life option
-    overall_quality = calculator.overall_quality_of_life(user_info, living_expense, property_expense, child_care_expense)
+    overall_quality = calculator.overall_quality_of_life(user_info, living_expense, property_expense,
+                                                         child_care_expense)
     # for health care option
     cities_health_care = calculator.cost_of_health_calculation()
 

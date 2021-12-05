@@ -1,4 +1,4 @@
-h1{
+h1 {
     margin-top: 30px;
 }
 
@@ -62,11 +62,11 @@ th {
     color: white;
 }
 
-th:first-child{
+th:first-child {
     width: 500px;
 }
 
-th:not(:first-child){
+th:not(:first-child) {
     width: 200px;
     padding: 0.75rem 0.3rem;
 }
@@ -79,8 +79,8 @@ td:not(:first-child) {
     text-align: center;
 }
 
-.summary{
-    font-weight:bold;
+.summary {
+    font-weight: bold;
     height: 25px;
     font-size: 17px;
 }

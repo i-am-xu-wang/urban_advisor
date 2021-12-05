@@ -30,7 +30,7 @@
                 {% for city_quality in overall_quality %}
                     <td>
                         {{ city_quality.cost_of_living_ratio |floatformat:2 }}
-                        <span class = "rating"> <br/>{{ city_quality.cost_of_living_ratio|income_ratio_rating }}</span>
+                        <span class="rating"> <br/>{{ city_quality.cost_of_living_ratio|income_ratio_rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -40,7 +40,7 @@
                     {% for city_quality in overall_quality %}
                         <td>
                             {{ city_quality.housing_expense_ratio |floatformat:2 }}
-                        <br/>{{ city_quality.housing_expense_ratio|housing_ratio_rating }}
+                            <br/>{{ city_quality.housing_expense_ratio|housing_ratio_rating }}
                         </td>
                     {% endfor %}
                 </tr>
@@ -51,7 +51,7 @@
                     {% for city_quality in overall_quality %}
                         <td>
                             {{ city_quality.health_care_ratio |floatformat:2 }}
-                        <br/>{{ city_quality.health_care_ratio|rating }}
+                            <br/>{{ city_quality.health_care_ratio|rating }}
                         </td>
                     {% endfor %}
                 </tr>
@@ -62,7 +62,7 @@
                     {% for city_quality in overall_quality %}
                         <td>
                             {{ city_quality.crime_index |floatformat:2 }}
-                          <br/>{{ city_quality.crime_index|rating }}
+                            <br/>{{ city_quality.crime_index|rating }}
                         </td>
                     {% endfor %}
                 </tr>
@@ -71,7 +71,7 @@
                     {% for city_quality in overall_quality %}
                         <td>
                             {{ city_quality.safety_index |floatformat:2 }}
-                         <br/>{{ city_quality.safety_index|rating }}
+                            <br/>{{ city_quality.safety_index|rating }}
                         </td>
                     {% endfor %}
                 </tr>
@@ -82,7 +82,7 @@
                     {% for city_quality in overall_quality %}
                         <td>
                             {{ city_quality.food_option |floatformat:2 }}
-                         <br/>{{ city_quality.food_option|rating }}
+                            <br/>{{ city_quality.food_option|rating }}
                         </td>
                     {% endfor %}
                 </tr>
@@ -92,7 +92,7 @@
                 {% for city_quality in overall_quality %}
                     <td>
                         {{ city_quality.overall_index |floatformat:2 }}
-                     <br/>{{ city_quality.overall_index|rating }}
+                        <br/>{{ city_quality.overall_index|rating }}
                     </td>
                 {% endfor %}
             </tr>

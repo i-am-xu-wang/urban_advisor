@@ -81,19 +81,33 @@
             disableColonTypes: false, // do not interpret ":type" suffix as a type
             customTypes: {}, // extends defaultTypes
             defaultTypes: {
-                "string":  function(str) { return String(str); },
-                "number":  function(str) { return Number(str); },
-                "boolean": function(str) { var falses = ["false", "null", "undefined", "", "0"]; return falses.indexOf(str) === -1; },
-                "null":    function(str) { var falses = ["false", "null", "undefined", "", "0"]; return falses.indexOf(str) === -1 ? str : null; },
-                "array":   function(str) { return JSON.parse(str); },
-                "object":  function(str) { return JSON.parse(str); },
-                "skip":    null // skip is a special type used to ignore fields
+                "string": function (str) {
+                    return String(str);
+                },
+                "number": function (str) {
+                    return Number(str);
+                },
+                "boolean": function (str) {
+                    var falses = ["false", "null", "undefined", "", "0"];
+                    return falses.indexOf(str) === -1;
+                },
+                "null": function (str) {
+                    var falses = ["false", "null", "undefined", "", "0"];
+                    return falses.indexOf(str) === -1 ? str : null;
+                },
+                "array": function (str) {
+                    return JSON.parse(str);
+                },
+                "object": function (str) {
+                    return JSON.parse(str);
+                },
+                "skip": null // skip is a special type used to ignore fields
             },
             defaultType: "string",
         },
 
         // Validate and set defaults
-        setupOpts: function(options) {
+        setupOpts: function (options) {
             if (options == null) options = {};
             var f = $.serializeJSON;
 
@@ -112,7 +126,7 @@
             ];
             for (var opt in options) {
                 if (validOpts.indexOf(opt) === -1) {
-                    throw new  Error("serializeJSON ERROR: invalid option '" + opt + "'. Please use one of " + validOpts.join(", "));
+                    throw new Error("serializeJSON ERROR: invalid option '" + opt + "'. Please use one of " + validOpts.join(", "));
                 }
             }
 
@@ -122,15 +136,17 @@
 
         // Just like jQuery's serializeArray method, returns an array of objects with name and value.
         // but also includes the dom element (el) and is handles unchecked checkboxes if the option or data attribute are provided.
-        serializeArray: function($form, opts) {
-            if (opts == null) { opts = {}; }
+        serializeArray: function ($form, opts) {
+            if (opts == null) {
+                opts = {};
+            }
             var f = $.serializeJSON;
 
-            return $form.map(function() {
+            return $form.map(function () {
                 var elements = $.prop(this, "elements"); // handle propHook "elements" to filter or add form elements
                 return elements ? $.makeArray(elements) : this;
 
-            }).filter(function() {
+            }).filter(function () {
                 var $el = $(this);
                 var type = this.type;
 
@@ -140,7 +156,7 @@
                     rsubmittable.test(this.nodeName) && !rsubmitterTypes.test(type) && // only serialize submittable fields (and not buttons)
                     (this.checked || !rcheckableType.test(type) || f.getCheckboxUncheckedValue($el, opts) != null); // skip unchecked checkboxes (unless using opts)
 
-            }).map(function(_i, el) {
+            }).map(function (_i, el) {
                 var $el = $(this);
                 var val = $el.val();
                 var type = this.type; // "input", "select", "textarea", "checkbox", etc.
@@ -154,17 +170,17 @@
                 }
 
                 if (isArray(val)) {
-                    return $.map(val, function(val) {
-                        return { name: el.name, value: val.replace(rCRLF, "\r\n"), el: el };
-                    } );
+                    return $.map(val, function (val) {
+                        return {name: el.name, value: val.replace(rCRLF, "\r\n"), el: el};
+                    });
                 }
 
-                return { name: el.name, value: val.replace(rCRLF, "\r\n"), el: el };
+                return {name: el.name, value: val.replace(rCRLF, "\r\n"), el: el};
 
             }).get();
         },
 
-        getCheckboxUncheckedValue: function($el, opts) {
+        getCheckboxUncheckedValue: function ($el, opts) {
             var val = $el.attr("data-unchecked-value");
             if (val == null) {
                 val = opts.checkboxUncheckedValue;
@@ -173,7 +189,7 @@
         },
 
         // Parse value with type function
-        applyTypeFunc: function(name, strVal, type, el, typeFunctions) {
+        applyTypeFunc: function (name, strVal, type, el, typeFunctions) {
             var typeFunc = typeFunctions[type];
             if (!typeFunc) { // quick feedback to user if there is a typo or missconfiguration
                 throw new Error("serializeJSON ERROR: Invalid type " + type + " found in input name '" + name + "', please use one of " + objectKeys(typeFunctions).join(", "));
@@ -185,7 +201,7 @@
         //   "foo"           =>  ["foo", ""]
         //   "foo:boolean"   =>  ["foo", "boolean"]
         //   "foo[bar]:null" =>  ["foo[bar]", "null"]
-        splitType : function(name) {
+        splitType: function (name) {
             var parts = name.split(":");
             if (parts.length > 1) {
                 var t = parts.pop();
@@ -197,7 +213,7 @@
 
         // Check if this input should be skipped when it has a falsy value,
         // depending on the options to skip values by name or type, and the data-skip-falsy attribute.
-        shouldSkipFalsy: function(name, nameSansType, type, el, opts) {
+        shouldSkipFalsy: function (name, nameSansType, type, el, opts) {
             var skipFromDataAttr = $(el).attr("data-skip-falsy");
             if (skipFromDataAttr != null) {
                 return skipFromDataAttr !== "false"; // any value is true, except the string "false"
@@ -224,10 +240,14 @@
         // "foo[inn[bar]]"    => ["foo", "inn", "bar"]
         // "foo[inn][arr][0]" => ["foo", "inn", "arr", "0"]
         // "arr[][val]"       => ["arr", "", "val"]
-        splitInputNameIntoKeysArray: function(nameWithNoType) {
+        splitInputNameIntoKeysArray: function (nameWithNoType) {
             var keys = nameWithNoType.split("["); // split string into array
-            keys = $.map(keys, function (key) { return key.replace(/\]/g, ""); }); // remove closing brackets
-            if (keys[0] === "") { keys.shift(); } // ensure no opening bracket ("[foo][inn]" should be same as "foo[inn]")
+            keys = $.map(keys, function (key) {
+                return key.replace(/\]/g, "");
+            }); // remove closing brackets
+            if (keys[0] === "") {
+                keys.shift();
+            } // ensure no opening bracket ("[foo][inn]" should be same as "foo[inn]")
             return keys;
         },
 
@@ -251,10 +271,16 @@
         // deepSet(arr, ["", "bar"], v)  // arr => [v, {foo: v, bar: v}, {bar: v}]
         //
         deepSet: function (o, keys, value, opts) {
-            if (opts == null) { opts = {}; }
+            if (opts == null) {
+                opts = {};
+            }
             var f = $.serializeJSON;
-            if (isUndefined(o)) { throw new Error("ArgumentError: param 'o' expected to be an object or array, found undefined"); }
-            if (!keys || keys.length === 0) { throw new Error("ArgumentError: param 'keys' expected to be an array with least one element"); }
+            if (isUndefined(o)) {
+                throw new Error("ArgumentError: param 'o' expected to be an object or array, found undefined");
+            }
+            if (!keys || keys.length === 0) {
+                throw new Error("ArgumentError: param 'keys' expected to be an array with least one element");
+            }
 
             var key = keys[0];
 
@@ -321,18 +347,28 @@
     };
 
     // polyfill Object.keys to get option keys in IE<9
-    var objectKeys = function(obj) {
+    var objectKeys = function (obj) {
         if (Object.keys) {
             return Object.keys(obj);
         } else {
             var key, keys = [];
-            for (key in obj) { keys.push(key); }
+            for (key in obj) {
+                keys.push(key);
+            }
             return keys;
         }
     };
 
-    var isObject =          function(obj) { return obj === Object(obj); }; // true for Objects and Arrays
-    var isUndefined =       function(obj) { return obj === void 0; }; // safe check for undefined values
-    var isValidArrayIndex = function(val) { return /^[0-9]+$/.test(String(val)); }; // 1,2,3,4 ... are valid array indexes
-    var isArray =           Array.isArray || function(obj) { return Object.prototype.toString.call(obj) === "[object Array]"; };
+    var isObject = function (obj) {
+        return obj === Object(obj);
+    }; // true for Objects and Arrays
+    var isUndefined = function (obj) {
+        return obj === void 0;
+    }; // safe check for undefined values
+    var isValidArrayIndex = function (val) {
+        return /^[0-9]+$/.test(String(val));
+    }; // 1,2,3,4 ... are valid array indexes
+    var isArray = Array.isArray || function (obj) {
+        return Object.prototype.toString.call(obj) === "[object Array]";
+    };
 }));
