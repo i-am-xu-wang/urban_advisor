@@ -29,7 +29,7 @@ def register_form(request):
     inexpensive_restaurant_options = request.POST["inexpensive-restaurant-options"]
     coffee_option = request.POST["coffee-options"]
     going_out_options = request.POST["going-out-options"]
-    smoking_option = request.POST["smoking-options"]
+    # smoking_option = request.POST["smoking-options"]
     drinking_options = request.POST["drinking-options"]
     driving_options = request.POST["driving-options"]
     rideshare_options = request.POST["rideshare-options"]
@@ -48,7 +48,7 @@ def register_form(request):
     clothing_options = request.POST["clothing-options"]
     living_expense = calculator.cost_of_living_calculation(
         household_member, eating_options, inexpensive_restaurant_options, coffee_option, going_out_options,
-        smoking_option, drinking_options, driving_options, rideshare_options, public_transit_options,
+         drinking_options, driving_options, rideshare_options, public_transit_options,
         public_transit_members, public_transit_trips, gym_options, vacation_spending, clothing_options,
     )
     # for property option
