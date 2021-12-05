@@ -160,7 +160,7 @@ $(document).ready(function () {
             checkboxes.addClass('alert alert-danger');
             valid = false;
             message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
-                '    <strong>Error!</strong> Please select at least one city to evaluate\n' +
+                '    <strong>Error!</strong> Please select at least one city to evaluate.\n' +
                 '</div>');
             checkboxes.before(message);
             errorScroll();
@@ -169,7 +169,7 @@ $(document).ready(function () {
             salaryQuestion.addClass('alert alert-danger');
             valid = false;
             message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
-                '    <strong>Error!</strong> Please enter anticipated annual income\n' +
+                '    <strong>Error!</strong> Please enter anticipated annual income.\n' +
                 '</div>');
             salaryQuestion.before(message);
             errorScroll();
@@ -178,7 +178,7 @@ $(document).ready(function () {
             vacationSpending.addClass('alert alert-danger');
             valid = false;
             message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
-                '    <strong>Error!</strong> Please enter vacation spending\n' +
+                '    <strong>Error!</strong> Please enter vacation spending.\n' +
                 '</div>');
             vacationSpending.before(message);
             errorScroll();
@@ -191,7 +191,7 @@ $(document).ready(function () {
                     cityProximityOptions.addClass('alert alert-danger');
                     valid = false;
                     message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
-                        '    <strong>Error!</strong> Please select an option for city proximity\n' +
+                        '    <strong>Error!</strong> Please select an option for city proximity.\n' +
                         '</div>');
                     cityProximityOptions.before(message);
                     errorScroll();
@@ -200,7 +200,7 @@ $(document).ready(function () {
                     rentOrBuyOptions.addClass('alert alert-danger');
                     valid = false;
                     message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
-                        '    <strong>Error!</strong> Please select an option for rent or buy\n' +
+                        '    <strong>Error!</strong> Please select an option for rent or buy.\n' +
                         '</div>');
                     rentOrBuyOptions.before(message);
                     errorScroll();
@@ -211,7 +211,7 @@ $(document).ready(function () {
                             rentQuestions.addClass('alert alert-danger');
                             valid = false;
                             message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
-                                '    <strong>Error!</strong> Please select an option for rental bedrooms\n' +
+                                '    <strong>Error!</strong> Please select an option for rental bedrooms.\n' +
                                 '</div>');
                             rentQuestions.before(message);
                             errorScroll();
@@ -222,7 +222,7 @@ $(document).ready(function () {
                             buySquareFootageQuestion.addClass('alert alert-danger');
                             valid = false;
                             message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
-                                '    <strong>Error!</strong> Please enter desired square footage\n' +
+                                '    <strong>Error!</strong> Please enter desired square footage.\n' +
                                 '</div>');
                             buySquareFootageQuestion.before(message);
                             errorScroll();
@@ -231,7 +231,7 @@ $(document).ready(function () {
                             downPaymentQuestion.addClass('alert alert-danger');
                             valid = false;
                             message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
-                                '    <strong>Error!</strong> Please enter desired down payment\n' +
+                                '    <strong>Error!</strong> Please enter desired down payment.\n' +
                                 '</div>');
                             downPaymentQuestion.before(message);
                             errorScroll();
