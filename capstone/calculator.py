@@ -168,6 +168,7 @@ def overall_quality_of_life(userInfo: UserInfo, living_expense: CostLivingResult
         if userInfo.food_option:
             count += 1
             total += int((getattr(Expense.objects.get(id=77), city)))
+
         total += (100 - ((int(living_expense[i].total) / int(userInfo.salary)) * 100))
 
         overall_quality_results.append(
@@ -262,13 +263,13 @@ def cost_of_property_calculation(proximity, rent_or_buy, property_size, down_pay
             if proximity == 'Suburb':
                 down = (int(property_size) * int(getattr(Expense.objects.get(id=37), v))) * int(
                     down_payment_percent) / 100
-                p = (int(property_size) * int(getattr(Expense.objects.get(id=37), v))) - down
+                p = (float(property_size) * float(getattr(Expense.objects.get(id=37), v))) - down
                 m = p * ((r * ((1 + r) ** n)) / ((1 + r) ** n - 1))
                 cities_property_expense.append(CostPropertyResult(rent_or_buy, m, property_size, proximity))
             elif proximity == 'City Center':
-                down = (int(property_size) * int(getattr(Expense.objects.get(id=37), v))) * int(
+                down = (float(property_size) * float(getattr(Expense.objects.get(id=37), v))) * int(
                     down_payment_percent) / 100
-                p = int(property_size) * int(getattr(Expense.objects.get(id=36), v)) - down
+                p = float(property_size) * float(getattr(Expense.objects.get(id=36), v)) - down
                 m = p * ((r * ((1 + r) ** n)) / ((1 + r) ** n - 1))
                 cities_property_expense.append(CostPropertyResult(rent_or_buy, m, property_size, proximity))
 
