@@ -1,5 +1,4 @@
 from django.shortcuts import render
-
 from . import calculator
 
 
@@ -23,19 +22,16 @@ def register_form(request):
     cities = request.POST.getlist('cities-checkbox')
     user_info = calculator.register_user(cities, salary, feature_options)
     salary_section_list = zip(user_info.cities, user_info.salary_comparison, user_info.remain_money)
-    salary_list = calculator.get_selected_city_salary()
-    salary_list.insert(0, user_info.salary)
-    labels_for_salary = calculator.get_salary_labels()
-
     # for cost of living option
     household_member = request.POST["household-options"]
     eating_options = request.POST["eating-out-options"]
     inexpensive_restaurant_options = request.POST["inexpensive-restaurant-options"]
     coffee_option = request.POST["coffee-options"]
     going_out_options = request.POST["going-out-options"]
-    # smoking_option = request.POST["smoking-options"]
+    smoking_option = request.POST["smoking-options"]
     drinking_options = request.POST["drinking-options"]
     driving_options = request.POST["driving-options"]
+    driving_distance = request.POST["driving-distance"]
     rideshare_options = request.POST["rideshare-options"]
     public_transit_options = request.POST["public-transit-options"]
     if public_transit_options == "No":
@@ -52,7 +48,7 @@ def register_form(request):
     clothing_options = request.POST["clothing-options"]
     living_expense = calculator.cost_of_living_calculation(
         household_member, eating_options, inexpensive_restaurant_options, coffee_option, going_out_options,
-         drinking_options, driving_options, rideshare_options, public_transit_options,
+        smoking_option, drinking_options, driving_options,driving_distance, rideshare_options, public_transit_options,
         public_transit_members, public_transit_trips, gym_options, vacation_spending, clothing_options,
     )
     # for property option
@@ -73,9 +69,9 @@ def register_form(request):
     private_school_number = request.POST.get('private-school-numbers')
     child_care_expense = calculator.cost_of_child_care(daycare_number, private_school_number)
 
+
     # for overall quality of life option
-    overall_quality = calculator.overall_quality_of_life(user_info, living_expense, property_expense,
-                                                         child_care_expense)
+    overall_quality = calculator.overall_quality_of_life(user_info, living_expense, property_expense, child_care_expense)
     # for health care option
     cities_health_care = calculator.cost_of_health_calculation()
 
@@ -84,10 +80,10 @@ def register_form(request):
 
     # for food option
     cities_food_option = calculator.food_option_calculation()
+    #remaining_salary = calculator.remaining(calculator.UserInfo,calculator.CostLivingResult,calculator.CostPropertyResult, calculator.ChildCareResult,salary)
 
     return render(request, "capstone/report.html",
                   {"cities_living_expense": living_expense, "user_info": user_info,
-                   "labels_for_salary": labels_for_salary, "salary_list": salary_list,
                    "salary_section_list": salary_section_list, "overall_quality": overall_quality,
                    "cities_property_expense": property_expense, "child_care": child_care_expense,
                    "cities_health_care": cities_health_care, "cities_crime_rate": cities_crime_rate,
