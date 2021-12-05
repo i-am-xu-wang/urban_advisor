@@ -28,37 +28,47 @@ th {
 }
 
 #index-table th {
-    background-color: seagreen;
+    /*background-color: seagreen;*/
+    background-color: #482f2f;
     color: white;
 }
 
 #cost-living th {
-    background-color: cornflowerblue;
+    /*background-color: cornflowerblue;*/
+    background-color: #2f4835;
     color: white;
 }
 
 #cost-property th {
-    background-color: lightskyblue;
+    /*background-color: lightskyblue;*/
+    background-color: #2f3b48;
     color: white;
 }
 
 #child-care th {
-    background-color: lightseagreen;
+    /*background-color: lightseagreen;*/
+    background-color: #66909d;
     color: white;
 }
 
 #health-care th {
-    background-color: limegreen;
+    /*background-color: limegreen;*/
+    background-color: #2f4841;
+
     color: white;
 }
 
 #crime-rate th {
-    background-color: lightpink;
+    /*background-color: lightpink;*/
+    background-color: #48482f;
+
     color: white;
 }
 
 #food-option th {
-    background-color: lightsalmon;
+    /*background-color: lightsalmon;*/
+    background-color: #482f44;
+
     color: white;
 }
 

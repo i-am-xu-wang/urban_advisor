@@ -29,22 +29,13 @@
                         label: "$USD",
                         data: {{ salary_list|safe }},
                         backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 159, 64, 0.2)',
-                            'rgba(255, 205, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(201, 203, 207, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgb(255, 99, 132)',
-                            'rgb(255, 159, 64)',
-                            'rgb(255, 205, 86)',
-                            'rgb(75, 192, 192)',
-                            'rgb(54, 162, 235)',
-                            'rgb(153, 102, 255)',
-                            'rgb(201, 203, 207)'
+                            'rgba(72,47,47)',
+                            'rgba(47,72,53)',
+                            'rgba(47,59,72)',
+                            'rgba(102,144,157)',
+                            'rgba(47,72,65)',
+                            'rgba(72,72,47)',
+                            'rgba(72,47,68)'
                         ],
                         borderWidth: 1
                     }],
@@ -59,6 +50,11 @@
                     }
                 }
             };
+{#            {% if user_info.property_option or user_info.healthcare or user_info.childcare or user_info.crime_rate or user_info.food_option %}#}
+{#        <div class="container" style="width: 75%;">#}
+{#            <canvas id="index-chart"></canvas>#}
+{#        </div>#}
+{#    {% endif %}#}
             let indexChart = {
                 type: 'bar',
                 data: {
@@ -67,22 +63,14 @@
                         label: '{{ user_info.cities.0|city_name }}',
                         data: {{ index_data.0|safe }},
                         backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 99, 132, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgb(255, 99, 132)',
-                            'rgb(255, 99, 132)',
-                            'rgb(255, 99, 132)',
-                            'rgb(255, 99, 132)',
-                            'rgb(255, 99, 132)',
-                            'rgb(255, 99, 132)',
-                            'rgb(255, 99, 132)'
+                            'rgba(72,47,47)',
+                            'rgba(72,47,47)',
+                            'rgba(72,47,47)',
+                            'rgba(72,47,47)',
+                            'rgba(72,47,47)',
+                            'rgba(72,47,47)',
+                            'rgba(72,47,47)',
+
                         ],
                         borderWidth: 1
                     },
@@ -91,22 +79,14 @@
                                 label: '{{ user_info.cities.1|city_name }}',
                                 data: {{ index_data.1|safe }},
                                 backgroundColor: [
-                                    'rgba(54, 162, 235, 0.2)',
-                                    'rgba(54, 162, 235, 0.2)',
-                                    'rgba(54, 162, 235, 0.2)',
-                                    'rgba(54, 162, 235, 0.2)',
-                                    'rgba(54, 162, 235, 0.2)',
-                                    'rgba(54, 162, 235, 0.2)',
-                                    'rgba(54, 162, 235, 0.2)'
-                                ],
-                                borderColor: [
-                                    'rgb(54, 162, 235)',
-                                    'rgb(54, 162, 235)',
-                                    'rgb(54, 162, 235)',
-                                    'rgb(54, 162, 235)',
-                                    'rgb(54, 162, 235)',
-                                    'rgb(54, 162, 235)',
-                                    'rgb(54, 162, 235)'
+                                    'rgba(47,72,53)',
+                                    'rgba(47,72,53)',
+                                    'rgba(47,72,53)',
+                                    'rgba(47,72,53)',
+                                    'rgba(47,72,53)',
+                                    'rgba(47,72,53)',
+                                    'rgba(47,72,53)',
+
                                 ],
                                 borderWidth: 1
                             },
@@ -116,28 +96,18 @@
                                 label: '{{ user_info.cities.2|city_name }}',
                                 data: {{ index_data.2|safe }},
                                 backgroundColor: [
-                                    'rgba(75, 192, 192, 0.2)',
-                                    'rgba(75, 192, 192, 0.2)',
-                                    'rgba(75, 192, 192, 0.2)',
-                                    'rgba(75, 192, 192, 0.2)',
-                                    'rgba(75, 192, 192, 0.2)',
-                                    'rgba(75, 192, 192, 0.2)',
-                                    'rgba(75, 192, 192, 0.2)'
-                                ],
-                                borderColor: [
-                                    'rgb(75, 192, 192)',
-                                    'rgb(75, 192, 192)',
-                                    'rgb(75, 192, 192)',
-                                    'rgb(75, 192, 192)',
-                                    'rgb(75, 192, 192)',
-                                    'rgb(75, 192, 192)',
-                                    'rgb(75, 192, 192)'
+                                    'rgba(47,59,72)',
+                                    'rgba(47,59,72)',
+                                    'rgba(47,59,72)',
+                                    'rgba(47,59,72)',
+                                    'rgba(47,59,72)',
+                                    'rgba(47,59,72)',
+                                    'rgba(47,59,72)',
                                 ],
                                 borderWidth: 1
                             }
                         {% endif %}
                     ],
-
                 },
                 options: {
                     indexAxis: 'y', // convert to horizontal bar chart
@@ -345,7 +315,7 @@
         </tr>
         <tr>
             <td>
-                Estimated Cinema and Nightlife Expense:
+                Estimated entertainment(movies/nightlife/etc)?:
             </td>
             {% for city_result in cities_living_expense %}
                 <td>
@@ -355,7 +325,7 @@
         </tr>
         <tr>
             <td>
-                Estimated Vacation Expense (amortized by month):
+                Estimated Vacation Expense:
             </td>
             {% for city_result in cities_living_expense %}
                 <td>
