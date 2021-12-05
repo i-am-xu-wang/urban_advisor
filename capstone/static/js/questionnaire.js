@@ -15,12 +15,9 @@ $(document).ready(function () {
 
     processCitiesCheckboxes = function () {
         var $cs = $('#cities-checkboxes').find(':checkbox:checked');
-        $(atLeastOne).removeClass('fw-bold text-danger');
-        $(maximumThree).removeClass('fw-bold text-success');
-        if ($cs.length === 0) {
-            $(atLeastOne).addClass('fw-bold text-danger');
-        } else if ($cs.length >= 3) {
-            $(maximumThree).addClass('fw-bold text-success');
+        $(maximumThree).removeClass('fw-bold spruce-text');
+        if ($cs.length >= 3) {
+            $(maximumThree).addClass('fw-bold spruce-text');
         }
         return $cs.length > 3;
     }
