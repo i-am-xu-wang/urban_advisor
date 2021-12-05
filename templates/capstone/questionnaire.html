@@ -22,14 +22,11 @@
         {% csrf_token %}
         <!-- Cities options -->
         <div id="cities-checkboxes">
-            Choose cities to compare (Max 3)
-            {#            <span id="at-least-one">at least one</span>, #}
-            {#            <span id="maximum-three">maximum three</span>):#}
-            {#            <span class = "note">* = required</span>#}
+            Choose cities to compare (<span id="maximum-three">maximum three</span>)*:
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6 col-md-4 p-1">
-                        <label class="card text-white bg-success pt-0" for="washington-dc-checkbox"><img
+                        <label class="card text-white spruce-bg pt-0" for="washington-dc-checkbox"><img
                                 class="card-img-top" src="{% static "images/washington-dc.jpeg" %}"
                                 alt="Washington DC"/>
                             <div class="card-body"><input type="checkbox" id="washington-dc-checkbox"
@@ -39,7 +36,7 @@
                         </label>
                     </div>
                     <div class="col-sm-6 col-md-4 p-1">
-                        <label class="card text-white bg-success pt-0" for="philadelphia-checkbox"><img
+                        <label class="card text-white spruce-bg pt-0" for="philadelphia-checkbox"><img
                                 class="card-img-top" src="{% static "images/philadelphia.jpeg" %}" alt="Philadelphia"/>
                             <div class="card-body"><input type="checkbox" id="philadelphia-checkbox"
                                                           name="cities-checkbox" value="Philadelphia"
@@ -48,7 +45,7 @@
                         </label>
                     </div>
                     <div class="col-sm-6 col-md-4 p-1">
-                        <label class="card text-white bg-success pt-0" for="boston-checkbox"><img class="card-img-top"
+                        <label class="card text-white spruce-bg pt-0" for="boston-checkbox"><img class="card-img-top"
                                                                                                   src="{% static "images/boston.jpeg" %}"
                                                                                                   alt="Boston"/>
                             <div class="card-body"><input type="checkbox" id="boston-checkbox" name="cities-checkbox"
@@ -57,7 +54,7 @@
                         </label>
                     </div>
                     <div class="col-sm-6 col-md-4 p-1">
-                        <label class="card text-white bg-success pt-0" for="seattle-checkbox"><img class="card-img-top"
+                        <label class="card text-white spruce-bg pt-0" for="seattle-checkbox"><img class="card-img-top"
                                                                                                    src="{% static "images/seattle.jpeg" %}"
                                                                                                    alt="Seattle"/>
                             <div class="card-body"><input type="checkbox" id="seattle-checkbox" name="cities-checkbox"
@@ -67,7 +64,7 @@
                         </label>
                     </div>
                     <div class="col-sm-6 col-md-4 p-1">
-                        <label class="card text-white bg-success pt-0" for="silicon-valley-checkbox"><img
+                        <label class="card text-white spruce-bg pt-0" for="silicon-valley-checkbox"><img
                                 class="card-img-top" src="{% static "images/sf.jpg" %}"
                                 alt="Silicon Valley"/>
                             <div class="card-body"><input type="checkbox" id="silicon-valley-checkbox"
@@ -77,7 +74,7 @@
                         </label>
                     </div>
                     <div class="col-sm-6 col-md-4 p-1">
-                        <label class="card text-white bg-success pt-0" for="roanoke-checkbox"><img class="card-img-top"
+                        <label class="card text-white spruce-bg pt-0" for="roanoke-checkbox"><img class="card-img-top"
                                                                                                    src="{% static "images/roanoke.jpeg" %}"
                                                                                                    alt="Roanoke"/>
                             <div class="card-body"><input type="checkbox" id="roanoke-checkbox" name="cities-checkbox"
@@ -462,7 +459,8 @@
                 </select>
             </div>
         </div>
-        <input class="btn btn-success" type="button" onClick="submitForms()" id="submit-button" name="submit-button"
+        <p><strong>* = required</strong></p>
+        <input class="btn text-white spruce-bg" type="button" onClick="submitForms()" id="submit-button" name="submit-button"
                value="Submit">
     </form>
 {% endblock %}
