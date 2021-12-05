@@ -9,13 +9,12 @@ from capstone.models import Expense
 class UserInfo:
     cities: List[str]
     salary: int
-    salary_comparison: List[int]
+    salary_comparison: List[float]
     property_option: bool
     crime_rate: bool
     healthcare: bool
     childcare: bool
     food_option: bool
-    #remain_money: List[int]
 
 
 @dataclass
@@ -117,24 +116,18 @@ def register_user(cities, salary, feature_options: List[str]):
     healthcare = 'healthcare' in feature_options
     childcare = 'childcare' in feature_options
     food_option = 'food' in feature_options
-    # todo:add salary comparison of each city into the comparison list
-    # todo:add remain_money (per month) into the comparison list
-    # for the lower than the average salary, store negative percentage number, for the higher than the average salary
-    # store positive percentage number
 
     salary_comparison = []
-    #remain_money = [1, 2, 3]
     for i, city in enumerate(selected_cities):
         salary_comparison.append(((int(salary) - int(getattr(Expense.objects.get(id=67), city))) / int(
             getattr(Expense.objects.get(id=67), city))) * 100)
     return UserInfo(cities, salary, salary_comparison, property_option, crime_rate, healthcare, childcare, food_option)
-                    #,remain_money)
 
 
-def remaining(userInfo: UserInfo,living_expense: CostLivingResult, property_expense: CostPropertyResult,
+def remaining(userInfo: UserInfo, living_expense: CostLivingResult, property_expense: CostPropertyResult,
               child_care_expense: ChildCareResult, salary):
     remaining_money = []
-    salary = int(salary)/12
+    salary = int(salary) / 12
     for i, city in enumerate(selected_cities):
         total = 0
         if userInfo.childcare:
@@ -142,11 +135,9 @@ def remaining(userInfo: UserInfo,living_expense: CostLivingResult, property_expe
         if userInfo.property_option:
             total += (int(property_expense[i].monthly_payment))
         remaining_money.append(salary - (int(living_expense[i].total) + total))
-    return 
+    return remaining_money
 
 
-
-# todo: return a list of overall quality_of_life_result
 def overall_quality_of_life(userInfo: UserInfo, living_expense: CostLivingResult, property_expense: CostPropertyResult,
                             child_care_expense: ChildCareResult):
     overall_quality_results = []
@@ -157,7 +148,7 @@ def overall_quality_of_life(userInfo: UserInfo, living_expense: CostLivingResult
         l = 0
         if userInfo.childcare:
             count += 1
-            k = (((living_expense[i].total + child_care_expense[i].total)/ int(userInfo.salary)) * 100)
+            k = (((living_expense[i].total + child_care_expense[i].total) / int(userInfo.salary)) * 100)
             total += (100 - k)
         else:
             k = ((living_expense[i].total / int(userInfo.salary)) * 100)
@@ -179,13 +170,13 @@ def overall_quality_of_life(userInfo: UserInfo, living_expense: CostLivingResult
         total += (100 - ((int(living_expense[i].total) / int(userInfo.salary)) * 100))
 
         overall_quality_results.append(
-            OverallQualityResult( k,
-                l,
-                (getattr(Expense.objects.get(id=72), city)),
-                (getattr(Expense.objects.get(id=70), city)),
-                (getattr(Expense.objects.get(id=71), city)),
-                (getattr(Expense.objects.get(id=77), city)),
-                total / count)  # dummy data
+            OverallQualityResult(k,
+                                 l,
+                                 (getattr(Expense.objects.get(id=72), city)),
+                                 (getattr(Expense.objects.get(id=70), city)),
+                                 (getattr(Expense.objects.get(id=71), city)),
+                                 (getattr(Expense.objects.get(id=77), city)),
+                                 total / count)
         )
     return overall_quality_results
 
@@ -227,8 +218,9 @@ def cost_of_living_calculation(household_member, eating_options, inexpensive_res
         gas.append(
             (int(driving_options) * int(driving_distance) / avg_mpg) * int(getattr(Expense.objects.get(id=61), v)))
         total.append(
-            int(food[i]) + int(grocery[i]) + int(entertainment[i]) + float(gym[i]) + int(vacation_spending) / 12.0 + int(
-                cigarettes[i]) + float (drinks[i]) + float(public_transport[i]) + clothing[i] + gas[i] + taxi[i])
+            int(food[i]) + int(grocery[i]) + int(entertainment[i]) + float(gym[i]) + int(
+                vacation_spending) / 12.0 + int(
+                cigarettes[i]) + float(drinks[i]) + float(public_transport[i]) + clothing[i] + gas[i] + taxi[i])
 
     cost_of_living_result = []
     for i in range(len(selected_cities)):
@@ -248,7 +240,8 @@ def cost_of_property_calculation(proximity, rent_or_buy, property_size, down_pay
                     CostPropertyResult(rent_or_buy, getattr(Expense.objects.get(id=32), v), property_size, proximity))
             elif proximity == 'City Center' and property_size == 'Two Bedrooms':
                 cities_property_expense.append(CostPropertyResult(rent_or_buy, (
-                        float(getattr(Expense.objects.get(id=32), v)) + float(getattr(Expense.objects.get(id=34), v)) / 2),
+                        float(getattr(Expense.objects.get(id=32), v)) + float(
+                    getattr(Expense.objects.get(id=34), v)) / 2),
                                                                   property_size, proximity))
             elif proximity == 'City Center' and property_size == 'Three Bedrooms':
                 cities_property_expense.append(
@@ -258,7 +251,8 @@ def cost_of_property_calculation(proximity, rent_or_buy, property_size, down_pay
                     CostPropertyResult(rent_or_buy, getattr(Expense.objects.get(id=33), v), property_size, proximity))
             elif proximity == 'Suburb' and property_size == 'Two Bedrooms':
                 cities_property_expense.append(CostPropertyResult(rent_or_buy, (
-                        float(getattr(Expense.objects.get(id=33), v)) + float(getattr(Expense.objects.get(id=35), v)) / 2),
+                        float(getattr(Expense.objects.get(id=33), v)) + float(
+                    getattr(Expense.objects.get(id=35), v)) / 2),
                                                                   property_size, proximity))
             elif proximity == 'Suburb' and property_size == 'Three Bedrooms':
                 cities_property_expense.append(
@@ -282,7 +276,6 @@ def cost_of_property_calculation(proximity, rent_or_buy, property_size, down_pay
     return cities_property_expense
 
 
-# todo: childcare calculation
 def cost_of_child_care(daycare_number, private_school_number):
     child_care_city = []
     for city in selected_cities:
@@ -310,7 +303,6 @@ def cost_of_health_calculation():
     return health_care_city
 
 
-# todo: this function purely fetch data from DB, not using data pass from frontend.
 def cost_of_crime_calculation():
     crime_city = []
     for city in selected_cities:
@@ -327,7 +319,6 @@ def cost_of_crime_calculation():
     return crime_city
 
 
-# todo: this function purely fetch data from DB, not using data pass from frontend.
 def food_option_calculation():
     food_city = []
     for city in selected_cities:
@@ -356,9 +347,9 @@ def get_salary_labels():
 def add_index_data(overall_quality: List[OverallQualityResult]):
     data = []
     for overall_quality_per_city in overall_quality:
-        data_per_city = [overall_quality_per_city.cost_of_living_ratio]
+        data_per_city = [round(overall_quality_per_city.cost_of_living_ratio,2)]
         if overall_quality_per_city.housing_expense_ratio != -1:
-            data_per_city.append(overall_quality_per_city.housing_expense_ratio)
+            data_per_city.append(round(overall_quality_per_city.housing_expense_ratio,2))
         if overall_quality_per_city.health_care_ratio != -1:
             data_per_city.append(overall_quality_per_city.health_care_ratio)
         if overall_quality_per_city.crime_index != -1:

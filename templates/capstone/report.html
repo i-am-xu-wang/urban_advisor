@@ -14,9 +14,8 @@
         {% for city_result, salary_compare, remain_money in salary_section_list %}
             <p>To Live in <strong>{{ city_result|city_name }}</strong>:</p>
             <p> Your salary is {{ salary_compare | salary_percentage|floatformat:2 }}% {{ salary_compare|modifier }}
-                than the average salary. You can save approximately ${{ remain_money |floatformat:2 }} per month.</p>
+                than the average salary. You have approximately ${{ remain_money |floatformat:2 }} left per month.</p>
         {% endfor %}
-        {#    Salary Graph#}
         <div class="container" style="width: 75%;">
             <canvas id="salary-chart"></canvas>
         </div>
@@ -50,11 +49,6 @@
                     }
                 }
             };
-{#            {% if user_info.property_option or user_info.healthcare or user_info.childcare or user_info.crime_rate or user_info.food_option %}#}
-{#        <div class="container" style="width: 75%;">#}
-{#            <canvas id="index-chart"></canvas>#}
-{#        </div>#}
-{#    {% endif %}#}
             let indexChart = {
                 type: 'bar',
                 data: {
