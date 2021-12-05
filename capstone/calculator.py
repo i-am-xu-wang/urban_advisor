@@ -15,7 +15,7 @@ class UserInfo:
     healthcare: bool
     childcare: bool
     food_option: bool
-    remain_money: List[int]
+    #remain_money: List[int]
 
 
 @dataclass
@@ -123,15 +123,15 @@ def register_user(cities, salary, feature_options: List[str]):
     # store positive percentage number
 
     salary_comparison = []
-    remain_money = [1, 2, 3]
+    #remain_money = [1, 2, 3]
     for i, city in enumerate(selected_cities):
         salary_comparison.append(((int(salary) - int(getattr(Expense.objects.get(id=67), city))) / int(
             getattr(Expense.objects.get(id=67), city))) * 100)
-    return UserInfo(cities, salary, salary_comparison, property_option, crime_rate, healthcare, childcare, food_option,
-                    remain_money)
+    return UserInfo(cities, salary, salary_comparison, property_option, crime_rate, healthcare, childcare, food_option)
+                    #,remain_money)
 
 
-'''def remaining(userInfo: UserInfo,living_expense: CostLivingResult, property_expense: CostPropertyResult,
+def remaining(userInfo: UserInfo,living_expense: CostLivingResult, property_expense: CostPropertyResult,
               child_care_expense: ChildCareResult, salary):
     remaining_money = []
     salary = int(salary)/12
@@ -143,7 +143,7 @@ def register_user(cities, salary, feature_options: List[str]):
             total += (int(property_expense[i].monthly_payment))
         remaining_money.append(salary - (int(living_expense[i].total) + total))
     return 
-    '''
+
 
 
 # todo: return a list of overall quality_of_life_result

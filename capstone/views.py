@@ -21,7 +21,7 @@ def register_form(request):
     salary = request.POST.get('salary')
     cities = request.POST.getlist('cities-checkbox')
     user_info = calculator.register_user(cities, salary, feature_options)
-    salary_section_list = zip(user_info.cities, user_info.salary_comparison, user_info.remain_money)
+    salary_section_list = zip(user_info.cities, user_info.salary_comparison)#, user_info.remain_money)
     salary_list = calculator.get_selected_city_salary()
     salary_list.insert(0, user_info.salary)
     labels_for_salary = calculator.get_salary_labels()
@@ -83,7 +83,10 @@ def register_form(request):
 
     # for food option
     cities_food_option = calculator.food_option_calculation()
-    # remaining_salary = calculator.remaining(calculator.UserInfo,calculator.CostLivingResult,calculator.CostPropertyResult, calculator.ChildCareResult,salary)
+
+    #for remaining salary
+    remaining_salary = calculator.remaining(user_info, living_expense, property_expense,
+                                            child_care_expense, salary)
     # for the quality graph
     index_labels = generate_overall_quality_labels(user_info)
     index_data = calculator.add_index_data(overall_quality)
