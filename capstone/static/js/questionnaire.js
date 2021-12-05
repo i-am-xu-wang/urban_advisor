@@ -1,10 +1,12 @@
 $(document).ready(function () {
-    const moneyRegExp = /^[$0-9,]+([.][0-9]{0,2})?$/;
+    const moneyRegExp = /^[$0-9][$0-9,]+?$/;
+    const numberRegExp = /^[0-9,]+$/;
     const percentRegExp = /^([0-9]{1,2}){1}(\.[0-9]{1,2})?$/;
 
     const maximumThree = document.getElementById('maximum-three');
 
     const driveDistance = document.getElementById('when-driving');
+    const drivingDistance = $('input[name="driving-distance"]');
 
     const monthlyOptions = document.getElementById('when-public-monthly');
     const onDemandOptions = document.getElementById('when-public-on-demand');
@@ -177,7 +179,7 @@ $(document).ready(function () {
             salaryQuestion.addClass('alert alert-danger');
             valid = false;
             message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
-                '    <strong>Error!</strong> Please only submit a dollar amount for this field.\n' +
+                '    <strong>Error!</strong> Please only submit a whole dollar amount for this field.\n' +
                 '</div>');
             salaryQuestion.before(message);
             errorScroll();
@@ -195,9 +197,18 @@ $(document).ready(function () {
             vacationSpending.addClass('alert alert-danger');
             valid = false;
             message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
-                '    <strong>Error!</strong> Please only submit a dollar amount for this field.\n' +
+                '    <strong>Error!</strong> Please only submit a whole dollar amount for this field.\n' +
                 '</div>');
             vacationSpending.before(message);
+            errorScroll();
+        } else if (!(drivingDistance.val() === "") && !numberRegExp.test(drivingDistance.val())) {
+            const whenDriving = $('#when-driving');
+            whenDriving.addClass('alert alert-danger');
+            valid = false;
+            message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
+                '    <strong>Error!</strong> Please only submit a whole number for this field.\n' +
+                '</div>');
+            whenDriving.before(message);
             errorScroll();
         } else {
             // property price quiz validation
@@ -243,6 +254,15 @@ $(document).ready(function () {
                                 '</div>');
                             buySquareFootageQuestion.before(message);
                             errorScroll();
+                        } else if (!numberRegExp.test($('input[name="buy-square-footage"]').val())) {
+                            const buySquareFootageQuestion = $('#buy-square-footage-question');
+                            buySquareFootageQuestion.addClass('alert alert-danger');
+                            valid = false;
+                            message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
+                                '    <strong>Error!</strong> Please only submit a whole number for this field.\n' +
+                                '</div>');
+                            buySquareFootageQuestion.before(message);
+                            errorScroll();
                         } else if ($('input[name="down-payment"]').val() === "") {
                             const downPaymentQuestion = $('#down-payment-question');
                             downPaymentQuestion.addClass('alert alert-danger');
@@ -257,7 +277,7 @@ $(document).ready(function () {
                             downPaymentQuestion.addClass('alert alert-danger');
                             valid = false;
                             message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
-                                '    <strong>Error!</strong> Please only submit a percentage between 0-99.99.\n' +
+                                '    <strong>Error!</strong> Please only submit a percentage between 0-99.99 (maximum two decimal places).\n' +
                                 '</div>');
                             downPaymentQuestion.before(message);
                             errorScroll();
@@ -268,10 +288,14 @@ $(document).ready(function () {
             // if we have passed all checks without valid being set to false, we are ready to submit
             if (valid) {
                 // accept 0 as a valid driving-distance value if user did not submit their own
-                const drivingDistance = $('input[name="driving-distance"]')
                 if (drivingDistance.val() === "") {
                     drivingDistance.val(0);
                 }
+                // replace all dollar signs or commas allowed in text input
+                $('input[name="salary"]').val($('input[name="salary"]').val().replace(/[$,]/g , ""));
+                $('input[name="driving-distance"]').val($('input[name="driving-distance"]').val().replaceAll(',', ''));
+                $('input[name="vacation-spending"]').val($('input[name="vacation-spending"]').val().replace(/[$,]/g , ""));
+                $('input[name="buy-square-footage"]').val($('input[name="buy-square-footage"]').val().replaceAll(',', ''));
                 // submit form
                 document.getElementById('cost-of-living-quiz').submit();
             }
