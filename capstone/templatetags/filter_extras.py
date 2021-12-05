@@ -20,7 +20,7 @@ def generate_rating_qualifier(score):
 @register.filter(name='city_name')
 def match_city_name(city):
     if city == "sf":
-        return "Silicon Valley"
+        return "San Francisco"
     elif city == "dc":
         return "Washington D.C."
     else:
