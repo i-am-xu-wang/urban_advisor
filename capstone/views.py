@@ -63,7 +63,6 @@ def register_form(request):
     else:
         property_size = request.POST.get('buy-square-footage')
         down_payment_percent = request.POST.get('down-payment')
-        print(down_payment_percent)
     property_expense = calculator.cost_of_property_calculation(proximity, rent_or_buy, property_size,
                                                                down_payment_percent)
 
@@ -91,7 +90,7 @@ def register_form(request):
 
     # for the quality graph
     index_labels = generate_overall_quality_labels(user_info)
-    index_data = calculator.add_index_data(overall_quality)
+    index_data = calculator.add_index_data(user_info, overall_quality)
 
     return render(request, "capstone/report.html",
                   {"cities_living_expense": living_expense, "user_info": user_info,
