@@ -17,11 +17,11 @@
                 than the average salary. You can save approximately ${{ remain_money |floatformat:2 }} per month.</p>
         {% endfor %}
         {#    Salary Graph#}
-        <div id="container" style="width: 75%;">
+        <div class="container" style="width: 75%;">
             <canvas id="salary-chart"></canvas>
         </div>
         <script>
-            var salaryChart = {
+            const salaryChart = {
                 type: 'bar',
                 data: {
                     labels: [{%for label in labels_for_salary %}'{{label|city_name}}',{%endfor%}],
@@ -57,9 +57,98 @@
                     }
                 },
             };
+             let indexChart = {
+                type: 'bar',
+                data: {
+                    labels: [{%for label in index_labels %}'{{label}}',{%endfor%}],
+                    datasets: [{
+                        label: '{{ user_info.cities.0|city_name }}',
+                        data: {{ index_data.0|safe }},
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(255, 99, 132, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgb(255, 99, 132)',
+                            'rgb(255, 99, 132)',
+                            'rgb(255, 99, 132)',
+                            'rgb(255, 99, 132)',
+                            'rgb(255, 99, 132)',
+                            'rgb(255, 99, 132)',
+                            'rgb(255, 99, 132)'
+                        ],
+                        borderWidth: 1
+                    },
+                      {% if user_info.cities.1 %}
+                        {
+                            label:'{{ user_info.cities.1|city_name }}',
+                            data: {{ index_data.1|safe }},
+                            backgroundColor: [
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(54, 162, 235, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgb(54, 162, 235)',
+                                'rgb(54, 162, 235)',
+                                'rgb(54, 162, 235)',
+                                'rgb(54, 162, 235)',
+                                'rgb(54, 162, 235)',
+                                'rgb(54, 162, 235)',
+                                'rgb(54, 162, 235)'
+                            ],
+                            borderWidth: 1
+                        },
+                        {% endif %}
+                    {% if user_info.cities.2 %}
+                        {
+                            label:'{{ user_info.cities.2|city_name }}',
+                            data: {{ index_data.2|safe }},
+                            backgroundColor: [
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(75, 192, 192, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgb(75, 192, 192)',
+                                'rgb(75, 192, 192)',
+                                'rgb(75, 192, 192)',
+                                'rgb(75, 192, 192)',
+                                'rgb(75, 192, 192)',
+                                'rgb(75, 192, 192)',
+                                'rgb(75, 192, 192)'
+                            ],
+                            borderWidth: 1
+                        }
+                        {% endif %}
+                    ],
+
+                },
+                options: {
+                    indexAxis: 'y', // convert to horizontal bar chart
+                    scales: {
+                        y: {beginAtZero: true} // convert to non-stacked bar chart
+                    }
+                },
+            };
             window.onload = function () {
-                var ctx = document.getElementById('salary-chart').getContext('2d');
-                window.myPie = new Chart(ctx, salaryChart);
+                var ctx1 = document.getElementById('salary-chart').getContext('2d');
+                var ctx2 = document.getElementById('index-chart').getContext('2d');
+                window.myBar = new Chart(ctx1, salaryChart);
+                window.myBar = new Chart(ctx2, indexChart);
             };
 
         </script>
@@ -147,7 +236,9 @@
             </tr>
             </tbody>
         </table>
-
+        <div class="container" style="width: 75%;">
+            <canvas id="index-chart"></canvas>
+        </div>
     </div>
     <h2 class="report">Cost of Living Report (Monthly)</h2>
     <table id="cost-living" class="table table-hover table-responsive">
