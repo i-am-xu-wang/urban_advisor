@@ -94,7 +94,13 @@ td:not(:first-child) {
     height: 25px;
     font-size: 17px;
 }
+
 #annotation-title{
     display: flex;
     flex-direction: row;
+}
+
+#annotation-title a img{
+    margin-top: 47px;
+    margin-left:15px;
 }
