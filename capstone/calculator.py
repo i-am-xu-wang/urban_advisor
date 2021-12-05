@@ -221,8 +221,8 @@ def cost_of_living_calculation(household_member, eating_options, inexpensive_res
         gas.append(
             (int(driving_options) * int(driving_distance) / avg_mpg) * int(getattr(Expense.objects.get(id=61), v)))
         total.append(
-            int(food[i]) + int(grocery[i]) + int(entertainment[i]) + int(gym[i]) + int(vacation_spending) / 12.0 + int(
-                cigarettes[i]) + int(drinks[i]) + int(public_transport[i]) + clothing[i] + gas[i] + taxi[i])
+            int(food[i]) + int(grocery[i]) + int(entertainment[i]) + float(gym[i]) + int(vacation_spending) / 12.0 + int(
+                cigarettes[i]) + float(drinks[i]) + float(public_transport[i]) + clothing[i] + gas[i] + taxi[i])
 
     cost_of_living_result = []
     for i in range(len(selected_cities)):
@@ -242,7 +242,7 @@ def cost_of_property_calculation(proximity, rent_or_buy, property_size, down_pay
                     CostPropertyResult(rent_or_buy, getattr(Expense.objects.get(id=32), v), property_size, proximity))
             elif proximity == 'City Center' and property_size == 'Two Bedrooms':
                 cities_property_expense.append(CostPropertyResult(rent_or_buy, (
-                        int(getattr(Expense.objects.get(id=32), v)) + int(getattr(Expense.objects.get(id=34), v)) / 2),
+                        float(getattr(Expense.objects.get(id=32), v)) + float(getattr(Expense.objects.get(id=34), v)) / 2),
                                                                   property_size, proximity))
             elif proximity == 'City Center' and property_size == 'Three Bedrooms':
                 cities_property_expense.append(
@@ -252,7 +252,7 @@ def cost_of_property_calculation(proximity, rent_or_buy, property_size, down_pay
                     CostPropertyResult(rent_or_buy, getattr(Expense.objects.get(id=33), v), property_size, proximity))
             elif proximity == 'Suburb' and property_size == 'Two Bedrooms':
                 cities_property_expense.append(CostPropertyResult(rent_or_buy, (
-                        float(getattr(Expense.objects.get(id=33), v)) + int(getattr(Expense.objects.get(id=35), v)) / 2),
+                        float(getattr(Expense.objects.get(id=33), v)) + float(getattr(Expense.objects.get(id=35), v)) / 2),
                                                                   property_size, proximity))
             elif proximity == 'Suburb' and property_size == 'Three Bedrooms':
                 cities_property_expense.append(
