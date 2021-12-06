@@ -376,7 +376,7 @@
                     {% if cities_property_expense.0.rent_or_buy == "Rent" %}
                         To <strong>Rent</strong> a {{ cities_property_expense.0.property_size }} Apartment
                     {% else %}
-                        To <strong>Buy</strong> a {{ cities_property_expense.0.property_size }} Square Foot Property
+                        To <strong>Buy</strong> a {{ cities_property_expense.0.property_size | intcomma }} Square Foot Property
                     {% endif %}
                     in {{ cities_property_expense.0.proximity }}:
                 </td>
