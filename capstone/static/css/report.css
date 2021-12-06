@@ -54,21 +54,18 @@ th {
 #health-care th {
     /*background-color: limegreen;*/
     background-color: #2f4841;
-
     color: white;
 }
 
 #crime-rate th {
     /*background-color: lightpink;*/
     background-color: #48482f;
-
     color: white;
 }
 
 #food-option th {
     /*background-color: lightsalmon;*/
     background-color: #482f44;
-
     color: white;
 }
 
@@ -103,4 +100,28 @@ td:not(:first-child) {
 #annotation-title a img{
     margin-top: 47px;
     margin-left:15px;
+}
+
+span[class='Very High'],
+span[class='reverse-Very Low']{
+    color: #099035;
+}
+
+span[class='High'],
+span[class='reverse-Low']{
+    color: #0389b4;
+}
+
+span[class='Moderate'] {
+    color: #2f4f6f;
+}
+
+span[class='Low'],
+span[class='reverse-High']{
+    color: #c97c3b;
+}
+
+span[class='Very Low'],
+span[class='reverse-Very High']{
+    color: #a52020;
 }

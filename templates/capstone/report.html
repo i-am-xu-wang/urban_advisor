@@ -136,7 +136,7 @@
                 {% for city_quality in overall_quality %}
                     <td>
                         {{ city_quality.cost_of_living_ratio |floatformat:2 }}
-                        <span class="rating"> <br/>{{ city_quality.cost_of_living_ratio|income_ratio_rating }}</span>
+                        <br/><span class="reverse-{{ city_quality.cost_of_living_ratio|income_ratio_rating }}">{{ city_quality.cost_of_living_ratio|income_ratio_rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -146,7 +146,7 @@
                     {% for city_quality in overall_quality %}
                         <td>
                             {{ city_quality.housing_expense_ratio |floatformat:2 }}
-                            <br/>{{ city_quality.housing_expense_ratio|housing_ratio_rating }}
+                            <br/><span class="reverse-{{ city_quality.housing_expense_ratio|housing_ratio_rating }}">{{ city_quality.housing_expense_ratio|housing_ratio_rating }}</span>
                         </td>
                     {% endfor %}
                 </tr>
@@ -157,7 +157,7 @@
                     {% for city_quality in overall_quality %}
                         <td>
                             {{ city_quality.health_care_ratio |floatformat:2 }}
-                            <br/>{{ city_quality.health_care_ratio|rating }}
+                            <br/><span class="{{ city_quality.health_care_ratio|rating }}">{{ city_quality.health_care_ratio|rating }}</span>
                         </td>
                     {% endfor %}
                 </tr>
@@ -168,7 +168,7 @@
                     {% for city_quality in overall_quality %}
                         <td>
                             {{ city_quality.crime_index |floatformat:2 }}
-                            <br/>{{ city_quality.crime_index|rating }}
+                            <br/><span class="reverse-{{ city_quality.crime_index|rating }}">{{ city_quality.crime_index|rating }}</span>
                         </td>
                     {% endfor %}
                 </tr>
@@ -177,7 +177,7 @@
                     {% for city_quality in overall_quality %}
                         <td>
                             {{ city_quality.safety_index |floatformat:2 }}
-                            <br/>{{ city_quality.safety_index|rating }}
+                            <br/><span class="{{ city_quality.safety_index|rating }}">{{ city_quality.safety_index|rating }}</span>
                         </td>
                     {% endfor %}
                 </tr>
@@ -188,7 +188,7 @@
                     {% for city_quality in overall_quality %}
                         <td>
                             {{ city_quality.food_option |floatformat:2 }}
-                            <br/>{{ city_quality.food_option|rating }}
+                            <br/><span class="{{ city_quality.food_option|rating }}">{{ city_quality.food_option|rating }}</span>
                         </td>
                     {% endfor %}
                 </tr>
@@ -198,7 +198,7 @@
                 {% for city_quality in overall_quality %}
                     <td>
                         {{ city_quality.overall_index |floatformat:2 }}
-                        <br/>{{ city_quality.overall_index|rating }}
+                        <br/><span class="{{ city_quality.overall_index|rating }}">{{ city_quality.overall_index|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -459,7 +459,8 @@
                 <td>Medical Staff Skill/Competency:</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        {{ city_health.skill |floatformat:2 }}<br/>{{ city_health.skill|rating }}
+                        {{ city_health.skill |floatformat:2 }}
+                        <br/><span class="{{ city_health.skill|rating }}">{{ city_health.skill|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -467,7 +468,8 @@
                 <td>Examination and Reporting Speed</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        {{ city_health.speed |floatformat:2 }}<br/>{{ city_health.speed|rating }}
+                        {{ city_health.speed |floatformat:2 }}
+                        <br/><span class="{{ city_health.speed|rating }}">{{ city_health.speed|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -475,7 +477,8 @@
                 <td>Modern Equipment</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        {{ city_health.equipment |floatformat:2 }}<br/>{{ city_health.equipment|rating }}
+                        {{ city_health.equipment |floatformat:2 }}
+                        <br/><span class="{{ city_health.equipment|rating }}">{{ city_health.equipment|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -483,7 +486,8 @@
                 <td>Report Accuracy/Completeness</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        {{ city_health.accuracy |floatformat:2 }}<br/>{{ city_health.accuracy|rating }}
+                        {{ city_health.accuracy |floatformat:2 }}
+                        <br/><span class="{{ city_health.accuracy|rating }}">{{ city_health.accuracy|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -491,7 +495,8 @@
                 <td>Staff Friendliness/Courtesy</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        {{ city_health.friendliness |floatformat:2 }}<br/>{{ city_health.friendliness|rating }}
+                        {{ city_health.friendliness |floatformat:2 }}
+                        <br/><span class="{{ city_health.friendliness|rating }}">{{ city_health.friendliness|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -499,7 +504,8 @@
                 <td>Reasonable Responsiveness/Waiting Times</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        {{ city_health.satisfaction_responsiveness |floatformat:2 }}<br/>{{ city_health.satisfaction_responsiveness|rating }}
+                        {{ city_health.satisfaction_responsiveness |floatformat:2 }}
+                        <br/><span class="{{ city_health.satisfaction_responsiveness|rating }}">{{ city_health.satisfaction_responsiveness|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -507,7 +513,8 @@
                 <td>Satisfaction with Cost</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        {{ city_health.satisfaction_cost |floatformat:2 }}<br/>{{ city_health.satisfaction_cost|rating }}
+                        {{ city_health.satisfaction_cost |floatformat:2 }}
+                        <br/><span class="{{ city_health.satisfaction_cost|rating }}">{{ city_health.satisfaction_cost|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -515,7 +522,8 @@
                 <td>Convenience of Location</td>
                 {% for city_health in cities_health_care %}
                     <td>
-                        {{ city_health.location |floatformat:2 }}<br/>{{ city_health.location|rating }}
+                        {{ city_health.location |floatformat:2 }}
+                        <br/><span class="{{ city_health.location|rating }}">{{ city_health.location|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -584,7 +592,8 @@
                 <td>Crime Level</td>
                 {% for city_crime in cities_crime_rate %}
                     <td>
-                        {{ city_crime.crime_level |floatformat:2 }}<br/>{{ city_crime.crime_level|rating }}
+                        {{ city_crime.crime_level |floatformat:2 }}
+                        <br/><span class="{{ city_crime.crime_level|rating }}">{{ city_crime.crime_level|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -592,7 +601,8 @@
                 <td>Crime Increasing Over Time (Past Three Years)</td>
                 {% for city_crime in cities_crime_rate %}
                     <td>
-                        {{ city_crime.crime_increasing|floatformat:2 }}<br/>{{ city_crime.crime_increasing|rating }}
+                        {{ city_crime.crime_increasing|floatformat:2 }}
+                        <br/><span class="{{ city_crime.crime_increasing|rating }}">{{ city_crime.crime_increasing|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -600,7 +610,8 @@
                 <td>Home Invasion/Burglary Worries</td>
                 {% for city_crime in cities_crime_rate %}
                     <td>
-                        {{ city_crime.home_broken|floatformat:2 }}<br/>{{ city_crime.home_broken|rating }}
+                        {{ city_crime.home_broken|floatformat:2 }}
+                        <br/><span class="{{ city_crime.home_broken|rating }}">{{ city_crime.home_broken|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -608,7 +619,8 @@
                 <td>Mugging/Robbery Worries</td>
                 {% for city_crime in cities_crime_rate %}
                     <td>
-                        {{ city_crime.mugged_or_robbed|floatformat:2 }}<br/>{{ city_crime.mugged_or_robbed|rating }}
+                        {{ city_crime.mugged_or_robbed|floatformat:2 }}
+                        <br/><span class="{{ city_crime.mugged_or_robbed|rating }}">{{ city_crime.mugged_or_robbed|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -616,7 +628,8 @@
                 <td>Car Theft Worries</td>
                 {% for city_crime in cities_crime_rate %}
                     <td>
-                        {{ city_crime.car_stolen|floatformat:2 }}<br/>{{ city_crime.car_stolen|rating }}
+                        {{ city_crime.car_stolen|floatformat:2 }}
+                        <br/><span class="{{ city_crime.car_stolen|rating }}">{{ city_crime.car_stolen|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -624,7 +637,8 @@
                 <td>Item Theft from Car Worries</td>
                 {% for city_crime in cities_crime_rate %}
                     <td>
-                        {{ city_crime.things_from_car|floatformat:2 }}<br/>{{ city_crime.things_from_car|rating }}
+                        {{ city_crime.things_from_car|floatformat:2 }}
+                        <br/><span class="{{ city_crime.things_from_car|rating }}">{{ city_crime.things_from_car|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -632,7 +646,8 @@
                 <td>Physical Altercation/Attack Worries</td>
                 {% for city_crime in cities_crime_rate %}
                     <td>
-                        {{ city_crime.worries_attack|floatformat:2 }}<br/>{{ city_crime.worries_attack|rating }}
+                        {{ city_crime.worries_attack|floatformat:2 }}
+                        <br/><span class="{{ city_crime.worries_attack|rating }}">{{ city_crime.worries_attack|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -640,7 +655,8 @@
                 <td>Verbal Confrontation/Insult Worries</td>
                 {% for city_crime in cities_crime_rate %}
                     <td>
-                        {{ city_crime.worries_insult|floatformat:2 }}<br/>{{ city_crime.worries_insult|rating }}
+                        {{ city_crime.worries_insult|floatformat:2 }}
+                        <br/><span class="{{ city_crime.worries_insult|rating }}">{{ city_crime.worries_insult|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -648,7 +664,8 @@
                 <td>Racist Violence Worries</td>
                 {% for city_crime in cities_crime_rate %}
                     <td>
-                        {{ city_crime.worries_racist|floatformat:2 }}<br/>{{ city_crime.worries_racist|rating }}
+                        {{ city_crime.worries_racist|floatformat:2 }}
+                        <br/><span class="{{ city_crime.worries_racist|rating }}">{{ city_crime.worries_racist|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -656,7 +673,8 @@
                 <td>Drug Use/Dealing Worries</td>
                 {% for city_crime in cities_crime_rate %}
                     <td>
-                        {{ city_crime.problem_drugs|floatformat:2 }}<br/>{{ city_crime.problem_drugs|rating }}
+                        {{ city_crime.problem_drugs|floatformat:2 }}
+                        <br/><span class="{{ city_crime.problem_drugs|rating }}">{{ city_crime.problem_drugs|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -664,7 +682,8 @@
                 <td>Vandalism/Property Crime Worries</td>
                 {% for city_crime in cities_crime_rate %}
                     <td>
-                        {{ city_crime.property_crime|floatformat:2 }}<br/>{{ city_crime.property_crime|rating }}
+                        {{ city_crime.property_crime|floatformat:2 }}
+                        <br/><span class="{{ city_crime.property_crime|rating }}">{{ city_crime.property_crime|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -672,7 +691,8 @@
                 <td>Assault/Armed Robbery Worries</td>
                 {% for city_crime in cities_crime_rate %}
                     <td>
-                        {{ city_crime.violent_crime|floatformat:2 }}<br/>{{ city_crime.violent_crime|rating }}
+                        {{ city_crime.violent_crime|floatformat:2 }}
+                        <br/><span class="{{ city_crime.violent_crime|rating }}">{{ city_crime.violent_crime|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -680,7 +700,8 @@
                 <td>Corruption and Bribery Worries</td>
                 {% for city_crime in cities_crime_rate %}
                     <td>
-                        {{ city_crime.corruption|floatformat:2 }}<br/>{{ city_crime.corruption|rating }}
+                        {{ city_crime.corruption|floatformat:2 }}
+                        <br/><span class="{{ city_crime.corruption|rating }}">{{ city_crime.corruption|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -693,7 +714,8 @@
                 <td>Safety Walking Alone During Daylight</td>
                 {% for city_crime in cities_crime_rate %}
                     <td>
-                        {{ city_crime.safety_day|floatformat:2 }}<br/>{{ city_crime.safety_day|rating }}
+                        {{ city_crime.safety_day|floatformat:2 }}
+                        <br/><span class="{{ city_crime.safety_day|rating }}">{{ city_crime.safety_day|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -701,7 +723,8 @@
                 <td>Safety Walking Alone During Night</td>
                 {% for city_crime in cities_crime_rate %}
                     <td>
-                        {{ city_crime.safety_night|floatformat:2 }}<br/>{{ city_crime.safety_night|rating }}
+                        {{ city_crime.safety_night|floatformat:2 }}
+                        <br/><span class="{{ city_crime.safety_night|rating }}">{{ city_crime.safety_night|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
