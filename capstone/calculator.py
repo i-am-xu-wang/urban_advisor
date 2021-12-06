@@ -343,7 +343,7 @@ def get_salary_labels():
     return salary_labels
 
 
-def add_index_data(user_info:UserInfo, overall_quality: List[OverallQualityResult]):
+def add_index_data(user_info: UserInfo, overall_quality: List[OverallQualityResult]):
     data = []
     for overall_quality_per_city in overall_quality:
         data_per_city = [overall_quality_per_city.cost_of_living_ratio]
@@ -351,7 +351,7 @@ def add_index_data(user_info:UserInfo, overall_quality: List[OverallQualityResul
             data_per_city.append(overall_quality_per_city.housing_expense_ratio)
         if user_info.healthcare:
             data_per_city.append(overall_quality_per_city.health_care_ratio)
-        if user_info.crime_rate != -1:
+        if user_info.crime_rate:
             data_per_city.append(overall_quality_per_city.crime_index)
             data_per_city.append(overall_quality_per_city.safety_index)
         if user_info.food_option:
