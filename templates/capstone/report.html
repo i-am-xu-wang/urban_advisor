@@ -593,7 +593,7 @@
                 {% for city_crime in cities_crime_rate %}
                     <td>
                         {{ city_crime.crime_level |floatformat:2 }}
-                        <br/><span class="{{ city_crime.crime_level|rating }}">{{ city_crime.crime_level|rating }}</span>
+                        <br/><span class="reverse-{{ city_crime.crime_level|rating }}">{{ city_crime.crime_level|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -602,7 +602,7 @@
                 {% for city_crime in cities_crime_rate %}
                     <td>
                         {{ city_crime.crime_increasing|floatformat:2 }}
-                        <br/><span class="{{ city_crime.crime_increasing|rating }}">{{ city_crime.crime_increasing|rating }}</span>
+                        <br/><span class="reverse-{{ city_crime.crime_increasing|rating }}">{{ city_crime.crime_increasing|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -611,7 +611,7 @@
                 {% for city_crime in cities_crime_rate %}
                     <td>
                         {{ city_crime.home_broken|floatformat:2 }}
-                        <br/><span class="{{ city_crime.home_broken|rating }}">{{ city_crime.home_broken|rating }}</span>
+                        <br/><span class="reverse-{{ city_crime.home_broken|rating }}">{{ city_crime.home_broken|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -620,7 +620,7 @@
                 {% for city_crime in cities_crime_rate %}
                     <td>
                         {{ city_crime.mugged_or_robbed|floatformat:2 }}
-                        <br/><span class="{{ city_crime.mugged_or_robbed|rating }}">{{ city_crime.mugged_or_robbed|rating }}</span>
+                        <br/><span class="reverse-{{ city_crime.mugged_or_robbed|rating }}">{{ city_crime.mugged_or_robbed|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -629,7 +629,7 @@
                 {% for city_crime in cities_crime_rate %}
                     <td>
                         {{ city_crime.car_stolen|floatformat:2 }}
-                        <br/><span class="{{ city_crime.car_stolen|rating }}">{{ city_crime.car_stolen|rating }}</span>
+                        <br/><span class="reverse-{{ city_crime.car_stolen|rating }}">{{ city_crime.car_stolen|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -638,7 +638,7 @@
                 {% for city_crime in cities_crime_rate %}
                     <td>
                         {{ city_crime.things_from_car|floatformat:2 }}
-                        <br/><span class="{{ city_crime.things_from_car|rating }}">{{ city_crime.things_from_car|rating }}</span>
+                        <br/><span class="reverse-{{ city_crime.things_from_car|rating }}">{{ city_crime.things_from_car|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -647,7 +647,7 @@
                 {% for city_crime in cities_crime_rate %}
                     <td>
                         {{ city_crime.worries_attack|floatformat:2 }}
-                        <br/><span class="{{ city_crime.worries_attack|rating }}">{{ city_crime.worries_attack|rating }}</span>
+                        <br/><span class="reverse-{{ city_crime.worries_attack|rating }}">{{ city_crime.worries_attack|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -656,7 +656,7 @@
                 {% for city_crime in cities_crime_rate %}
                     <td>
                         {{ city_crime.worries_insult|floatformat:2 }}
-                        <br/><span class="{{ city_crime.worries_insult|rating }}">{{ city_crime.worries_insult|rating }}</span>
+                        <br/><span class="reverse-{{ city_crime.worries_insult|rating }}">{{ city_crime.worries_insult|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -665,7 +665,7 @@
                 {% for city_crime in cities_crime_rate %}
                     <td>
                         {{ city_crime.worries_racist|floatformat:2 }}
-                        <br/><span class="{{ city_crime.worries_racist|rating }}">{{ city_crime.worries_racist|rating }}</span>
+                        <br/><span class="reverse-{{ city_crime.worries_racist|rating }}">{{ city_crime.worries_racist|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -674,7 +674,7 @@
                 {% for city_crime in cities_crime_rate %}
                     <td>
                         {{ city_crime.problem_drugs|floatformat:2 }}
-                        <br/><span class="{{ city_crime.problem_drugs|rating }}">{{ city_crime.problem_drugs|rating }}</span>
+                        <br/><span class="reverse-{{ city_crime.problem_drugs|rating }}">{{ city_crime.problem_drugs|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -683,7 +683,7 @@
                 {% for city_crime in cities_crime_rate %}
                     <td>
                         {{ city_crime.property_crime|floatformat:2 }}
-                        <br/><span class="{{ city_crime.property_crime|rating }}">{{ city_crime.property_crime|rating }}</span>
+                        <br/><span class="reverse-{{ city_crime.property_crime|rating }}">{{ city_crime.property_crime|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -692,7 +692,7 @@
                 {% for city_crime in cities_crime_rate %}
                     <td>
                         {{ city_crime.violent_crime|floatformat:2 }}
-                        <br/><span class="{{ city_crime.violent_crime|rating }}">{{ city_crime.violent_crime|rating }}</span>
+                        <br/><span class="reverse-{{ city_crime.violent_crime|rating }}">{{ city_crime.violent_crime|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -701,7 +701,7 @@
                 {% for city_crime in cities_crime_rate %}
                     <td>
                         {{ city_crime.corruption|floatformat:2 }}
-                        <br/><span class="{{ city_crime.corruption|rating }}">{{ city_crime.corruption|rating }}</span>
+                        <br/><span class="reverse-{{ city_crime.corruption|rating }}">{{ city_crime.corruption|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -715,7 +715,7 @@
                 {% for city_crime in cities_crime_rate %}
                     <td>
                         {{ city_crime.safety_day|floatformat:2 }}
-                        <br/><span class="{{ city_crime.safety_day|rating }}">{{ city_crime.safety_day|rating }}</span>
+                        <br/><span class="reverse-{{ city_crime.safety_day|rating }}">{{ city_crime.safety_day|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
@@ -724,7 +724,7 @@
                 {% for city_crime in cities_crime_rate %}
                     <td>
                         {{ city_crime.safety_night|floatformat:2 }}
-                        <br/><span class="{{ city_crime.safety_night|rating }}">{{ city_crime.safety_night|rating }}</span>
+                        <br/><span class="reverse-{{ city_crime.safety_night|rating }}">{{ city_crime.safety_night|rating }}</span>
                     </td>
                 {% endfor %}
             </tr>
