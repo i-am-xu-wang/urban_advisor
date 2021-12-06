@@ -116,10 +116,6 @@ def register_user(cities, salary, feature_options: List[str]):
     healthcare = 'healthcare' in feature_options
     childcare = 'childcare' in feature_options
     food_option = 'food' in feature_options
-    # todo:add salary comparison of each city into the comparison list
-    # todo:add remain_money (per month) into the comparison list
-    # for the lower than the average salary, store negative percentage number, for the higher than the average salary
-    # store positive percentage number
 
     salary_comparison = []
 
