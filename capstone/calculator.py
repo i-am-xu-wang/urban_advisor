@@ -61,19 +61,19 @@ class ChildCareResult:
 
 @dataclass
 class HealthCareResult:
-    skill: float
-    speed: float
-    equipment: float
-    accuracy: float
-    friendliness: float
-    satisfaction_responsiveness: float
-    satisfaction_cost: float
-    location: float
-    doctor_visit: float
-    dentist_visit: float
-    optometrist_visit: float
-    RX_drug: float
-    veterinary_visit: float
+    skill: int
+    speed: int
+    equipment: int
+    accuracy: int
+    friendliness: int
+    satisfaction_responsiveness: int
+    satisfaction_cost: int
+    location: int
+    doctor_visit: int
+    dentist_visit: int
+    optometrist_visit: int
+    RX_drug: int
+    veterinary_visit: int
 
 
 @dataclass
@@ -120,7 +120,7 @@ def register_user(cities, salary, feature_options: List[str]):
     salary_comparison = []
 
     for i, city in enumerate(selected_cities):
-        salary_comparison.append(((int(salary) - int(getattr(Expense.objects.get(id=67), city))) / int(
+        salary_comparison.append((((int(salary)) - int(getattr(Expense.objects.get(id=67), city))) / int(
             getattr(Expense.objects.get(id=67), city))) * 100)
     return UserInfo(cities, salary, salary_comparison, property_option, crime_rate, healthcare, childcare, food_option)
 
@@ -149,14 +149,14 @@ def overall_quality_of_life(userInfo: UserInfo, living_expense: CostLivingResult
         l = 0
         if userInfo.childcare:
             count += 1
-            k = round((((living_expense[i].total + child_care_expense[i].total) / int(userInfo.salary)) * 100), 2)
+            k = round((((living_expense[i].total + child_care_expense[i].total) / (int(userInfo.salary)/12)) * 100), 2)
             total += (100 - k)
         else:
-            k = round(((living_expense[i].total / int(userInfo.salary)) * 100), 2)
+            k = round(((living_expense[i].total / (int(userInfo.salary)/12)) * 100), 2)
             total += (100 - k)
         if userInfo.property_option:
             count += 1
-            l = round(((int(property_expense[i].monthly_payment) / int(userInfo.salary)) * 100), 2)
+            l = round(((int(property_expense[i].monthly_payment) / (int(userInfo.salary)/12)) * 100), 2)
             total += 100 - l
         if userInfo.healthcare:
             count += 1
@@ -169,13 +169,13 @@ def overall_quality_of_life(userInfo: UserInfo, living_expense: CostLivingResult
             total += int((getattr(Expense.objects.get(id=77), city)))
 
         overall_quality_results.append(
-            OverallQualityResult(k,
-                                 l,
-                                 (getattr(Expense.objects.get(id=72), city)),
-                                 (getattr(Expense.objects.get(id=70), city)),
-                                 (getattr(Expense.objects.get(id=71), city)),
-                                 (getattr(Expense.objects.get(id=77), city)),
-                                 total / count)  # dummy data
+            OverallQualityResult(round(k),
+                                 round(l),
+                                 round(getattr(Expense.objects.get(id=72), city)),
+                                 round(getattr(Expense.objects.get(id=70), city)),
+                                 round(getattr(Expense.objects.get(id=71), city)),
+                                 round(getattr(Expense.objects.get(id=77), city)),
+                                 round(total / count))  # dummy data
         )
     return overall_quality_results
 
@@ -208,7 +208,7 @@ def cost_of_living_calculation(household_member, eating_options, inexpensive_res
         grocery.append(getattr(Expense.objects.get(id=10), v))
         entertainment.append(int(going_out_options) * int(household_member) * getattr(Expense.objects.get(id=16), v))
         gym.append(int(gym_options) * int(household_member) * getattr(Expense.objects.get(id=14), v))
-        cigarettes.append(int(smoking_option) * getattr(Expense.objects.get(id=14), v))
+        cigarettes.append(int(smoking_option) * getattr(Expense.objects.get(id=78), v))
         drinks.append(int(drinking_options) * getattr(Expense.objects.get(id=5), v))
         public_transport.append(int(public_transit_members) * getattr(Expense.objects.get(id=57), v) + int(
             public_transit_trips) * 2 * getattr(Expense.objects.get(id=56), v))
@@ -278,12 +278,12 @@ def cost_of_property_calculation(proximity, rent_or_buy, property_size, down_pay
 def cost_of_child_care(daycare_number, private_school_number):
     child_care_city = []
     for city in selected_cities:
-        child_care_city.append(ChildCareResult(int(getattr(Expense.objects.get(id=54), city)) * int(daycare_number),
+        child_care_city.append(ChildCareResult(round(int(getattr(Expense.objects.get(id=54), city)) * int(daycare_number)),
+                                               round(int(getattr(Expense.objects.get(id=55), city)) / 12.0 * int(
+                                                   private_school_number)),
+                                               round(int(getattr(Expense.objects.get(id=54), city)) * int(daycare_number) +
                                                int(getattr(Expense.objects.get(id=55), city)) / 12.0 * int(
-                                                   private_school_number),
-                                               int(getattr(Expense.objects.get(id=54), city)) * int(daycare_number) +
-                                               int(getattr(Expense.objects.get(id=55), city)) / 12.0 * int(
-                                                   private_school_number)))
+                                                   private_school_number))))
     return child_care_city
 
 
@@ -292,13 +292,13 @@ def cost_of_health_calculation():
     health_care_city = []
     for i, v in enumerate(selected_cities):
         health_care_city.append(
-            HealthCareResult((getattr(Expense.objects.get(id=19), v)), (getattr(Expense.objects.get(id=20), v)),
-                             (getattr(Expense.objects.get(id=21), v)), (getattr(Expense.objects.get(id=22), v)),
-                             (getattr(Expense.objects.get(id=23), v)), (getattr(Expense.objects.get(id=24), v)),
-                             (getattr(Expense.objects.get(id=25), v)), (getattr(Expense.objects.get(id=26), v)),
-                             (getattr(Expense.objects.get(id=27), v)), (getattr(Expense.objects.get(id=28), v)),
-                             (getattr(Expense.objects.get(id=29), v)), (getattr(Expense.objects.get(id=30), v)),
-                             (getattr(Expense.objects.get(id=31), v))))
+            HealthCareResult(round(getattr(Expense.objects.get(id=19), v)), round(getattr(Expense.objects.get(id=20), v)),
+                             round(getattr(Expense.objects.get(id=21), v)), round(getattr(Expense.objects.get(id=22), v)),
+                             round(getattr(Expense.objects.get(id=23), v)), round(getattr(Expense.objects.get(id=24), v)),
+                             round(getattr(Expense.objects.get(id=25), v)), round(getattr(Expense.objects.get(id=26), v)),
+                             round(getattr(Expense.objects.get(id=27), v)), round(getattr(Expense.objects.get(id=28), v)),
+                             round(getattr(Expense.objects.get(id=29), v)), round(getattr(Expense.objects.get(id=30), v)),
+                             round(getattr(Expense.objects.get(id=31), v))))
     return health_care_city
 
 
@@ -306,14 +306,14 @@ def cost_of_crime_calculation():
     crime_city = []
     for city in selected_cities:
         crime_city.append(
-            CrimeSafetyResult((getattr(Expense.objects.get(id=39), city)), (getattr(Expense.objects.get(id=40), city)),
-                              (getattr(Expense.objects.get(id=41), city)), (getattr(Expense.objects.get(id=42), city)),
-                              (getattr(Expense.objects.get(id=43), city)), (getattr(Expense.objects.get(id=44), city)),
-                              (getattr(Expense.objects.get(id=45), city)), (getattr(Expense.objects.get(id=46), city)),
-                              (getattr(Expense.objects.get(id=47), city)), (getattr(Expense.objects.get(id=48), city)),
-                              (getattr(Expense.objects.get(id=49), city)), (getattr(Expense.objects.get(id=50), city)),
-                              (getattr(Expense.objects.get(id=51), city)), (getattr(Expense.objects.get(id=52), city)),
-                              (getattr(Expense.objects.get(id=53), city)))
+            CrimeSafetyResult(round(getattr(Expense.objects.get(id=39), city)), round(getattr(Expense.objects.get(id=40), city)),
+                              round(getattr(Expense.objects.get(id=41), city)), round(getattr(Expense.objects.get(id=42), city)),
+                              round(getattr(Expense.objects.get(id=43), city)), round(getattr(Expense.objects.get(id=44), city)),
+                              round(getattr(Expense.objects.get(id=45), city)), round(getattr(Expense.objects.get(id=46), city)),
+                              round(getattr(Expense.objects.get(id=47), city)), round(getattr(Expense.objects.get(id=48), city)),
+                              round(getattr(Expense.objects.get(id=49), city)), round(getattr(Expense.objects.get(id=50), city)),
+                              round(getattr(Expense.objects.get(id=51), city)), round(getattr(Expense.objects.get(id=52), city)),
+                              round(getattr(Expense.objects.get(id=53), city)))
         )
     return crime_city
 
@@ -322,9 +322,9 @@ def food_option_calculation():
     food_city = []
     for city in selected_cities:
         food_city.append(
-            FoodResult((getattr(Expense.objects.get(id=73), city)), (getattr(Expense.objects.get(id=74), city)),
-                       (getattr(Expense.objects.get(id=75), city)), (getattr(Expense.objects.get(id=76), city)),
-                       (getattr(Expense.objects.get(id=77), city)))
+            FoodResult(round(getattr(Expense.objects.get(id=73), city)), round(getattr(Expense.objects.get(id=74), city)),
+                       round(getattr(Expense.objects.get(id=75), city)), round(getattr(Expense.objects.get(id=76), city)),
+                       round(getattr(Expense.objects.get(id=77), city)))
         )
     return food_city
 
