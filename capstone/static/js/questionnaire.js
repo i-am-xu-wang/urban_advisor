@@ -19,6 +19,9 @@ $(document).ready(function () {
 
     const childcareOptions = document.getElementById('childcare-options')
 
+    var childcareWarnZero = false;
+    var childcareWarnTooMany = false;
+
     processCitiesCheckboxes = function () {
         var $cs = $('#cities-checkboxes').find(':checkbox:checked');
         $(maximumThree).removeClass('fw-bold spruce-text');
@@ -81,9 +84,11 @@ $(document).ready(function () {
         } else if ($('#public-on-demand').is(":checked")) {
             monthlyOptions.style.display = 'none';
             onDemandOptions.style.display = 'block';
+            $('#public-transit-members').val(0);
         } else {
             monthlyOptions.style.display = 'none';
             onDemandOptions.style.display = 'none';
+            $('#public-transit-members').val(0);
         }
     }
 
@@ -118,6 +123,7 @@ $(document).ready(function () {
 
     removeError = function () {
         $(".alert-danger").removeClass("alert-danger");
+        $(".alert-info").removeClass("alert-info");
         $(".alert").removeClass("alert");
         $(".alert-dismissible").remove();
     }
@@ -186,13 +192,15 @@ $(document).ready(function () {
         toggleChildcare();
     })
 
-    $('#cost-of-living-quiz').on("click", ".alert-danger", function () {
+    $('#cost-of-living-quiz').on("click", ".alert", function () {
         removeError();
     });
 
     submitForms = function () {
         // valid will be set to false if form fails any validation check
         let valid = true;
+
+        let householdNum = countHousehold();
 
         // reset error messages to perform validation anew
         removeError();
@@ -223,6 +231,7 @@ $(document).ready(function () {
             message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
                 '    <strong>Error!</strong> Please enter anticipated annual income.\n' +
                 '</div>');
+            console.log(message);
             salaryQuestion.before(message);
             errorScroll();
         } else if (!moneyRegExp.test($('input[name="salary"]').val())) {
@@ -233,6 +242,45 @@ $(document).ready(function () {
                 '    <strong>Error!</strong> Please only submit a whole dollar amount for this field.\n' +
                 '</div>');
             salaryQuestion.before(message);
+            errorScroll();
+        } else if ($('#expensive-restaurant-options').val() > $('#eating-out-options').val()) {
+            const expensiveRestaurant = $('#expensive-restaurant-question');
+            expensiveRestaurant.addClass('alert alert-danger');
+            valid = false;
+            message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
+                '    <strong>Error!</strong> Invalid number of expensive restaurant trips.\n' +
+                '</div>');
+            console.log(message);
+            expensiveRestaurant.before(message);
+            errorScroll();
+        } else if (!(drivingDistance.val() === "") && !numberRegExp.test(drivingDistance.val())) {
+            const whenDriving = $('#when-driving');
+            whenDriving.addClass('alert alert-danger');
+            valid = false;
+            message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
+                '    <strong>Error!</strong> Please only submit a whole number for this field.\n' +
+                '</div>');
+            whenDriving.before(message);
+            errorScroll();
+        } else if ($('#public-transit-members').val() > householdNum) {
+            const publicTransitQuestion = $('#when-public-monthly');
+            publicTransitQuestion.addClass('alert alert-danger');
+            valid = false;
+            message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
+                '    <strong>Error!</strong> Invalid number of public transit memberships.\n' +
+                '</div>');
+            console.log(message);
+            publicTransitQuestion.before(message);
+            errorScroll();
+        } else if ($('#gym-options').val() > householdNum) {
+            const gymQuestion = $('#gym-question');
+            gymQuestion.addClass('alert alert-danger');
+            valid = false;
+            message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
+                '    <strong>Error!</strong> Invalid number of gym memberships.\n' +
+                '</div>');
+            console.log(message);
+            gymQuestion.before(message);
             errorScroll();
         } else if ($('input[name="vacation-spending"]').val() === "") {
             const vacationSpending = $('#vacation-spending-question');
@@ -251,15 +299,6 @@ $(document).ready(function () {
                 '    <strong>Error!</strong> Please only submit a whole dollar amount for this field.\n' +
                 '</div>');
             vacationSpending.before(message);
-            errorScroll();
-        } else if (!(drivingDistance.val() === "") && !numberRegExp.test(drivingDistance.val())) {
-            const whenDriving = $('#when-driving');
-            whenDriving.addClass('alert alert-danger');
-            valid = false;
-            message = $('<div class="alert alert-danger alert-dismissible fade show">\n' +
-                '    <strong>Error!</strong> Please only submit a whole number for this field.\n' +
-                '</div>');
-            whenDriving.before(message);
             errorScroll();
         } else {
             // property price quiz validation
@@ -334,6 +373,40 @@ $(document).ready(function () {
                             errorScroll();
                         }
                     }
+                }
+            }
+            // childcare form validation
+            const childcare_checkbox = document.getElementById('childcare-checkbox');
+            if ($(childcare_checkbox).is(":checked")) {
+                const sumChildren = $('#daycare-numbers').val() + $('#private-school-numbers').val();
+                if (sumChildren === '00') {
+                    valid = childcareWarnZero;
+                    if (!childcareWarnZero) {
+                        const childcareQuestions = $('#childcare-questions');
+                        childcareQuestions.addClass('alert alert-info');
+                        valid = false;
+                        message = $('<div class="alert alert-info alert-dismissible fade show">\n' +
+                            '    <strong>Are you sure?</strong> You haven\'t selected any children\n' +
+                            '</div>');
+                        childcareQuestions.before(message);
+                        errorScroll();
+                    }
+                    childcareWarnZero = true;
+                } else if (sumChildren > householdNum) {
+                    valid = childcareWarnTooMany;
+                    if (!childcareWarnTooMany) {
+                        const householdQuestion = $('#household-question');
+                        householdQuestion.addClass('alert alert-info');
+                        valid = false;
+                        message = $('<div class="alert alert-info alert-dismissible fade show">\n' +
+                            '    <strong>Are you sure?</strong> You have selected more children than are in\n' +
+                            'your household.\n' +
+                            '</div>');
+                        console.log(message);
+                        householdQuestion.before(message);
+                        errorScroll();
+                    }
+                    childcareWarnTooMany = true;
                 }
             }
             // if we have passed all checks without valid being set to false, we are ready to submit
