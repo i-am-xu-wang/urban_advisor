@@ -5,6 +5,8 @@ $(document).ready(function () {
 
     const maximumThree = document.getElementById('maximum-three');
 
+    const expensiveRestaurantQuestion = document.getElementById('expensive-restaurant-question');
+
     const driveDistance = document.getElementById('when-driving');
     const drivingDistance = $('input[name="driving-distance"]');
 
@@ -39,6 +41,20 @@ $(document).ready(function () {
         $('#gym-members-3').attr('hidden', num<3);
         $('#gym-members-4').attr('hidden', num<4);
         $('#gym-members-5').attr('hidden', num<5);
+    }
+
+    processNumRestaurants = function() {
+        var num = $('#eating-out-options').find(':checked').val();
+        if (num === '0') {
+            expensiveRestaurantQuestion.style.display = 'none';
+            $('expensive-restaurant-options').val(0);
+        } else {
+            expensiveRestaurantQuestion.style.display = 'block';
+            $('#expensive-restaurant-2').attr('hidden', num<2);
+            $('#expensive-restaurant-3').attr('hidden', num<3);
+            $('#expensive-restaurant-4').attr('hidden', num<4);
+            $('#expensive-restaurant-5').attr('hidden', num<5);
+        }
     }
 
     toggleDrivingOptions = function () {
@@ -114,6 +130,7 @@ $(document).ready(function () {
 
     processCitiesCheckboxes();
     processNumMembers();
+    processNumRestaurants()
     toggleDrivingOptions();
     togglePublicTransport();
     toggleProperty();
@@ -129,6 +146,10 @@ $(document).ready(function () {
     $('#household-options').change(function () {
         togglePublicTransport();
         processNumMembers();
+    })
+
+    $('#eating-out-options').change(function () {
+        processNumRestaurants();
     })
 
     $('#driving-options').change(function () {

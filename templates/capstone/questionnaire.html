@@ -4,7 +4,7 @@
 
 {% block content %}
     <link rel="stylesheet" type="text/css" href="{% static "css/questionnaire.css" %}?{% now "U" %}">
-    <script src="{% static "js/questionnaire.js" %}"></script>
+    <script src="{% static "js/questionnaire.js" %}?{% now "U" %}"></script>
     <h4>Please answer the following questions for us to better evaluate your needs</h4>
     <form id="cost-of-living-quiz" action="{% url "report" %}" method="post">
         {% csrf_token %}
@@ -146,16 +146,16 @@
             </select>
         </div>
         <!-- Inexpensive restaurant options -->
-        <div>
-            <label class="form-label" for="inexpensive-restaurant-options">How often does your household choose expensive
+        <div id="expensive-restaurant-question">
+            <label class="form-label" for="expensive-restaurant-options">How often does your household choose expensive
                 restaurants?</label>
-            <select class="form-select" id="inexpensive-restaurant-options" name="inexpensive-restaurant-options">
+            <select class="form-select" id="expensive-restaurant-options" name="inexpensive-restaurant-options">
                 <option value="0">Never</option>
                 <option value="1">1 time per week</option>
-                <option value="2">2 times per week</option>
-                <option value="3">3 times per week</option>
-                <option value="4">4 times per week</option>
-                <option value="5">5+ times per week</option>
+                <option id="expensive-restaurant-2" value="2">2 times per week</option>
+                <option id="expensive-restaurant-3" value="3">3 times per week</option>
+                <option id="expensive-restaurant-4" value="4">4 times per week</option>
+                <option id="expensive-restaurant-5" value="5">5+ times per week</option>
             </select>
         </div>
         <!-- Coffee options -->
