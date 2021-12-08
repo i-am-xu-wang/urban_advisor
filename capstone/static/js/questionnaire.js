@@ -30,6 +30,17 @@ $(document).ready(function () {
         return $('#household-options').find(':checked').val();
     }
 
+    processNumMembers = function () {
+        var num = countHousehold();
+        $('#public-transit-members-3').attr('hidden', num<3);
+        $('#public-transit-members-4').attr('hidden', num<4);
+        $('#public-transit-members-5').attr('hidden', num<5);
+        $('#gym-members-2').attr('hidden', num<2);
+        $('#gym-members-3').attr('hidden', num<3);
+        $('#gym-members-4').attr('hidden', num<4);
+        $('#gym-members-5').attr('hidden', num<5);
+    }
+
     toggleDrivingOptions = function () {
         if ($('#driving-options').val() === '0') {
             driveDistance.style.display = 'none';
@@ -98,6 +109,7 @@ $(document).ready(function () {
     }
 
     processCitiesCheckboxes();
+    processNumMembers();
     toggleDrivingOptions();
     togglePublicTransport();
     toggleProperty();
@@ -112,14 +124,7 @@ $(document).ready(function () {
 
     $('#household-options').change(function () {
         togglePublicTransport();
-        var num = countHousehold();
-        $('#public-transit-members-3').attr('hidden', num<3);
-        $('#public-transit-members-4').attr('hidden', num<4);
-        $('#public-transit-members-5').attr('hidden', num<5);
-        $('#gym-members-2').attr('hidden', num<2);
-        $('#gym-members-3').attr('hidden', num<3);
-        $('#gym-members-4').attr('hidden', num<4);
-        $('#gym-members-5').attr('hidden', num<5);
+        processNumMembers();
     })
 
     $('#driving-options').change(function () {
