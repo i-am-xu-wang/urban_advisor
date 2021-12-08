@@ -55,6 +55,10 @@ $(document).ready(function () {
             if (countHousehold() > 1) {
                 monthlyOptions.style.display = 'block';
             } else {
+                // if there's only one person in the household,
+                // and the user indicates has selected the monthly pass,
+                // this person must themselves use the monthly pass.
+                // we do not need to ask the user to confirm this information
                 monthlyOptions.style.display = 'none';
                 $('#public-transit-members').val(1);
             }
