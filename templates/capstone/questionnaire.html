@@ -122,7 +122,7 @@
             </div>
         </div>
         <!-- Members of household options -->
-        <div>
+        <div id="household-question">
             <label class="form-label" for="household-options">How many members are in your household:</label>
             <select class="form-select" id="household-options" name="household-options">
                 <option value="1">1 member</option>
@@ -292,7 +292,7 @@
         </div>
 
         <!-- Gym options -->
-        <div>
+        <div id="gym-question">
             <label class="form-label" for="gym-options">How many members of your household have a gym
                 membership?</label>
             <select class="form-select" id="gym-options" name="gym-options">
@@ -418,28 +418,30 @@
 
         <div id="childcare-options">
             <h4>Childcare Options</h4>
-            <div id="daycare-question">
-                <label class="form-label" for="daycare-numbers">Number of children going to daycare:</label>
-                <select class="form-select" id="daycare-numbers" name="daycare-numbers">
-                    <option value="0">0 children</option>
-                    <option value="1">1 child</option>
-                    <option value="2">2 children</option>
-                    <option value="3">3 children</option>
-                    <option value="4">4 children</option>
-                    <option value="5">5+ children</option>
-                </select>
-            </div>
-            <div id="private-school-question">
-                <label class="form-label" for="private-school-numbers">Number of children going to private
-                    school:</label>
-                <select class="form-select" id="private-school-numbers" name="private-school-numbers">
-                    <option value="0">0 children</option>
-                    <option value="1">1 child</option>
-                    <option value="2">2 children</option>
-                    <option value="3">3 children</option>
-                    <option value="4">4 children</option>
-                    <option value="5">5+ children</option>
-                </select>
+            <div id="childcare-questions">
+                <div id="daycare-question">
+                    <label class="form-label" for="daycare-numbers">Number of children going to daycare:</label>
+                    <select class="form-select" id="daycare-numbers" name="daycare-numbers">
+                        <option value="0">0 children</option>
+                        <option value="1">1 child</option>
+                        <option value="2">2 children</option>
+                        <option value="3">3 children</option>
+                        <option value="4">4 children</option>
+                        <option value="5">5+ children</option>
+                    </select>
+                </div>
+                <div id="private-school-question">
+                    <label class="form-label" for="private-school-numbers">Number of children going to private
+                        school:</label>
+                    <select class="form-select" id="private-school-numbers" name="private-school-numbers">
+                        <option value="0">0 children</option>
+                        <option value="1">1 child</option>
+                        <option value="2">2 children</option>
+                        <option value="3">3 children</option>
+                        <option value="4">4 children</option>
+                        <option value="5">5+ children</option>
+                    </select>
+                </div>
             </div>
         </div>
         <p><strong>* = required</strong></p>
