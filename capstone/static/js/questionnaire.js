@@ -26,6 +26,10 @@ $(document).ready(function () {
         return $cs.length > 3;
     }
 
+    countHousehold = function () {
+        return $('#household-options').find(':checked').val();
+    }
+
     toggleDrivingOptions = function () {
         if ($('#driving-options').val() === '0') {
             driveDistance.style.display = 'none';
@@ -36,8 +40,13 @@ $(document).ready(function () {
 
     togglePublicTransport = function () {
         if ($('#public-monthly').is(":checked")) {
-            monthlyOptions.style.display = 'block';
             onDemandOptions.style.display = 'none';
+            if (countHousehold() > 1) {
+                monthlyOptions.style.display = 'block';
+            } else {
+                monthlyOptions.style.display = 'none';
+                $('#public-transit-members').val(1);
+            }
         } else if ($('#public-on-demand').is(":checked")) {
             monthlyOptions.style.display = 'none';
             onDemandOptions.style.display = 'block';
@@ -100,6 +109,18 @@ $(document).ready(function () {
             this.checked = false;
         }
     });
+
+    $('#household-options').change(function () {
+        togglePublicTransport();
+        var num = countHousehold();
+        $('#public-transit-members-3').attr('hidden', num<3);
+        $('#public-transit-members-4').attr('hidden', num<4);
+        $('#public-transit-members-5').attr('hidden', num<5);
+        $('#gym-members-2').attr('hidden', num<2);
+        $('#gym-members-3').attr('hidden', num<3);
+        $('#gym-members-4').attr('hidden', num<4);
+        $('#gym-members-5').attr('hidden', num<5);
+    })
 
     $('#driving-options').change(function () {
         toggleDrivingOptions();
