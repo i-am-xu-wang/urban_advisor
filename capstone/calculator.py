@@ -296,9 +296,9 @@ def cost_of_health_calculation():
                              round(getattr(Expense.objects.get(id=21), v)), round(getattr(Expense.objects.get(id=22), v)),
                              round(getattr(Expense.objects.get(id=23), v)), round(getattr(Expense.objects.get(id=24), v)),
                              round(getattr(Expense.objects.get(id=25), v)), round(getattr(Expense.objects.get(id=26), v)),
-                             round(getattr(Expense.objects.get(id=27), v)), round(getattr(Expense.objects.get(id=28), v)),
-                             round(getattr(Expense.objects.get(id=29), v)), round(getattr(Expense.objects.get(id=30), v)),
-                             round(getattr(Expense.objects.get(id=31), v))))
+                             getattr(Expense.objects.get(id=27), v), getattr(Expense.objects.get(id=28), v),
+                             getattr(Expense.objects.get(id=29), v), getattr(Expense.objects.get(id=30), v),
+                             getattr(Expense.objects.get(id=31), v)))
     return health_care_city
 
 
@@ -322,9 +322,9 @@ def food_option_calculation():
     food_city = []
     for city in selected_cities:
         food_city.append(
-            FoodResult(round(getattr(Expense.objects.get(id=73), city)), round(getattr(Expense.objects.get(id=74), city)),
-                       round(getattr(Expense.objects.get(id=75), city)), round(getattr(Expense.objects.get(id=76), city)),
-                       round(getattr(Expense.objects.get(id=77), city)))
+            FoodResult(getattr(Expense.objects.get(id=73), city), getattr(Expense.objects.get(id=74), city),
+                       getattr(Expense.objects.get(id=75), city), getattr(Expense.objects.get(id=76), city),
+                       getattr(Expense.objects.get(id=77), city))
         )
     return food_city
 
