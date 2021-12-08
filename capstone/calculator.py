@@ -337,7 +337,7 @@ def get_selected_city_salary():
 
 
 def get_salary_labels():
-    salary_labels = ["Your Average Salary"]
+    salary_labels = ["Your Household Income"]
     for city in selected_cities:
         salary_labels.append(city)
     return salary_labels

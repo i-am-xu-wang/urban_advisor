@@ -48,6 +48,22 @@ def salary_percentage_modifier(salary_compare):
         return "lower"
 
 
+@register.filter(name='remain_salary_number')
+def remain_salary_filter(remain_salary):
+    if remain_salary > 0:
+        return remain_salary
+    else:
+        return -remain_salary
+
+
+@register.filter(name='remain_salary_wording')
+def salary_remaining_wording(remain_salary):
+    if remain_salary > 0:
+        return "You can save approximately"
+    else:
+        return "You may overspend"
+
+
 @register.filter(name='income_ratio_rating')
 def income_ratio_rating(ratio):
     if 0 <= ratio < 15:
