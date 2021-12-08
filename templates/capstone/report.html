@@ -135,7 +135,7 @@
                 <td>Cost of Living to Income Ratio (%):</td>
                 {% for city_quality in overall_quality %}
                     <td>
-                        {{ city_quality.cost_of_living_ratio  }}
+                        {{ city_quality.cost_of_living_ratio|floatformat:2  }}
                         <br/><span class="reverse-{{ city_quality.cost_of_living_ratio|income_ratio_rating }}">{{ city_quality.cost_of_living_ratio|income_ratio_rating }}</span>
                     </td>
                 {% endfor %}
@@ -145,7 +145,7 @@
                     <td>Housing Expense to Income Ratio (%):</td>
                     {% for city_quality in overall_quality %}
                         <td>
-                            {{ city_quality.housing_expense_ratio  }}
+                            {{ city_quality.housing_expense_ratio|floatformat:2  }}
                             <br/><span class="reverse-{{ city_quality.housing_expense_ratio|housing_ratio_rating }}">{{ city_quality.housing_expense_ratio|housing_ratio_rating }}</span>
                         </td>
                     {% endfor %}

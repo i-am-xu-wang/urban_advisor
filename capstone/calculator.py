@@ -121,7 +121,7 @@ def register_user(cities, salary, feature_options: List[str]):
 
     for i, city in enumerate(selected_cities):
         salary_comparison.append((((int(salary)) - int(getattr(Expense.objects.get(id=67), city))) / int(
-            getattr(Expense.objects.get(id=67), city))) * 100)
+            getattr(Expense.objects.get(id=79), city))) * 100)
     return UserInfo(cities, salary, salary_comparison, property_option, crime_rate, healthcare, childcare, food_option)
 
 
@@ -149,15 +149,24 @@ def overall_quality_of_life(userInfo: UserInfo, living_expense: CostLivingResult
         l = 0
         if userInfo.childcare:
             count += 1
-            k = round((((living_expense[i].total + child_care_expense[i].total) / (int(userInfo.salary)/12)) * 100), 2)
-            total += (100 - k)
+            k = ((living_expense[i].total + child_care_expense[i].total) / (float(userInfo.salary)/12)) * 100
+            csl = (100 - k)
+            if csl < 0:
+                csl = 0
+            total += csl
         else:
-            k = round(((living_expense[i].total / (int(userInfo.salary)/12)) * 100), 2)
-            total += (100 - k)
+            k = round(((living_expense[i].total / (float(userInfo.salary)/12)) * 100), 2)
+            csl_1 = (100 - k)
+            if csl_1 < 0:
+                csl_1= 0
+            total += csl_1
         if userInfo.property_option:
             count += 1
             l = round(((int(property_expense[i].monthly_payment) / (int(userInfo.salary)/12)) * 100), 2)
-            total += 100 - l
+            prp = 100 - l
+            if prp < 0:
+                prp = 0
+            total += prp
         if userInfo.healthcare:
             count += 1
             total += int((getattr(Expense.objects.get(id=72), city)))
@@ -167,10 +176,9 @@ def overall_quality_of_life(userInfo: UserInfo, living_expense: CostLivingResult
         if userInfo.food_option:
             count += 1
             total += int((getattr(Expense.objects.get(id=77), city)))
-
         overall_quality_results.append(
-            OverallQualityResult(round(k),
-                                 round(l),
+            OverallQualityResult(k,
+                                 l,
                                  round(getattr(Expense.objects.get(id=72), city)),
                                  round(getattr(Expense.objects.get(id=70), city)),
                                  round(getattr(Expense.objects.get(id=71), city)),
@@ -201,16 +209,16 @@ def cost_of_living_calculation(household_member, eating_options, inexpensive_res
     avg_mpg = 25
     print(driving_options, rideshare_options, public_transit_options, public_transit_members, public_transit_trips)
     for i, v in enumerate(selected_cities):
-        food.append((int(eating_options) * int(household_member) * getattr(Expense.objects.get(id=1), v) * 4) + (
-                int(inexpensive_restaurant_options) * 4 * int(household_member) * getattr(Expense.objects.get(id=2),
-                                                                                      v)) / 2 + (
-                            int(coffee_option) * int(household_member) * getattr(Expense.objects.get(id=6), v) * 4))
+        food.append(((int(eating_options) - int(inexpensive_restaurant_options)) * int(household_member) *
+            getattr(Expense.objects.get(id=1), v) * 4) + (int(inexpensive_restaurant_options) * 4 * int(household_member) *
+            getattr(Expense.objects.get(id=2), v)) / 2 + (int(coffee_option) * int(household_member) *
+                                                        getattr(Expense.objects.get(id=6), v) * 4))
         grocery.append(getattr(Expense.objects.get(id=10), v) * int(household_member))
         entertainment.append(int(going_out_options) * int(household_member) * getattr(Expense.objects.get(id=16), v) * 4)
         gym.append(int(gym_options) * getattr(Expense.objects.get(id=14), v))
         cigarettes.append(int(smoking_option) * getattr(Expense.objects.get(id=78), v) * 4)
         drinks.append(int(drinking_options) * getattr(Expense.objects.get(id=5), v) * 4)
-        public_transport.append((int(public_transit_members) * getattr(Expense.objects.get(id=57), v) * 4)+ int(
+        public_transport.append((int(public_transit_members) * getattr(Expense.objects.get(id=57), v))+ int(
             public_transit_trips) * 2 * getattr(Expense.objects.get(id=56), v) * 4)
         clothing.append(int(clothing_options) * getattr(Expense.objects.get(id=69), v) * int(household_member))
         taxi.append(20 * 2 * int(rideshare_options) * getattr(Expense.objects.get(id=59), v)*4)
